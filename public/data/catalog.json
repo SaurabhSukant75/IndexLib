@@ -2,94 +2,299 @@
   "schemaVersion": 1,
   "books": [
     {
-      "id": "book-01",
-      "title": "The Attention Economy · 01",
+      "id": "book-001",
+      "title": "The Confirmation Bias · 001",
+      "summary": "Why do we seek evidence that proves us right and ignore what challenges us?",
+      "contentPath": "book/book-001.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Mental Model"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "confirmation-bias",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-002",
+      "title": "The Education Paradox · 002",
+      "summary": "Why can educated people still make irrational decisions?",
+      "contentPath": "book/book-002.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Mental Model"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "education-paradox",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-003",
+      "title": "The Map Is Not the Territory · 003",
+      "summary": "Why is our understanding of reality never the same as reality itself?",
+      "contentPath": "book/book-003.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Mental Model"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "map-is-not-the-territory",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-004",
+      "title": "The Attention Economy · 004",
       "summary": "Who controls your attention, and who profits from it?",
-      "contentPath": "book/book-01.html",
+      "contentPath": "book/book-004.html",
       "revision": 1,
+      "version": "1.0.0",
       "status": "published",
-      "readingMinutes": 10,
-      "primaryTaxonomyId": "attention-focus",
-      "taxonomyIds": ["human-nature", "attention-focus"],
-      "tags": ["Focus", "Technology"],
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Trending",
+        "Mental Model"
+      ],
       "conceptLinks": [
-        { "conceptId": "attention", "role": "explains" },
-        { "conceptId": "incentives", "role": "introduces" }
+        {
+          "conceptId": "attention",
+          "role": "explains"
+        }
       ]
     },
     {
-      "id": "book-02",
-      "title": "The Attention Economy · 02",
-      "summary": "A second copy of the sample book for independent reader testing.",
-      "contentPath": "book/book-02.html",
+      "id": "book-005",
+      "title": "The Illusion of Understanding · 005",
+      "summary": "Why do we believe we understand something until we try to explain it?",
+      "contentPath": "book/book-005.html",
       "revision": 1,
+      "version": "1.0.0",
       "status": "published",
-      "readingMinutes": 10,
-      "primaryTaxonomyId": "digital-products",
-      "taxonomyIds": ["technology", "digital-products"],
-      "tags": ["Systems", "Technology"],
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Mental Model"
+      ],
       "conceptLinks": [
-        { "conceptId": "attention", "role": "explains" },
-        { "conceptId": "engagement", "role": "introduces" }
+        {
+          "conceptId": "illusion-of-understanding",
+          "role": "explains"
+        }
       ]
     },
     {
-      "id": "book-03",
-      "title": "The Attention Economy · 03",
-      "summary": "Explore a separate book entry, route, and reading state.",
-      "contentPath": "book/book-03.html",
+      "id": "book-006",
+      "title": "The Dunning–Kruger Effect · 006",
+      "summary": "Why can limited knowledge make people overestimate their ability?",
+      "contentPath": "book/book-006.html",
       "revision": 1,
+      "version": "1.0.0",
       "status": "published",
-      "readingMinutes": 10,
-      "primaryTaxonomyId": "design-society",
-      "taxonomyIds": ["design-society"],
-      "tags": ["Design", "Culture"],
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Mental Model"
+      ],
       "conceptLinks": [
-        { "conceptId": "incentives", "role": "explains" },
-        { "conceptId": "interface-design", "role": "applies" }
+        {
+          "conceptId": "dunning-kruger-effect",
+          "role": "explains"
+        }
       ]
     },
     {
-      "id": "book-04",
-      "title": "The Attention Economy · 04",
-      "summary": "A fourth independent sample entry in the growing catalog.",
-      "contentPath": "book/book-04.html",
+      "id": "book-007",
+      "title": "The Availability Heuristic · 007",
+      "summary": "Why do vivid or recent events seem more common than they really are?",
+      "contentPath": "book/book-007.html",
       "revision": 1,
+      "version": "1.0.0",
       "status": "published",
-      "readingMinutes": 10,
-      "primaryTaxonomyId": "attention-focus",
-      "taxonomyIds": ["human-nature", "attention-focus"],
-      "tags": ["Learning", "Focus"],
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Mental Model"
+      ],
       "conceptLinks": [
-        { "conceptId": "attention", "role": "explains" },
-        { "conceptId": "engagement", "role": "applies" }
+        {
+          "conceptId": "availability-heuristic",
+          "role": "explains"
+        }
       ]
     },
     {
-      "id": "book-05",
-      "title": "The Attention Economy · 05",
-      "summary": "A fifth copy to investigate discovery and personal organization.",
-      "contentPath": "book/book-05.html",
+      "id": "book-008",
+      "title": "The Sunk Cost Fallacy · 008",
+      "summary": "Why do we keep investing in choices that no longer make sense?",
+      "contentPath": "book/book-008.html",
       "revision": 1,
+      "version": "1.0.0",
       "status": "published",
-      "readingMinutes": 10,
-      "primaryTaxonomyId": "digital-products",
-      "taxonomyIds": ["technology", "digital-products"],
-      "tags": ["Technology", "Design"],
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Mental Model"
+      ],
       "conceptLinks": [
-        { "conceptId": "interface-design", "role": "explains" },
-        { "conceptId": "engagement", "role": "applies" }
+        {
+          "conceptId": "sunk-cost-fallacy",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-009",
+      "title": "The Framing Effect · 009",
+      "summary": "How can the same facts lead to different decisions when presented differently?",
+      "contentPath": "book/book-009.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Mental Model"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "framing-effect",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-010",
+      "title": "The Cognitive Dissonance · 010",
+      "summary": "Why is it uncomfortable when our beliefs and actions contradict each other?",
+      "contentPath": "book/book-010.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Mental Model"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "cognitive-dissonance",
+          "role": "explains"
+        }
       ]
     }
   ],
   "taxonomy": [
-    { "id": "ideas", "name": "Ideas", "parentId": null, "order": 1 },
-    { "id": "human-nature", "name": "Human nature & thinking", "parentId": "ideas", "order": 1 },
-    { "id": "attention-focus", "name": "Attention & focus", "parentId": "human-nature", "order": 1 },
-    { "id": "beliefs-bias", "name": "Beliefs & bias", "parentId": "human-nature", "order": 2 },
-    { "id": "technology", "name": "Technology & systems", "parentId": "ideas", "order": 2 },
-    { "id": "digital-products", "name": "Digital products", "parentId": "technology", "order": 1 },
-    { "id": "design-society", "name": "Design & society", "parentId": "ideas", "order": 3 }
+    {
+      "id": "ideas",
+      "name": "Ideas",
+      "parentId": null,
+      "order": 1
+    },
+    {
+      "id": "human-nature",
+      "name": "Human nature & thinking",
+      "parentId": "ideas",
+      "order": 1
+    },
+    {
+      "id": "attention-focus",
+      "name": "Attention & focus",
+      "parentId": "human-nature",
+      "order": 1
+    },
+    {
+      "id": "beliefs-bias",
+      "name": "Beliefs & bias",
+      "parentId": "human-nature",
+      "order": 2
+    },
+    {
+      "id": "technology",
+      "name": "Technology & systems",
+      "parentId": "ideas",
+      "order": 2
+    },
+    {
+      "id": "digital-products",
+      "name": "Digital products",
+      "parentId": "technology",
+      "order": 1
+    },
+    {
+      "id": "design-society",
+      "name": "Design & society",
+      "parentId": "ideas",
+      "order": 3
+    }
   ],
   "concepts": [
     {
@@ -118,10 +323,30 @@
     }
   ],
   "conceptRelations": [
-    { "id": "attention-competes-for-incentives", "fromConceptId": "attention", "type": "competes_for", "toConceptId": "incentives" },
-    { "id": "attention-measured-as-engagement", "fromConceptId": "attention", "type": "measured_as", "toConceptId": "engagement" },
-    { "id": "incentives-shape-interface-design", "fromConceptId": "incentives", "type": "shapes", "toConceptId": "interface-design" },
-    { "id": "engagement-informs-interface-design", "fromConceptId": "engagement", "type": "informs", "toConceptId": "interface-design" }
+    {
+      "id": "attention-competes-for-incentives",
+      "fromConceptId": "attention",
+      "type": "competes_for",
+      "toConceptId": "incentives"
+    },
+    {
+      "id": "attention-measured-as-engagement",
+      "fromConceptId": "attention",
+      "type": "measured_as",
+      "toConceptId": "engagement"
+    },
+    {
+      "id": "incentives-shape-interface-design",
+      "fromConceptId": "incentives",
+      "type": "shapes",
+      "toConceptId": "interface-design"
+    },
+    {
+      "id": "engagement-informs-interface-design",
+      "fromConceptId": "engagement",
+      "type": "informs",
+      "toConceptId": "interface-design"
+    }
   ],
   "learningPaths": [
     {
@@ -129,9 +354,24 @@
       "title": "Understand attention by design",
       "description": "Start with attention, follow the incentives, and connect the idea to design choices.",
       "items": [
-        { "position": 1, "bookId": "book-01", "required": true, "estimatedMinutes": 10 },
-        { "position": 2, "bookId": "book-02", "required": true, "estimatedMinutes": 10 },
-        { "position": 3, "bookId": "book-03", "required": false, "estimatedMinutes": 10 }
+        {
+          "position": 1,
+          "bookId": "book-01",
+          "required": true,
+          "estimatedMinutes": 10
+        },
+        {
+          "position": 2,
+          "bookId": "book-02",
+          "required": true,
+          "estimatedMinutes": 10
+        },
+        {
+          "position": 3,
+          "bookId": "book-03",
+          "required": false,
+          "estimatedMinutes": 10
+        }
       ]
     }
   ]

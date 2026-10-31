@@ -17,7 +17,7 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "description": "Why do we seek evidence that proves us right and ignore what challenges us?",
     "theme": "Human Nature & Thinking",
     "category": "evergreen",
-    "bookId": "book-03"
+    "bookId": "book-001"
   },
   {
     "num": "002",
@@ -25,7 +25,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Education Paradox",
     "description": "Why can educated people still make irrational decisions?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-002"
   },
   {
     "num": "003",
@@ -33,7 +34,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Map Is Not the Territory",
     "description": "Why is our understanding of reality never the same as reality itself?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-003"
   },
   {
     "num": "004",
@@ -42,7 +44,7 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "description": "Who controls your attention, and who profits from it?",
     "theme": "Human Nature & Thinking",
     "category": "trending",
-    "bookId": "book-01"
+    "bookId": "book-004"
   },
   {
     "num": "005",
@@ -50,7 +52,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Illusion of Understanding",
     "description": "Why do we believe we understand something until we try to explain it?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-005"
   },
   {
     "num": "006",
@@ -58,7 +61,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Dunning–Kruger Effect",
     "description": "Why can limited knowledge make people overestimate their ability?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-006"
   },
   {
     "num": "007",
@@ -66,7 +70,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Availability Heuristic",
     "description": "Why do vivid or recent events seem more common than they really are?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-007"
   },
   {
     "num": "008",
@@ -74,7 +79,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Sunk Cost Fallacy",
     "description": "Why do we keep investing in choices that no longer make sense?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-008"
   },
   {
     "num": "009",
@@ -82,7 +88,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Framing Effect",
     "description": "How can the same facts lead to different decisions when presented differently?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-009"
   },
   {
     "num": "010",
@@ -90,7 +97,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Cognitive Dissonance",
     "description": "Why is it uncomfortable when our beliefs and actions contradict each other?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-010"
   },
   {
     "num": "011",
