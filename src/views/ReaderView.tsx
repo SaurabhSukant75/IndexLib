@@ -38,11 +38,16 @@ export const ReaderView: React.FC<ReaderViewProps> = ({ catalogBooks, user, onTo
           setContentSrc(URL.createObjectURL(blob));
         }
       } else {
-        // Resolve path relative to Vite base
-        const basePath = import.meta.env.BASE_URL || '/';
-        const normalizedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
-        const cleanContentPath = foundBook.contentPath.replace(/^\/?/, '');
-        setContentSrc(`${normalizedBase}${cleanContentPath}`);
+        // If contentPath is an absolute URL (e.g. Supabase Storage https://...), use it directly
+        if (/^https?:\/\//i.test(foundBook.contentPath)) {
+          setContentSrc(foundBook.contentPath);
+        } else {
+          // Resolve path relative to Vite base
+          const basePath = import.meta.env.BASE_URL || '/';
+          const normalizedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
+          const cleanContentPath = foundBook.contentPath.replace(/^\/?/, '');
+          setContentSrc(`${normalizedBase}${cleanContentPath}`);
+        }
       }
 
       setBook(foundBook || null);
