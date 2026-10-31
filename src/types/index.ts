@@ -20,6 +20,8 @@ export interface CatalogBook {
   authorId?: string;
   authorUsername?: string;
   revision?: number;
+  version?: string;
+  changelog?: string;
   isImported?: boolean;
 }
 

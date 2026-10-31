@@ -102,6 +102,9 @@ export async function submitBookToSupabase(
       taxonomy_ids: book.taxonomyIds || [],
       tags: book.tags || [],
       concept_links: book.conceptLinks || [],
+      version: book.version || '1.0.0',
+      revision: (book.revision || 0) + 1,
+      changelog: book.changelog || '',
       updated_at: new Date().toISOString(),
     });
 
@@ -168,5 +171,9 @@ function mapDbBookToCatalogBook(dbRecord: any): CatalogBook {
     tags: dbRecord.tags || [],
     conceptLinks: dbRecord.concept_links || [],
     authorId: dbRecord.author_id,
+    authorUsername: dbRecord.author_username,
+    version: dbRecord.version || '1.0.0',
+    revision: dbRecord.revision || 1,
+    changelog: dbRecord.changelog || '',
   };
 }

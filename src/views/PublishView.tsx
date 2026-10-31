@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ConceptNode, TaxonomyNode, UserProfile } from '../types';
 import { HtmlBookPublisher } from '../components/publisher/HtmlBookPublisher';
 
@@ -17,18 +17,19 @@ export const PublishView: React.FC<PublishViewProps> = ({
   onToast,
 }) => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const initialMode = searchParams.get('mode') === 'manage' ? 'manage' : 'create';
 
-  const handlePublishSuccess = (_bookId: string, status: string) => {
+  const handlePublishSuccess = (bookId: string, status: string) => {
     if (status === 'local') {
       onToast('Book saved locally to your device in IndexedDB!');
       navigate('/library');
+    } else if (status === 'private') {
+      onToast('Private edition saved to your cloud account!');
+      navigate(`/read/${bookId}`);
     } else {
-      onToast(`Book submitted successfully! Status is "Pending Review".`);
-      if (user?.role === 'admin') {
-        navigate('/admin');
-      } else {
-        navigate('/library');
-      }
+      onToast(`Book edition submitted successfully! Status is "Pending Review".`);
+      navigate(`/read/${bookId}`);
     }
   };
 
@@ -37,6 +38,7 @@ export const PublishView: React.FC<PublishViewProps> = ({
       user={user}
       taxonomies={taxonomies}
       concepts={concepts}
+      initialMode={initialMode}
       onPublishSuccess={handlePublishSuccess}
       onCancel={() => navigate(-1)}
     />

@@ -38,6 +38,9 @@ create table if not exists public.catalog_books (
   concept_links jsonb not null default '[]'::jsonb,
   page_ids jsonb not null default '[]'::jsonb,
   search_tokens jsonb not null default '[]'::jsonb,
+  version text not null default '1.0.0',
+  revision integer not null default 1,
+  changelog text,
   admin_feedback text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
