@@ -133,8 +133,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
               className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
               title="My Space"
             >
-              <span className="nav-item-icon">👤</span>
-              {!isCollapsed && <strong style={{ letterSpacing: '0.3px' }}>My Space</strong>}
+              {!isCollapsed ? (
+                <strong style={{ letterSpacing: '0.3px', fontSize: '0.95rem' }}>My Space</strong>
+              ) : (
+                <span style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>MS</span>
+              )}
             </NavLink>
           </li>
         </ul>

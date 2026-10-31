@@ -37,6 +37,9 @@ export interface ConceptNode {
   name: string;
   description: string;
   category?: 'evergreen' | 'trending';
+  num?: string;
+  theme?: string;
+  bookId?: string;
   x?: number;
   y?: number;
   fill?: string;

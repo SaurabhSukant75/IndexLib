@@ -1,272 +1,498 @@
-import React, { useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { CatalogBook, ConceptNode, ConceptRelation } from '../types';
-import { ConceptGraph } from '../components/concepts/ConceptGraph';
+import { CONCEPTS_100 } from '../data/concepts100';
 
 interface ConceptsViewProps {
-  concepts: ConceptNode[];
-  relations: ConceptRelation[];
-  books: CatalogBook[];
+  concepts?: ConceptNode[];
+  relations?: ConceptRelation[];
+  books?: CatalogBook[];
 }
 
 export const ConceptsView: React.FC<ConceptsViewProps> = ({
-  concepts,
-  relations,
-  books,
+  books = [],
 }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const selectedIdFromUrl = searchParams.get('id') || 'attention';
+  const navigate = useNavigate();
   const [filterTab, setFilterTab] = useState<'all' | 'evergreen' | 'trending'>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTheme, setSelectedTheme] = useState<string>('all');
 
-  const [selectedConceptId, setSelectedConceptId] = useState<string>(
-    concepts.some(c => c.id === selectedIdFromUrl) ? selectedIdFromUrl : concepts[0]?.id || 'attention'
-  );
+  // Extract themes
+  const allThemes = useMemo(() => {
+    const set = new Set<string>();
+    CONCEPTS_100.forEach(c => set.add(c.theme));
+    return Array.from(set);
+  }, []);
 
-  const selectedConcept = concepts.find(c => c.id === selectedConceptId) || concepts[0];
+  // Filtered concepts
+  const filteredConcepts = useMemo(() => {
+    return CONCEPTS_100.filter(c => {
+      // Category filter
+      if (filterTab !== 'all' && c.category !== filterTab) {
+        return false;
+      }
+      // Theme filter
+      if (selectedTheme !== 'all' && c.theme !== selectedTheme) {
+        return false;
+      }
+      // Search query
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase();
+        const matchesName = c.name.toLowerCase().includes(query);
+        const matchesDesc = c.description.toLowerCase().includes(query);
+        const matchesTheme = c.theme.toLowerCase().includes(query);
+        const matchesNum = c.num.includes(query);
+        if (!matchesName && !matchesDesc && !matchesTheme && !matchesNum) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }, [filterTab, selectedTheme, searchQuery]);
 
-  const handleSelectConcept = (conceptId: string) => {
-    setSelectedConceptId(conceptId);
-    setSearchParams({ id: conceptId });
-  };
+  const evergreenCount = CONCEPTS_100.filter(c => c.category === 'evergreen').length;
+  const trendingCount = CONCEPTS_100.filter(c => c.category === 'trending').length;
 
-  // Divide into Evergreen and Trending concepts
-  const evergreenConcepts = concepts.filter(c => c.category === 'evergreen' || (!c.category && (c.id === 'attention' || c.id === 'incentives')));
-  const trendingConcepts = concepts.filter(c => c.category === 'trending' || (!c.category && (c.id === 'engagement' || c.id === 'interface-design')));
-
-  // Filtered concepts based on tab
-  const displayedConcepts =
-    filterTab === 'evergreen'
-      ? evergreenConcepts
-      : filterTab === 'trending'
-      ? trendingConcepts
-      : concepts;
-
-  // Find linked books
-  const linkedBooks = books.filter(b =>
-    b.conceptLinks?.some(link => link.conceptId === selectedConcept?.id)
-  );
-
-  // Find active relationships
-  const activeRelations = relations.filter(
-    r => r.fromConceptId === selectedConcept?.id || r.toConceptId === selectedConcept?.id
-  );
+  // Book lookup map
+  const booksMap = useMemo(() => {
+    const map = new Map<string, CatalogBook>();
+    books.forEach(b => map.set(b.id, b));
+    return map;
+  }, [books]);
 
   return (
-    <div>
-      <p className="page-eyebrow">Explore Connections</p>
-      <h1 className="page-title">Follow an idea.</h1>
-      <p className="page-lede">
-        The knowledge graph shows how concepts relate. Explore timeless evergreen concepts and fast-evolving trending patterns, click on any node to discover linked visual books.
-      </p>
-
-      {/* Evergreen vs Trending Tabs */}
-      <div className="comic-concept-tabs" style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
-        <button
-          onClick={() => setFilterTab('all')}
-          className={`btn ${filterTab === 'all' ? 'btn-primary' : ''}`}
-          style={{ fontSize: '0.9rem' }}
-        >
-          All Concepts ({concepts.length})
-        </button>
-        <button
-          onClick={() => setFilterTab('evergreen')}
-          className={`btn ${filterTab === 'evergreen' ? 'btn-primary' : ''}`}
-          style={{ fontSize: '0.9rem', borderColor: filterTab === 'evergreen' ? '#20241f' : '#22c55e' }}
-        >
-          🌲 Evergreen Concepts ({evergreenConcepts.length})
-        </button>
-        <button
-          onClick={() => setFilterTab('trending')}
-          className={`btn ${filterTab === 'trending' ? 'btn-primary' : ''}`}
-          style={{ fontSize: '0.9rem', borderColor: filterTab === 'trending' ? '#20241f' : '#f97316' }}
-        >
-          🔥 Trending Concepts ({trendingConcepts.length})
-        </button>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr', gap: 28, alignItems: 'start' }}>
-        {/* Graph Canvas */}
-        <div>
-          <ConceptGraph
-            concepts={displayedConcepts}
-            relations={relations}
-            selectedConceptId={selectedConcept?.id || ''}
-            onSelectConcept={handleSelectConcept}
-          />
-
-          {/* Categorized Concept Quick Chips */}
-          <div style={{ marginTop: 20, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-            <div style={{ background: '#fff', border: '2px solid #20241f', borderRadius: 8, padding: 14, boxShadow: '3px 3px 0 #20241f' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
-                <span style={{ fontSize: '1.1rem' }}>🌲</span>
-                <strong style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Evergreen</strong>
-              </div>
-              <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', marginBottom: 10 }}>Foundational mental models that stand the test of time.</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                {evergreenConcepts.map(c => (
-                  <button
-                    key={c.id}
-                    onClick={() => handleSelectConcept(c.id)}
-                    className="btn"
-                    style={{
-                      fontSize: '0.8rem',
-                      padding: '4px 10px',
-                      background: selectedConceptId === c.id ? '#20241f' : '#f0fdf4',
-                      color: selectedConceptId === c.id ? '#fff' : '#166534',
-                      borderColor: '#166534',
-                    }}
-                  >
-                    ● {c.name}
-                  </button>
-                ))}
-              </div>
+    <div style={{ maxWidth: 1280, margin: '0 auto', paddingBottom: 60 }}>
+      {/* Header Banner */}
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%)',
+          border: '3px solid #20241f',
+          borderRadius: 16,
+          padding: 'clamp(24px, 4vw, 36px)',
+          boxShadow: '6px 6px 0 #20241f',
+          marginBottom: 32,
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+          <div>
+            <div
+              style={{
+                display: 'inline-block',
+                background: '#20241f',
+                color: '#ffe600',
+                fontWeight: 900,
+                fontSize: '0.8rem',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                padding: '4px 10px',
+                borderRadius: 4,
+                marginBottom: 10,
+              }}
+            >
+              100 IndexDictionaries Hooks
             </div>
-
-            <div style={{ background: '#fff', border: '2px solid #20241f', borderRadius: 8, padding: 14, boxShadow: '3px 3px 0 #20241f' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
-                <span style={{ fontSize: '1.1rem' }}>🔥</span>
-                <strong style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Trending</strong>
-              </div>
-              <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', marginBottom: 10 }}>Modern design, emergent digital behaviors, and active shifts.</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                {trendingConcepts.map(c => (
-                  <button
-                    key={c.id}
-                    onClick={() => handleSelectConcept(c.id)}
-                    className="btn"
-                    style={{
-                      fontSize: '0.8rem',
-                      padding: '4px 10px',
-                      background: selectedConceptId === c.id ? '#20241f' : '#fff7ed',
-                      color: selectedConceptId === c.id ? '#fff' : '#c2410c',
-                      borderColor: '#ea580c',
-                    }}
-                  >
-                    ● {c.name}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <h1
+              style={{
+                fontFamily: 'var(--font-editorial)',
+                fontSize: 'clamp(2rem, 4vw, 3.2rem)',
+                lineHeight: 1.1,
+                color: '#20241f',
+                margin: '0 0 10px 0',
+              }}
+            >
+              Understand Concepts. Connect Ideas.
+            </h1>
+            <p style={{ color: '#4a5568', fontSize: '1.05rem', maxWidth: 780, margin: 0, lineHeight: 1.5 }}>
+              One hundred foundational questions about how people think, how societies coordinate,
+              how power moves, and how technology reshapes the world.
+            </p>
           </div>
 
-          {/* Accessible Relationship List */}
-          <details
+          <div
             style={{
-              marginTop: 16,
-              background: 'var(--color-surface)',
-              border: '1px solid var(--color-line)',
-              borderRadius: 'var(--radius-sm)',
-              padding: '12px 16px',
-              fontSize: '0.88rem',
+              background: '#fff',
+              border: '2px solid #20241f',
+              borderRadius: 12,
+              padding: '16px 24px',
+              textAlign: 'center',
+              boxShadow: '3px 3px 0 #20241f',
+              minWidth: 140,
             }}
           >
-            <summary style={{ cursor: 'pointer', fontWeight: 600 }}>
-              Read relationships as a structured list
-            </summary>
-            <ul style={{ marginTop: 10, paddingLeft: 20, color: 'var(--color-muted)', lineHeight: 1.8 }}>
-              {activeRelations.map((rel, i) => {
-                const fromName = concepts.find(c => c.id === rel.fromConceptId)?.name;
-                const toName = concepts.find(c => c.id === rel.toConceptId)?.name;
-                return (
-                  <li key={`rel-list-${i}`}>
-                    <strong style={{ color: 'var(--color-ink)' }}>{fromName}</strong>{' '}
-                    <span>{rel.type.replace(/_/g, ' ')}</span>{' '}
-                    <strong style={{ color: 'var(--color-ink)' }}>{toName}</strong>
-                  </li>
-                );
-              })}
-            </ul>
-          </details>
+            <strong style={{ display: 'block', fontSize: '2.5rem', lineHeight: 1, color: '#2563eb' }}>
+              100
+            </strong>
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#64748b' }}>
+              Total Concepts
+            </span>
+          </div>
         </div>
 
-        {/* Selected Concept Detail Panel */}
-        <aside
+        {/* Filter Controls Bar */}
+        <div
           style={{
-            background: 'var(--color-surface)',
-            border: '1px solid var(--color-line)',
-            borderRadius: 'var(--radius-md)',
-            padding: 24,
-            boxShadow: 'var(--shadow-sm)',
+            marginTop: 24,
+            paddingTop: 20,
+            borderTop: '2px dashed #cbd5e1',
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 16,
           }}
         >
-          <p className="page-eyebrow">Selected Concept</p>
-          <h2 style={{ fontFamily: 'var(--font-editorial)', fontSize: '1.8rem', marginBottom: 8 }}>
-            {selectedConcept?.name}
-          </h2>
-          <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: 24 }}>
-            {selectedConcept?.description}
-          </p>
+          {/* Bifurcated Category Tabs */}
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <button
+              onClick={() => setFilterTab('all')}
+              className="btn"
+              style={{
+                background: filterTab === 'all' ? '#20241f' : '#fff',
+                color: filterTab === 'all' ? '#ffe600' : '#20241f',
+                fontWeight: 700,
+                fontSize: '0.88rem',
+                border: '2px solid #20241f',
+                padding: '8px 16px',
+                borderRadius: 8,
+                boxShadow: filterTab === 'all' ? '2px 2px 0 #20241f' : 'none',
+              }}
+            >
+              All Concepts (100)
+            </button>
+            <button
+              onClick={() => setFilterTab('evergreen')}
+              className="btn"
+              style={{
+                background: filterTab === 'evergreen' ? '#166534' : '#fff',
+                color: filterTab === 'evergreen' ? '#fff' : '#166534',
+                fontWeight: 700,
+                fontSize: '0.88rem',
+                border: '2px solid #166534',
+                padding: '8px 16px',
+                borderRadius: 8,
+                boxShadow: filterTab === 'evergreen' ? '2px 2px 0 #20241f' : 'none',
+              }}
+            >
+              🌲 Evergreen ({evergreenCount})
+            </button>
+            <button
+              onClick={() => setFilterTab('trending')}
+              className="btn"
+              style={{
+                background: filterTab === 'trending' ? '#ea580c' : '#fff',
+                color: filterTab === 'trending' ? '#fff' : '#ea580c',
+                fontWeight: 700,
+                fontSize: '0.88rem',
+                border: '2px solid #ea580c',
+                padding: '8px 16px',
+                borderRadius: 8,
+                boxShadow: filterTab === 'trending' ? '2px 2px 0 #20241f' : 'none',
+              }}
+            >
+              🔥 Trending ({trendingCount})
+            </button>
+          </div>
 
-          <h3
-            style={{
-              fontSize: '0.85rem',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px',
-              color: 'var(--color-muted)',
-              marginBottom: 12,
-            }}
-          >
-            Books that explain it
-          </h3>
+          {/* Search Input & Theme Selector */}
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', flex: '1 1 300px', justifyContent: 'flex-end' }}>
+            <select
+              value={selectedTheme}
+              onChange={(e) => setSelectedTheme(e.target.value)}
+              style={{
+                padding: '8px 12px',
+                borderRadius: 8,
+                border: '2px solid #20241f',
+                background: '#fff',
+                fontWeight: 600,
+                fontSize: '0.85rem',
+                outline: 'none',
+              }}
+            >
+              <option value="all">All 8 Themes</option>
+              {allThemes.map((theme) => (
+                <option key={theme} value={theme}>
+                  {theme}
+                </option>
+              ))}
+            </select>
 
-          {linkedBooks.length > 0 ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {linkedBooks.map((book) => {
-                const role = book.conceptLinks?.find(l => l.conceptId === selectedConcept?.id)?.role || 'related';
-                return (
-                  <Link
-                    key={book.id}
-                    to={`/read/${book.id}`}
+            <input
+              type="search"
+              placeholder="Search concepts or hooks..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{
+                padding: '8px 14px',
+                borderRadius: 8,
+                border: '2px solid #20241f',
+                background: '#fff',
+                fontSize: '0.88rem',
+                minWidth: 200,
+                maxWidth: 320,
+                outline: 'none',
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Concept Grid */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
+          gap: 22,
+        }}
+      >
+        {filteredConcepts.map((concept) => {
+          const linkedBook = concept.bookId ? booksMap.get(concept.bookId) : undefined;
+          const isTrending = concept.category === 'trending';
+          const badgeBg = isTrending ? '#fff7ed' : '#f0fdf4';
+          const badgeColor = isTrending ? '#c2410c' : '#166534';
+          const badgeBorder = isTrending ? '#ea580c' : '#16a34a';
+
+          return (
+            <div
+              key={concept.num}
+              style={{
+                background: '#fff',
+                border: '2px solid #20241f',
+                borderRadius: 12,
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+                boxShadow: '4px 4px 0 #20241f',
+                transition: 'transform 0.15s ease',
+              }}
+            >
+              {/* Card Header */}
+              <div
+                style={{
+                  padding: '12px 16px',
+                  background: isTrending ? '#fffaf5' : '#fafdfb',
+                  borderBottom: '2px solid #20241f',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span
                     style={{
+                      background: '#20241f',
+                      color: '#ffe600',
+                      fontSize: '0.75rem',
+                      fontWeight: 900,
+                      padding: '2px 6px',
+                      borderRadius: 4,
+                    }}
+                  >
+                    #{concept.num}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: '0.72rem',
+                      fontWeight: 800,
+                      textTransform: 'uppercase',
+                      padding: '2px 8px',
+                      borderRadius: 12,
+                      background: badgeBg,
+                      color: badgeColor,
+                      border: `1px solid ${badgeBorder}`,
+                    }}
+                  >
+                    {isTrending ? '🔥 Trending' : '🌲 Evergreen'}
+                  </span>
+                </div>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    color: '#64748b',
+                    fontWeight: 600,
+                    maxWidth: 150,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                  title={concept.theme}
+                >
+                  {concept.theme}
+                </span>
+              </div>
+
+              {/* Card Body */}
+              <div style={{ padding: 18, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <h3
+                  style={{
+                    fontSize: '1.25rem',
+                    margin: '0 0 10px 0',
+                    lineHeight: 1.25,
+                    fontFamily: 'var(--font-editorial)',
+                    color: '#1a202c',
+                  }}
+                >
+                  {concept.name}
+                </h3>
+                <p
+                  style={{
+                    fontSize: '0.92rem',
+                    lineHeight: 1.5,
+                    color: '#4a5568',
+                    fontStyle: 'italic',
+                    margin: '0 0 16px 0',
+                    flex: 1,
+                  }}
+                >
+                  “{concept.description}”
+                </p>
+
+                {/* Book Linkage & Thumbnail Area */}
+                {linkedBook ? (
+                  <div
+                    style={{
+                      background: '#f8fafc',
+                      border: '2px solid #20241f',
+                      borderRadius: 8,
+                      padding: 10,
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 16,
-                      padding: 12,
-                      background: 'var(--color-background)',
-                      border: '1px solid var(--color-line)',
-                      borderRadius: 'var(--radius-sm)',
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      transition: 'transform 0.15s, border-color 0.15s',
+                      gap: 12,
+                      marginTop: 'auto',
                     }}
                   >
                     <div
                       style={{
-                        width: 38,
-                        height: 46,
-                        background: 'var(--color-ink)',
-                        color: 'var(--color-accent)',
+                        width: 44,
+                        height: 56,
+                        background: '#20241f',
+                        color: '#ffe600',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        fontWeight: 'bold',
+                        fontWeight: 900,
                         fontSize: '0.85rem',
                         borderRadius: 4,
                         flexShrink: 0,
+                        border: '1px solid #20241f',
                       }}
                     >
-                      {book.id.slice(-2)}
+                      {linkedBook.id.slice(-2)}
                     </div>
-                    <div>
-                      <strong style={{ display: 'block', fontSize: '0.95rem', marginBottom: 2 }}>
-                        {book.title}
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <span
+                        style={{
+                          display: 'block',
+                          fontSize: '0.75rem',
+                          fontWeight: 800,
+                          textTransform: 'uppercase',
+                          color: '#16a34a',
+                        }}
+                      >
+                        ✓ Visual Book Available
+                      </span>
+                      <strong
+                        style={{
+                          display: 'block',
+                          fontSize: '0.88rem',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          color: '#1a202c',
+                        }}
+                        title={linkedBook.title}
+                      >
+                        {linkedBook.title}
                       </strong>
-                      <small style={{ color: 'var(--color-muted)', fontSize: '0.8rem', textTransform: 'capitalize' }}>
-                        {role} · {book.readingMinutes} min read
-                      </small>
                     </div>
-                  </Link>
-                );
-              })}
+                    <Link
+                      to={`/read/${linkedBook.id}`}
+                      className="btn btn-primary"
+                      style={{
+                        fontSize: '0.78rem',
+                        padding: '6px 12px',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      Read 📖
+                    </Link>
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      background: '#f8fafc',
+                      border: '1px dashed #cbd5e1',
+                      borderRadius: 8,
+                      padding: 10,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: 8,
+                      marginTop: 'auto',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span style={{ fontSize: '1.2rem', opacity: 0.7 }}>⏳</span>
+                      <div>
+                        <span style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#64748b' }}>
+                          In Preparation
+                        </span>
+                        <span style={{ display: 'block', fontSize: '0.7rem', color: '#94a3b8' }}>
+                          Hook #{concept.num}
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        navigate(`/templates?concept=${concept.id}&num=${concept.num}`);
+                      }}
+                      className="btn"
+                      style={{
+                        fontSize: '0.72rem',
+                        padding: '5px 10px',
+                        background: '#fff',
+                        borderColor: '#20241f',
+                        color: '#20241f',
+                        fontWeight: 700,
+                      }}
+                      title="Author or seed visual book for this concept"
+                    >
+                      Author +
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          ) : (
-            <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem' }}>
-              No visual books are linked to this concept yet.
-            </p>
-          )}
-        </aside>
+          );
+        })}
       </div>
+
+      {filteredConcepts.length === 0 && (
+        <div
+          style={{
+            background: '#fff',
+            border: '2px dashed #20241f',
+            borderRadius: 12,
+            padding: 40,
+            textAlign: 'center',
+            marginTop: 20,
+          }}
+        >
+          <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#64748b', margin: 0 }}>
+            No concepts matched your filter or search query.
+          </p>
+          <button
+            onClick={() => {
+              setFilterTab('all');
+              setSelectedTheme('all');
+              setSearchQuery('');
+            }}
+            className="btn btn-primary"
+            style={{ marginTop: 14 }}
+          >
+            Clear Filters
+          </button>
+        </div>
+      )}
     </div>
   );
 };
