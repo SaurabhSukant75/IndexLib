@@ -60,16 +60,6 @@ export const HomeView: React.FC = () => {
       </section>
 
       {/* =========================================================
-          CONCEPT SUMMARY BANNER
-          ========================================================= */}
-      <section className="home-3d-summary-card">
-        <h2>The Open Digital Library for Visual Mini-Books.</h2>
-        <p>
-          IndexLib is an open-source visual web library and authoring platform for short, structured, multi-page HTML books.
-        </p>
-      </section>
-
-      {/* =========================================================
           INDUSTRY STANDARD PROFESSIONAL FOOTER
           ========================================================= */}
       <footer className="home-site-footer">
