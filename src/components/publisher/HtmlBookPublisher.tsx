@@ -32,6 +32,7 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
   const [readingMinutes, setReadingMinutes] = useState<number>(10);
   const [primaryTaxonomyId, setPrimaryTaxonomyId] = useState<string>(taxonomies[0]?.id || 'human-nature');
   const [selectedConceptIds, setSelectedConceptIds] = useState<string[]>([]);
+  const [visibilityChoice, setVisibilityChoice] = useState<'request_approval' | 'private'>('request_approval');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string>('');
 
@@ -116,15 +117,15 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
     if (onPublishSuccess) onPublishSuccess(bookId, 'local');
   };
 
-  // Submit to Supabase (Pending Review)
-  const handleSubmitReview = async () => {
+  // Submit to Supabase Database (or Local Private)
+  const handleSubmitBook = async () => {
     if (!htmlContent || !title.trim()) {
       alert('Please upload an HTML document and enter a title.');
       return;
     }
 
     if (!user) {
-      alert('You must be signed in to submit a book for public review.');
+      alert('Please sign in to save your book to your cloud account.');
       return;
     }
 
@@ -136,29 +137,33 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '') || `book-${Date.now().toString(36)}`;
 
+    const targetStatus = visibilityChoice === 'request_approval' ? 'pending_review' : 'private';
+
     const result = await submitBookToSupabase(
       {
         id: stableId,
         title: title.trim(),
         summary: summary.trim() || 'A new visual book on IndexLib.',
         contentPath: '',
+        status: targetStatus,
         readingMinutes,
         primaryTaxonomyId,
         taxonomyIds: [primaryTaxonomyId],
-        tags: ['Community'],
+        tags: visibilityChoice === 'request_approval' ? ['Community'] : ['Private'],
         conceptLinks: selectedConceptIds.map(cId => ({ conceptId: cId, role: 'explains' })),
         authorId: user.id,
       },
       htmlContent,
-      user.id
+      user.id,
+      user.username
     );
 
     setIsSubmitting(false);
 
     if (result.success) {
-      if (onPublishSuccess) onPublishSuccess(stableId, 'pending_review');
+      if (onPublishSuccess) onPublishSuccess(stableId, targetStatus);
     } else {
-      setSubmitError(result.error || 'Failed to submit book.');
+      setSubmitError(result.error || 'Failed to submit book to Supabase.');
     }
   };
 
@@ -304,6 +309,43 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
               </div>
             </div>
 
+            {/* Visibility Mode Selector */}
+            <div style={{ marginBottom: 20, padding: 14, background: '#fdfbf7', border: '2px solid var(--color-ink)', borderRadius: 8 }}>
+              <label style={{ display: 'block', fontSize: '0.88rem', fontWeight: 800, marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                Book Visibility & Distribution
+              </label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontSize: '0.88rem' }}>
+                  <input
+                    type="radio"
+                    name="visibility"
+                    checked={visibilityChoice === 'request_approval'}
+                    onChange={() => setVisibilityChoice('request_approval')}
+                  />
+                  <div>
+                    <strong>Request Admin Approval (Make Public)</strong>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--color-muted)' }}>
+                      Instantly visible to you. Submits to Admin Review Queue for inclusion in the global public library.
+                    </div>
+                  </div>
+                </label>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontSize: '0.88rem' }}>
+                  <input
+                    type="radio"
+                    name="visibility"
+                    checked={visibilityChoice === 'private'}
+                    onChange={() => setVisibilityChoice('private')}
+                  />
+                  <div>
+                    <strong>Keep Private (Only Me)</strong>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--color-muted)' }}>
+                      Saved securely to your account database. Only you can access, read, and bookmark this book.
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
             {submitError && (
               <p style={{ color: 'var(--color-danger)', fontSize: '0.85rem', marginBottom: 12 }}>
                 {submitError}
@@ -331,14 +373,20 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
                   type="button"
                   className="btn btn-primary"
                   disabled={isSubmitting || !htmlContent}
-                  onClick={handleSubmitReview}
+                  onClick={handleSubmitBook}
                 >
-                  {isSubmitting ? 'Submitting...' : 'Submit for Review →'}
+                  {isSubmitting
+                    ? 'Publishing...'
+                    : visibilityChoice === 'request_approval'
+                    ? 'Publish & Request Approval ➔'
+                    : 'Save Private Book ➔'}
                 </button>
               </div>
             </div>
             <small style={{ display: 'block', color: 'var(--color-muted)', marginTop: 8, fontSize: '0.78rem' }}>
-              Submitting adds the book to your account and puts it in the Admin Queue for public catalog approval.
+              {visibilityChoice === 'request_approval'
+                ? 'Your book is instantly readable in your library and queued for admin moderation.'
+                : 'Your book is private to your account and never shown in the public catalog.'}
             </small>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { CatalogBook, CatalogData, ConceptNode, TaxonomyNode } from '../types';
-import { fetchPublishedBooks } from './supabase';
+import { fetchPublishedBooks, fetchUserBooks, getCurrentUserProfile } from './supabase';
 import { getLocalImports } from './local-db';
 
 let cachedCatalog: CatalogData | null = null;
@@ -23,6 +23,19 @@ export async function loadCatalog(): Promise<CatalogData> {
       for (const cloudBook of cloudBooks) {
         if (!existingIds.has(cloudBook.id)) {
           data.books.push(cloudBook);
+          existingIds.add(cloudBook.id);
+        }
+      }
+
+      // If user is logged in, also fetch user's own private/pending books
+      const user = await getCurrentUserProfile();
+      if (user) {
+        const userBooks = await fetchUserBooks(user.id);
+        for (const uBook of userBooks) {
+          if (!existingIds.has(uBook.id)) {
+            data.books.push(uBook);
+            existingIds.add(uBook.id);
+          }
         }
       }
     } catch {

@@ -1,4 +1,4 @@
-export type BookStatus = 'draft' | 'pending_review' | 'published' | 'rejected' | 'archived';
+export type BookStatus = 'draft' | 'private' | 'pending_review' | 'published' | 'rejected' | 'archived';
 export type UserRole = 'reader' | 'author' | 'admin';
 
 export interface ConceptLink {

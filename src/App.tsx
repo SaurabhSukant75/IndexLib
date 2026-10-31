@@ -14,6 +14,7 @@ import { ReaderView } from './views/ReaderView';
 import { PublishView } from './views/PublishView';
 import { AdminReviewView } from './views/AdminReviewView';
 import { AccountView } from './views/AccountView';
+import { SearchView } from './views/SearchView';
 
 export const App: React.FC = () => {
   const [catalog, setCatalog] = useState<CatalogData | null>(null);
@@ -91,6 +92,10 @@ export const App: React.FC = () => {
         <Route
           path="/account"
           element={<AccountView user={user} onUserChange={refreshUser} onToast={setToastMessage} />}
+        />
+        <Route
+          path="/search"
+          element={<SearchView catalog={catalog} />}
         />
       </Routes>
 

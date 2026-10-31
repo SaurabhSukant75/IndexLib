@@ -63,33 +63,40 @@ export async function fetchBooksForModeration(): Promise<CatalogBook[]> {
 }
 
 export async function submitBookToSupabase(
-  book: Omit<CatalogBook, 'status'>,
+  book: Omit<CatalogBook, 'status'> & { status?: BookStatus },
   htmlContent: string,
-  userId: string
+  userId: string,
+  authorUsername?: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    // 1. Upload HTML to Supabase Storage if bucket exists
+    const bookStatus = book.status || 'pending_review';
+    // 1. Upload HTML to Supabase Storage
     const storagePath = `${userId}/${book.id}.html`;
     const blob = new Blob([htmlContent], { type: 'text/html' });
 
-    // Attempt upload (gracefully fall back if bucket is pending)
-    await supabase.storage.from('books').upload(storagePath, blob, {
+    // Attempt upload to 'books' bucket
+    const { error: storageError } = await supabase.storage.from('books').upload(storagePath, blob, {
       contentType: 'text/html',
       upsert: true,
     });
 
+    if (storageError) {
+      console.warn('Storage upload notice (falling back or checking bucket):', storageError.message);
+    }
+
     const { data: publicUrlData } = supabase.storage.from('books').getPublicUrl(storagePath);
     const contentUrl = publicUrlData?.publicUrl || `book/${book.id}.html`;
 
-    // 2. Insert record in catalog_books with status = 'pending_review'
+    // 2. Insert record in catalog_books
     const { error } = await supabase.from('catalog_books').upsert({
       id: book.id,
       author_id: userId,
+      author_username: authorUsername || 'author',
       title: book.title,
       summary: book.summary,
       content_url: contentUrl,
       storage_path: storagePath,
-      status: 'pending_review',
+      status: bookStatus,
       reading_minutes: book.readingMinutes || 10,
       primary_taxonomy_id: book.primaryTaxonomyId,
       taxonomy_ids: book.taxonomyIds || [],
@@ -103,6 +110,17 @@ export async function submitBookToSupabase(
   } catch (err: any) {
     return { success: false, error: err.message || 'Submission failed' };
   }
+}
+
+export async function fetchUserBooks(userId: string): Promise<CatalogBook[]> {
+  const { data, error } = await supabase
+    .from('catalog_books')
+    .select('*')
+    .eq('author_id', userId)
+    .order('created_at', { ascending: false });
+
+  if (error || !data) return [];
+  return data.map(mapDbBookToCatalogBook);
 }
 
 export async function updateBookStatus(
