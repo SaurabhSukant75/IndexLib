@@ -24,6 +24,7 @@ export const Header: React.FC<HeaderProps> = ({ user, onToggleSidebar, isSidebar
 
   return (
     <header className="app-header">
+      {/* Brand & Drawer Toggle */}
       <div className="header-brand-group">
         {onToggleSidebar && (
           <button
@@ -41,6 +42,7 @@ export const Header: React.FC<HeaderProps> = ({ user, onToggleSidebar, isSidebar
         </Link>
       </div>
 
+      {/* Desktop Search Bar / Mobile Expanded Bar */}
       <form
         className={`search-bar ${isSearchExpandedMobile ? 'search-bar-expanded' : ''}`}
         onSubmit={handleSearchSubmit}
@@ -65,15 +67,20 @@ export const Header: React.FC<HeaderProps> = ({ user, onToggleSidebar, isSidebar
         )}
       </form>
 
+      {/* Header Actions */}
       <div className="header-actions">
+        {/* Mobile Search Trigger Icon */}
         <button
           type="button"
           className="search-toggle-mobile-btn"
           onClick={() => setIsSearchExpandedMobile(prev => !prev)}
-          aria-label="Toggle search input"
+          aria-label="Search"
           title="Search"
         >
-          SEARCH
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
         </button>
 
         {user?.role === 'admin' && (
@@ -87,6 +94,7 @@ export const Header: React.FC<HeaderProps> = ({ user, onToggleSidebar, isSidebar
           </>
         )}
 
+        {/* User / Sign In Button */}
         <Link
           to="/account"
           className={`btn comic-user-btn ${user ? 'comic-user-active' : ''}`}

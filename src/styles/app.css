@@ -1360,55 +1360,79 @@ main.main-viewport {
   }
 
   header.app-header {
-    padding: 0 12px;
+    padding: 0 10px;
+    height: 56px;
+  }
+
+  .header-brand-group {
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-burger-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+    box-shadow: 1.5px 1.5px 0 var(--color-ink);
+  }
+
+  .brand {
+    gap: 8px;
   }
 
   .brand-title {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
   }
 
   .brand-mark {
-    width: 30px;
-    height: 30px;
-    font-size: 0.95rem;
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+    border-radius: 4px;
   }
 
-  /* Search bar collapsible logic */
+  /* Compact Search Toggle Icon Button on Mobile */
   .search-toggle-mobile-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-sm);
-    width: 32px;
-    height: 32px;
-    font-size: 0.9rem;
+    background: #fff;
+    border: 2px solid var(--color-ink);
+    border-radius: 6px;
+    width: 34px;
+    height: 34px;
+    color: var(--color-ink);
     cursor: pointer;
+    box-shadow: 1.5px 1.5px 0 var(--color-ink);
+    flex-shrink: 0;
   }
 
   .search-bar {
-    display: none;
+    display: none !important;
     margin: 0;
   }
 
+  /* Expanded full-screen overlay when search button is tapped */
   .search-bar.search-bar-expanded {
-    display: flex;
+    display: flex !important;
     position: absolute;
     left: 8px;
     right: 8px;
-    top: 6px;
-    bottom: 6px;
-    z-index: 120;
+    top: 8px;
+    bottom: 8px;
+    z-index: 200;
     max-width: none;
     align-items: center;
-    background: var(--color-surface);
-    border-radius: var(--radius-sm);
+    background: #fff;
+    border-radius: 8px;
   }
 
   .search-bar.search-bar-expanded .search-input {
-    padding-right: 36px;
+    padding-left: 70px;
+    padding-right: 40px;
     height: 100%;
+    font-size: 0.86rem;
   }
 
   .search-close-mobile-btn {
@@ -1421,14 +1445,16 @@ main.main-viewport {
     transform: translateY(-50%);
     background: transparent;
     border: none;
-    color: var(--color-muted);
-    font-size: 1rem;
+    color: var(--color-ink);
+    font-size: 1.1rem;
+    font-weight: 900;
     cursor: pointer;
-    padding: 4px;
+    padding: 6px;
   }
 
   .header-actions {
     gap: 8px;
+    flex-shrink: 0;
   }
 
   .header-admin-btn,
@@ -1436,9 +1462,29 @@ main.main-viewport {
     display: none !important;
   }
 
-  .header-auth-btn {
-    padding: 6px 10px;
-    font-size: 0.8rem;
+  .comic-user-btn {
+    padding: 5px 10px !important;
+    box-shadow: 2px 2px 0 var(--color-ink);
+  }
+
+  .comic-signin-label {
+    font-size: 0.74rem;
+  }
+
+  .comic-user-label {
+    gap: 6px;
+  }
+
+  .comic-user-tag {
+    display: none;
+  }
+
+  .comic-user-name {
+    font-size: 0.78rem;
+    max-width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* Sidebar transformed into off-canvas drawer */
