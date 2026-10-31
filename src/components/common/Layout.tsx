@@ -73,7 +73,6 @@ export const Layout: React.FC<LayoutProps> = ({
               libraryCount={libraryCount}
               isAdmin={user?.role === 'admin'}
               isCollapsed={!isSidebarOpen}
-              onToggleCollapse={handleToggleSidebar}
               onCloseMobile={handleCloseSidebar}
             />
           </>

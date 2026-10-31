@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 interface SidebarProps {
@@ -7,23 +7,16 @@ interface SidebarProps {
   libraryCount?: number;
   isAdmin?: boolean;
   isCollapsed?: boolean;
-  onToggleCollapse?: () => void;
   onCloseMobile?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
-  conceptCount = 4,
+  conceptCount = 100,
   pathCount = 1,
   isAdmin = false,
   isCollapsed = false,
-  onToggleCollapse,
   onCloseMobile,
 }) => {
-  // Vertical collapse/expand state for sidebar sections
-  const [isExploreOpen, setIsExploreOpen] = useState(true);
-  const [isDesignStudioOpen, setIsDesignStudioOpen] = useState(true);
-  const [isAdminOpen, setIsAdminOpen] = useState(true);
-
   const handleNavClick = () => {
     if (onCloseMobile) {
       onCloseMobile();
@@ -32,161 +25,164 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside className={`sidebar ${isCollapsed ? 'collapsed' : 'mobile-open'}`}>
-      <div className="sidebar-header-row">
-        {!isCollapsed && <span className="sidebar-brand-sub">Navigation</span>}
-        <button
-          className="sidebar-toggle-btn"
-          onClick={onToggleCollapse}
-          title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        >
-          {isCollapsed ? '❯' : '✕'}
-        </button>
+      {/* Comic Sidebar Vault Header */}
+      <div className="comic-sidebar-header">
+        <div className="comic-sidebar-badge">INDEX VAULT</div>
+        <div className="comic-sidebar-vol">SERIES 1.0</div>
       </div>
 
-      {/* 1. Explore Section (Collapsible) */}
-      <div className="sidebar-section">
-        <div
-          className="nav-group-header"
-          onClick={() => !isCollapsed && setIsExploreOpen(prev => !prev)}
-          title={isExploreOpen ? 'Collapse Explore' : 'Expand Explore'}
-        >
-          <span className="nav-group-title">{!isCollapsed ? 'Explore' : '•••'}</span>
-          {!isCollapsed && (
-            <span className="section-toggle-icon">{isExploreOpen ? '▾' : '▸'}</span>
-          )}
-        </div>
-        {(!isCollapsed ? isExploreOpen : true) && (
-          <ul className="nav-list">
+      {/* Primary Navigation Sections */}
+      <div className="comic-sidebar-content">
+        {/* Explore Section */}
+        <div className="comic-sidebar-group">
+          <div className="comic-sidebar-group-title">EXPLORE</div>
+          <ul className="comic-nav-list">
             <li>
               <NavLink
                 to="/concepts"
                 onClick={handleNavClick}
-                className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
-                title="Concepts (Evergreen & Trending)"
+                className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
+                title="100 Concepts"
               >
-                <span className="nav-item-icon">💡</span>
-                {!isCollapsed && <span>Concepts</span>}
-                {!isCollapsed && <span className="nav-counter">{conceptCount}</span>}
+                <span className="comic-nav-label">Concepts</span>
+                <span className="comic-nav-count">{conceptCount}</span>
               </NavLink>
             </li>
             <li>
               <NavLink
                 to="/paths"
                 onClick={handleNavClick}
-                className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
+                className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
                 title="Learning Paths"
               >
-                <span className="nav-item-icon">🧭</span>
-                {!isCollapsed && <span>Learning Paths</span>}
-                {!isCollapsed && <span className="nav-counter">{pathCount}</span>}
+                <span className="comic-nav-label">Learning Paths</span>
+                <span className="comic-nav-count">{pathCount}</span>
               </NavLink>
             </li>
             <li>
               <NavLink
                 to="/training"
                 onClick={handleNavClick}
-                className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
+                className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
                 title="Creator Training"
               >
-                <span className="nav-item-icon">🎓</span>
-                {!isCollapsed && <span>Training</span>}
+                <span className="comic-nav-label">Training</span>
+                <span className="comic-nav-chip">PRO</span>
               </NavLink>
             </li>
           </ul>
-        )}
-      </div>
-
-      {/* 2. Design Studio Section (Publish a book & Template Catalog) */}
-      <div className="sidebar-section">
-        <div
-          className="nav-group-header"
-          onClick={() => !isCollapsed && setIsDesignStudioOpen(prev => !prev)}
-          title={isDesignStudioOpen ? 'Collapse Design Studio' : 'Expand Design Studio'}
-        >
-          <span className="nav-group-title">{!isCollapsed ? 'Design Studio' : '•••'}</span>
-          {!isCollapsed && (
-            <span className="section-toggle-icon">{isDesignStudioOpen ? '▾' : '▸'}</span>
-          )}
         </div>
-        {(!isCollapsed ? isDesignStudioOpen : true) && (
-          <ul className="nav-list">
+
+        {/* Studio Section */}
+        <div className="comic-sidebar-group">
+          <div className="comic-sidebar-group-title">STUDIO</div>
+          <ul className="comic-nav-list">
             <li>
               <NavLink
                 to="/publish"
                 onClick={handleNavClick}
-                className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
-                title="Publish a Book"
+                className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
+                title="Publish a Visual Book"
               >
-                <span className="nav-item-icon">✍️</span>
-                {!isCollapsed && <span>Publish a Book</span>}
+                <span className="comic-nav-label">Publish Book</span>
               </NavLink>
             </li>
             <li>
               <NavLink
                 to="/templates"
                 onClick={handleNavClick}
-                className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
+                className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
                 title="Template Catalog"
               >
-                <span className="nav-item-icon">📑</span>
-                {!isCollapsed && <span>Template Catalog</span>}
+                <span className="comic-nav-label">Templates</span>
               </NavLink>
             </li>
           </ul>
-        )}
-      </div>
+        </div>
 
-      {/* 3. My Space Section (Direct link, No dropdown needed) */}
-      <div className="sidebar-section">
-        <ul className="nav-list">
-          <li>
-            <NavLink
-              to="/library?tab=history"
-              onClick={handleNavClick}
-              className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
-              title="My Space"
-            >
-              {!isCollapsed ? (
-                <strong style={{ letterSpacing: '0.3px', fontSize: '0.95rem' }}>My Space</strong>
-              ) : (
-                <span style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>MS</span>
-              )}
-            </NavLink>
-          </li>
-        </ul>
-      </div>
+        {/* My Vault Section */}
+        <div className="comic-sidebar-group">
+          <div className="comic-sidebar-group-title">MY VAULT</div>
+          <ul className="comic-nav-list">
+            <li>
+              <NavLink
+                to="/library?tab=all"
+                onClick={handleNavClick}
+                className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
+                title="All Issues"
+              >
+                <span className="comic-nav-label">All Issues</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/library?tab=progress"
+                onClick={handleNavClick}
+                className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
+                title="In Progress"
+              >
+                <span className="comic-nav-label">In Progress</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/library?tab=history"
+                onClick={handleNavClick}
+                className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
+                title="Reading History"
+              >
+                <span className="comic-nav-label">History</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/library?tab=bookmarks"
+                onClick={handleNavClick}
+                className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
+                title="Bookmarks"
+              >
+                <span className="comic-nav-label">Bookmarks</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/account"
+                onClick={handleNavClick}
+                className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
+                title="Account & Sync"
+              >
+                <span className="comic-nav-label">Account & Sync</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
 
-      {/* 4. Creator & Admin Section (For Admin Users) */}
-      {isAdmin && (
-        <div className="sidebar-section">
-          <div
-            className="nav-group-header"
-            onClick={() => !isCollapsed && setIsAdminOpen(prev => !prev)}
-            title={isAdminOpen ? 'Collapse Admin' : 'Expand Admin'}
-          >
-            <span className="nav-group-title">{!isCollapsed ? 'Admin' : '•••'}</span>
-            {!isCollapsed && (
-              <span className="section-toggle-icon">{isAdminOpen ? '▾' : '▸'}</span>
-            )}
-          </div>
-          {(!isCollapsed ? isAdminOpen : true) && (
-            <ul className="nav-list">
+        {/* Admin Section */}
+        {isAdmin && (
+          <div className="comic-sidebar-group">
+            <div className="comic-sidebar-group-title">ADMIN</div>
+            <ul className="comic-nav-list">
               <li>
                 <NavLink
                   to="/admin"
                   onClick={handleNavClick}
-                  className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
-                  title="Admin Moderation"
+                  className={({ isActive }) => `comic-nav-link ${isActive ? 'active' : ''}`}
+                  title="Admin Moderation Queue"
                 >
-                  <span className="nav-item-icon">🛡️</span>
-                  {!isCollapsed && <span>Moderation Queue</span>}
+                  <span className="comic-nav-label">Moderation Queue</span>
+                  <span className="comic-nav-chip chip-admin">SHIELD</span>
                 </NavLink>
               </li>
             </ul>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
+
+      {/* Footer Vault Issue Stamp */}
+      <div className="comic-sidebar-footer">
+        <div className="comic-issue-stamp">ISSUE NO. 01</div>
+        <small className="comic-sidebar-copyright">© IndexLib Visuals</small>
+      </div>
     </aside>
   );
 };
