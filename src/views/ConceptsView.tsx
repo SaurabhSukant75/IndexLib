@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CatalogBook, ConceptNode, ConceptRelation } from '../types';
+import { CatalogBook, ConceptRelation } from '../types';
 import { CONCEPTS_100 } from '../data/concepts100';
 
 interface ConceptsViewProps {
-  concepts?: ConceptNode[];
+  concepts?: any[];
   relations?: ConceptRelation[];
   books?: CatalogBook[];
 }
@@ -14,8 +14,8 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
 }) => {
   const navigate = useNavigate();
   const [filterTab, setFilterTab] = useState<'all' | 'evergreen' | 'trending'>('all');
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedTheme, setSelectedTheme] = useState<string>('all');
+  const [sortOrder, setSortOrder] = useState<'num-asc' | 'a-z' | 'z-a'>('num-asc');
 
   // Extract themes
   const allThemes = useMemo(() => {
@@ -24,9 +24,9 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
     return Array.from(set);
   }, []);
 
-  // Filtered concepts
-  const filteredConcepts = useMemo(() => {
-    return CONCEPTS_100.filter(c => {
+  // Filtered and sorted concepts
+  const displayedConcepts = useMemo(() => {
+    const filtered = CONCEPTS_100.filter(c => {
       // Category filter
       if (filterTab !== 'all' && c.category !== filterTab) {
         return false;
@@ -35,23 +35,20 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
       if (selectedTheme !== 'all' && c.theme !== selectedTheme) {
         return false;
       }
-      // Search query
-      if (searchQuery.trim()) {
-        const query = searchQuery.toLowerCase();
-        const matchesName = c.name.toLowerCase().includes(query);
-        const matchesDesc = c.description.toLowerCase().includes(query);
-        const matchesTheme = c.theme.toLowerCase().includes(query);
-        const matchesNum = c.num.includes(query);
-        if (!matchesName && !matchesDesc && !matchesTheme && !matchesNum) {
-          return false;
-        }
-      }
       return true;
     });
-  }, [filterTab, selectedTheme, searchQuery]);
 
-  const evergreenCount = CONCEPTS_100.filter(c => c.category === 'evergreen').length;
-  const trendingCount = CONCEPTS_100.filter(c => c.category === 'trending').length;
+    // Sort
+    return filtered.sort((a, b) => {
+      if (sortOrder === 'a-z') {
+        return a.name.localeCompare(b.name);
+      }
+      if (sortOrder === 'z-a') {
+        return b.name.localeCompare(a.name);
+      }
+      return a.num.localeCompare(b.num);
+    });
+  }, [filterTab, selectedTheme, sortOrder]);
 
   // Book lookup map
   const booksMap = useMemo(() => {
@@ -62,177 +59,127 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
 
   return (
     <div style={{ maxWidth: 1280, margin: '0 auto', paddingBottom: 60 }}>
-      {/* Header Banner */}
+      {/* Standard IndexLib Page Header */}
+      <div style={{ marginBottom: 20 }}>
+        <p className="page-eyebrow">Visual Dictionaries</p>
+        <h1 className="page-title">Explore Concepts.</h1>
+        <p className="page-lede">
+          Foundational questions about how people think, how societies coordinate, how power moves, and how technology reshapes the world.
+        </p>
+      </div>
+
+      {/* Filter and Sorting Controls Toolbar */}
       <div
         style={{
-          background: 'linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%)',
-          border: '3px solid #20241f',
-          borderRadius: 16,
-          padding: 'clamp(24px, 4vw, 36px)',
-          boxShadow: '6px 6px 0 #20241f',
-          marginBottom: 32,
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 12,
+          padding: '12px 16px',
+          background: 'var(--color-surface)',
+          border: '2px solid #20241f',
+          borderRadius: 12,
+          boxShadow: '3px 3px 0 #20241f',
+          marginBottom: 24,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
-          <div>
-            <div
-              style={{
-                display: 'inline-block',
-                background: '#20241f',
-                color: '#ffe600',
-                fontWeight: 900,
-                fontSize: '0.8rem',
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                padding: '4px 10px',
-                borderRadius: 4,
-                marginBottom: 10,
-              }}
-            >
-              100 IndexDictionaries Hooks
-            </div>
-            <h1
-              style={{
-                fontFamily: 'var(--font-editorial)',
-                fontSize: 'clamp(2rem, 4vw, 3.2rem)',
-                lineHeight: 1.1,
-                color: '#20241f',
-                margin: '0 0 10px 0',
-              }}
-            >
-              Understand Concepts. Connect Ideas.
-            </h1>
-            <p style={{ color: '#4a5568', fontSize: '1.05rem', maxWidth: 780, margin: 0, lineHeight: 1.5 }}>
-              One hundred foundational questions about how people think, how societies coordinate,
-              how power moves, and how technology reshapes the world.
-            </p>
-          </div>
-
-          <div
+        {/* Category Tabs without count */}
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <button
+            onClick={() => setFilterTab('all')}
+            className="btn"
             style={{
-              background: '#fff',
+              background: filterTab === 'all' ? '#20241f' : '#fff',
+              color: filterTab === 'all' ? '#ffe600' : '#20241f',
+              fontWeight: 700,
+              fontSize: '0.85rem',
               border: '2px solid #20241f',
-              borderRadius: 12,
-              padding: '16px 24px',
-              textAlign: 'center',
-              boxShadow: '3px 3px 0 #20241f',
-              minWidth: 140,
+              padding: '6px 14px',
+              borderRadius: 8,
+              boxShadow: filterTab === 'all' ? '2px 2px 0 #20241f' : 'none',
             }}
           >
-            <strong style={{ display: 'block', fontSize: '2.5rem', lineHeight: 1, color: '#2563eb' }}>
-              100
-            </strong>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#64748b' }}>
-              Total Concepts
-            </span>
-          </div>
+            All Concepts
+          </button>
+          <button
+            onClick={() => setFilterTab('evergreen')}
+            className="btn"
+            style={{
+              background: filterTab === 'evergreen' ? '#166534' : '#fff',
+              color: filterTab === 'evergreen' ? '#fff' : '#166534',
+              fontWeight: 700,
+              fontSize: '0.85rem',
+              border: '2px solid #166534',
+              padding: '6px 14px',
+              borderRadius: 8,
+              boxShadow: filterTab === 'evergreen' ? '2px 2px 0 #20241f' : 'none',
+            }}
+          >
+            🌲 Evergreen
+          </button>
+          <button
+            onClick={() => setFilterTab('trending')}
+            className="btn"
+            style={{
+              background: filterTab === 'trending' ? '#ea580c' : '#fff',
+              color: filterTab === 'trending' ? '#fff' : '#ea580c',
+              fontWeight: 700,
+              fontSize: '0.85rem',
+              border: '2px solid #ea580c',
+              padding: '6px 14px',
+              borderRadius: 8,
+              boxShadow: filterTab === 'trending' ? '2px 2px 0 #20241f' : 'none',
+            }}
+          >
+            🔥 Trending
+          </button>
         </div>
 
-        {/* Filter Controls Bar */}
-        <div
-          style={{
-            marginTop: 24,
-            paddingTop: 20,
-            borderTop: '2px dashed #cbd5e1',
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 16,
-          }}
-        >
-          {/* Bifurcated Category Tabs */}
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            <button
-              onClick={() => setFilterTab('all')}
-              className="btn"
-              style={{
-                background: filterTab === 'all' ? '#20241f' : '#fff',
-                color: filterTab === 'all' ? '#ffe600' : '#20241f',
-                fontWeight: 700,
-                fontSize: '0.88rem',
-                border: '2px solid #20241f',
-                padding: '8px 16px',
-                borderRadius: 8,
-                boxShadow: filterTab === 'all' ? '2px 2px 0 #20241f' : 'none',
-              }}
-            >
-              All Concepts (100)
-            </button>
-            <button
-              onClick={() => setFilterTab('evergreen')}
-              className="btn"
-              style={{
-                background: filterTab === 'evergreen' ? '#166534' : '#fff',
-                color: filterTab === 'evergreen' ? '#fff' : '#166534',
-                fontWeight: 700,
-                fontSize: '0.88rem',
-                border: '2px solid #166534',
-                padding: '8px 16px',
-                borderRadius: 8,
-                boxShadow: filterTab === 'evergreen' ? '2px 2px 0 #20241f' : 'none',
-              }}
-            >
-              🌲 Evergreen ({evergreenCount})
-            </button>
-            <button
-              onClick={() => setFilterTab('trending')}
-              className="btn"
-              style={{
-                background: filterTab === 'trending' ? '#ea580c' : '#fff',
-                color: filterTab === 'trending' ? '#fff' : '#ea580c',
-                fontWeight: 700,
-                fontSize: '0.88rem',
-                border: '2px solid #ea580c',
-                padding: '8px 16px',
-                borderRadius: 8,
-                boxShadow: filterTab === 'trending' ? '2px 2px 0 #20241f' : 'none',
-              }}
-            >
-              🔥 Trending ({trendingCount})
-            </button>
-          </div>
+        {/* Theme Filter and A-Z Sorting Options */}
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+          {/* Theme Selector */}
+          <select
+            value={selectedTheme}
+            onChange={(e) => setSelectedTheme(e.target.value)}
+            style={{
+              padding: '7px 12px',
+              borderRadius: 8,
+              border: '2px solid #20241f',
+              background: '#fff',
+              fontWeight: 600,
+              fontSize: '0.85rem',
+              outline: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <option value="all">All Themes</option>
+            {allThemes.map((theme) => (
+              <option key={theme} value={theme}>
+                {theme}
+              </option>
+            ))}
+          </select>
 
-          {/* Search Input & Theme Selector */}
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', flex: '1 1 300px', justifyContent: 'flex-end' }}>
-            <select
-              value={selectedTheme}
-              onChange={(e) => setSelectedTheme(e.target.value)}
-              style={{
-                padding: '8px 12px',
-                borderRadius: 8,
-                border: '2px solid #20241f',
-                background: '#fff',
-                fontWeight: 600,
-                fontSize: '0.85rem',
-                outline: 'none',
-              }}
-            >
-              <option value="all">All 8 Themes</option>
-              {allThemes.map((theme) => (
-                <option key={theme} value={theme}>
-                  {theme}
-                </option>
-              ))}
-            </select>
-
-            <input
-              type="search"
-              placeholder="Search concepts or hooks..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                padding: '8px 14px',
-                borderRadius: 8,
-                border: '2px solid #20241f',
-                background: '#fff',
-                fontSize: '0.88rem',
-                minWidth: 200,
-                maxWidth: 320,
-                outline: 'none',
-              }}
-            />
-          </div>
+          {/* Sort Dropdown (A-Z, Z-A, Original Order) */}
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value as any)}
+            style={{
+              padding: '7px 12px',
+              borderRadius: 8,
+              border: '2px solid #20241f',
+              background: '#fff',
+              fontWeight: 600,
+              fontSize: '0.85rem',
+              outline: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <option value="num-asc">Sort: Concept # (001 - 100)</option>
+            <option value="a-z">Sort: A to Z</option>
+            <option value="z-a">Sort: Z to A</option>
+          </select>
         </div>
       </div>
 
@@ -241,10 +188,10 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))',
-          gap: 22,
+          gap: 20,
         }}
       >
-        {filteredConcepts.map((concept) => {
+        {displayedConcepts.map((concept) => {
           const linkedBook = concept.bookId ? booksMap.get(concept.bookId) : undefined;
           const isTrending = concept.category === 'trending';
           const badgeBg = isTrending ? '#fff7ed' : '#f0fdf4';
@@ -268,7 +215,7 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
               {/* Card Header */}
               <div
                 style={{
-                  padding: '12px 16px',
+                  padding: '10px 14px',
                   background: isTrending ? '#fffaf5' : '#fafdfb',
                   borderBottom: '2px solid #20241f',
                   display: 'flex',
@@ -309,7 +256,7 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
                     fontSize: '0.75rem',
                     color: '#64748b',
                     fontWeight: 600,
-                    maxWidth: 150,
+                    maxWidth: 160,
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -321,11 +268,11 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
               </div>
 
               {/* Card Body */}
-              <div style={{ padding: 18, flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <div style={{ padding: 16, flex: 1, display: 'flex', flexDirection: 'column' }}>
                 <h3
                   style={{
-                    fontSize: '1.25rem',
-                    margin: '0 0 10px 0',
+                    fontSize: '1.2rem',
+                    margin: '0 0 8px 0',
                     lineHeight: 1.25,
                     fontFamily: 'var(--font-editorial)',
                     color: '#1a202c',
@@ -335,7 +282,7 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
                 </h3>
                 <p
                   style={{
-                    fontSize: '0.92rem',
+                    fontSize: '0.9rem',
                     lineHeight: 1.5,
                     color: '#4a5568',
                     fontStyle: 'italic',
@@ -362,8 +309,8 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
                   >
                     <div
                       style={{
-                        width: 44,
-                        height: 56,
+                        width: 42,
+                        height: 52,
                         background: '#20241f',
                         color: '#ffe600',
                         display: 'flex',
@@ -431,7 +378,7 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontSize: '1.2rem', opacity: 0.7 }}>⏳</span>
+                      <span style={{ fontSize: '1.1rem', opacity: 0.7 }}>⏳</span>
                       <div>
                         <span style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: '#64748b' }}>
                           In Preparation
@@ -466,7 +413,7 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
         })}
       </div>
 
-      {filteredConcepts.length === 0 && (
+      {displayedConcepts.length === 0 && (
         <div
           style={{
             background: '#fff',
@@ -478,13 +425,12 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
           }}
         >
           <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#64748b', margin: 0 }}>
-            No concepts matched your filter or search query.
+            No concepts matched the selected theme.
           </p>
           <button
             onClick={() => {
               setFilterTab('all');
               setSelectedTheme('all');
-              setSearchQuery('');
             }}
             className="btn btn-primary"
             style={{ marginTop: 14 }}
