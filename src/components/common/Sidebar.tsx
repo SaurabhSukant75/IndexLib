@@ -19,8 +19,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   // Vertical collapse/expand state for sidebar sections
   const [isExploreOpen, setIsExploreOpen] = useState(true);
-  const [isPublishOpen, setIsPublishOpen] = useState(true);
-  const [isMySpaceOpen, setIsMySpaceOpen] = useState(true);
+  const [isDesignStudioOpen, setIsDesignStudioOpen] = useState(true);
   const [isAdminOpen, setIsAdminOpen] = useState(true);
 
   return (
@@ -73,74 +72,72 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 {!isCollapsed && <span className="nav-counter">{pathCount}</span>}
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/training"
+                className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
+                title="Creator Training"
+              >
+                <span className="nav-item-icon">🎓</span>
+                {!isCollapsed && <span>Training</span>}
+              </NavLink>
+            </li>
           </ul>
         )}
       </div>
 
-      {/* 2. Publish Studio Section (Placed after Explore and before My Space) */}
+      {/* 2. Design Studio Section (Publish a book & Template Catalog) */}
       <div className="sidebar-section">
         <div
           className="nav-group-header"
-          onClick={() => !isCollapsed && setIsPublishOpen(prev => !prev)}
-          title={isPublishOpen ? 'Collapse Publish Studio' : 'Expand Publish Studio'}
+          onClick={() => !isCollapsed && setIsDesignStudioOpen(prev => !prev)}
+          title={isDesignStudioOpen ? 'Collapse Design Studio' : 'Expand Design Studio'}
         >
-          <span className="nav-group-title">{!isCollapsed ? 'Publish Studio' : '•••'}</span>
+          <span className="nav-group-title">{!isCollapsed ? 'Design Studio' : '•••'}</span>
           {!isCollapsed && (
-            <span className="section-toggle-icon">{isPublishOpen ? '▾' : '▸'}</span>
+            <span className="section-toggle-icon">{isDesignStudioOpen ? '▾' : '▸'}</span>
           )}
         </div>
-        {(!isCollapsed ? isPublishOpen : true) && (
+        {(!isCollapsed ? isDesignStudioOpen : true) && (
           <ul className="nav-list">
             <li>
               <NavLink
                 to="/publish"
                 className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
-                title="Publish Studio"
+                title="Publish a Book"
               >
                 <span className="nav-item-icon">✍️</span>
-                {!isCollapsed && <span>Publish Studio</span>}
+                {!isCollapsed && <span>Publish a Book</span>}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/templates"
+                className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
+                title="Template Catalog"
+              >
+                <span className="nav-item-icon">📑</span>
+                {!isCollapsed && <span>Template Catalog</span>}
               </NavLink>
             </li>
           </ul>
         )}
       </div>
 
-      {/* 3. My Space Section (Collapsible) */}
+      {/* 3. My Space Section (Direct link, No dropdown needed) */}
       <div className="sidebar-section">
-        <div
-          className="nav-group-header"
-          onClick={() => !isCollapsed && setIsMySpaceOpen(prev => !prev)}
-          title={isMySpaceOpen ? 'Collapse My Space' : 'Expand My Space'}
-        >
-          <span className="nav-group-title">{!isCollapsed ? 'My Space' : '•••'}</span>
-          {!isCollapsed && (
-            <span className="section-toggle-icon">{isMySpaceOpen ? '▾' : '▸'}</span>
-          )}
-        </div>
-        {(!isCollapsed ? isMySpaceOpen : true) && (
-          <ul className="nav-list">
-            <li>
-              <NavLink
-                to="/library?tab=history"
-                className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
-                title="History"
-              >
-                <span className="nav-item-icon">📜</span>
-                {!isCollapsed && <span>History</span>}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/library?tab=progress"
-                className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
-                title="User Progress"
-              >
-                <span className="nav-item-icon">📊</span>
-                {!isCollapsed && <span>User Progress</span>}
-              </NavLink>
-            </li>
-          </ul>
-        )}
+        <ul className="nav-list">
+          <li>
+            <NavLink
+              to="/library?tab=history"
+              className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
+              title="My Space"
+            >
+              <span className="nav-item-icon">👤</span>
+              {!isCollapsed && <strong style={{ letterSpacing: '0.3px' }}>My Space</strong>}
+            </NavLink>
+          </li>
+        </ul>
       </div>
 
       {/* 4. Creator & Admin Section (For Admin Users) */}

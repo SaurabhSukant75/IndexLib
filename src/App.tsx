@@ -15,6 +15,8 @@ import { PublishView } from './views/PublishView';
 import { AdminReviewView } from './views/AdminReviewView';
 import { AccountView } from './views/AccountView';
 import { SearchView } from './views/SearchView';
+import { TrainingView } from './views/TrainingView';
+import { TemplateCatalogView } from './views/TemplateCatalogView';
 
 export const App: React.FC = () => {
   const [catalog, setCatalog] = useState<CatalogData | null>(null);
@@ -82,6 +84,14 @@ export const App: React.FC = () => {
         <Route
           path="/paths"
           element={<PathsView paths={catalog.learningPaths} books={catalog.books} />}
+        />
+        <Route
+          path="/training"
+          element={<TrainingView />}
+        />
+        <Route
+          path="/templates"
+          element={<TemplateCatalogView />}
         />
         <Route path="/library" element={<LibraryView catalogBooks={catalog.books} />} />
         <Route

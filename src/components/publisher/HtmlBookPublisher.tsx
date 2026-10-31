@@ -70,6 +70,27 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
     }
   }, [user]);
 
+  // Check if initial template HTML is passed from sessionStorage
+  useEffect(() => {
+    const templateHtml = sessionStorage.getItem('indexlib_template_html');
+    const templateTitle = sessionStorage.getItem('indexlib_template_title');
+    if (templateHtml) {
+      setHtmlContent(templateHtml);
+      setFileName(`${templateTitle || 'template'}.html`);
+      if (templateTitle) setTitle(templateTitle);
+
+      const inspection = inspectBookHtml(templateHtml);
+      setReport(inspection);
+
+      const blob = new Blob([templateHtml], { type: 'text/html;charset=utf-8' });
+      setBlobUrl(URL.createObjectURL(blob));
+
+      // Clean up session storage
+      sessionStorage.removeItem('indexlib_template_html');
+      sessionStorage.removeItem('indexlib_template_title');
+    }
+  }, []);
+
   // Load an existing book for updating/republishing with version bump
   const handleSelectBookToRepublish = (book: CatalogBook) => {
     setBookId(book.id);
