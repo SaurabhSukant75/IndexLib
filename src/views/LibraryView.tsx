@@ -10,7 +10,16 @@ interface LibraryViewProps {
 export const LibraryView: React.FC<LibraryViewProps> = ({ catalogBooks }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const urlTab = searchParams.get('tab');
-  const initialTab = urlTab === 'history' ? 'history' : urlTab === 'progress' ? 'progress' : 'all';
+  const initialTab =
+    urlTab === 'history'
+      ? 'history'
+      : urlTab === 'progress'
+      ? 'progress'
+      : urlTab === 'bookmarks'
+      ? 'bookmarks'
+      : urlTab === 'imported'
+      ? 'imported'
+      : 'all';
 
   const [activeTab, setActiveTab] = useState<'all' | 'history' | 'progress' | 'bookmarks' | 'imported'>(initialTab as any);
   const [progressList, setProgressList] = useState<ReadingProgressRecord[]>([]);
@@ -20,6 +29,9 @@ export const LibraryView: React.FC<LibraryViewProps> = ({ catalogBooks }) => {
   useEffect(() => {
     if (urlTab === 'history') setActiveTab('history');
     else if (urlTab === 'progress') setActiveTab('progress');
+    else if (urlTab === 'bookmarks') setActiveTab('bookmarks');
+    else if (urlTab === 'imported') setActiveTab('imported');
+    else if (urlTab === 'all') setActiveTab('all');
   }, [urlTab]);
 
   useEffect(() => {
@@ -37,7 +49,8 @@ export const LibraryView: React.FC<LibraryViewProps> = ({ catalogBooks }) => {
   }, []);
 
   const allBooks = [...catalogBooks, ...importedBooks];
-  
+  const colors = ['#d5ff58', '#b9d7f6', '#ffb99d', '#ded7f5', '#e7e3d4'];
+
   // History: books sorted by lastOpenedAt or updatedAt
   const historyList = [...progressList]
     .sort((a, b) => (b.lastOpenedAt || b.updatedAt) - (a.lastOpenedAt || a.updatedAt))
@@ -49,231 +62,293 @@ export const LibraryView: React.FC<LibraryViewProps> = ({ catalogBooks }) => {
 
   // User Progress: Completed vs In Progress
   const inProgressList = progressList.filter(p => !p.completed);
+  const inProgressBooks = inProgressList
+    .map(p => allBooks.find(b => b.id === p.bookId))
+    .filter((b): b is CatalogBook => Boolean(b));
+
   const completedList = progressList.filter(p => p.completed);
+  const completedBooks = completedList
+    .map(p => allBooks.find(b => b.id === p.bookId))
+    .filter((b): b is CatalogBook => Boolean(b));
+
+  const renderComicCard = (book: CatalogBook, idx: number, customSound?: string, extraBadge?: string) => {
+    const accentColor = colors[idx % colors.length];
+    const prog = progressList.find(p => p.bookId === book.id);
+    const soundText = customSound || (prog?.completed ? 'DONE!' : prog ? 'RESUME!' : 'READ!');
+
+    return (
+      <Link
+        key={book.id}
+        to={`/read/${book.id}${prog?.currentPageId ? `/${prog.currentPageId}` : ''}`}
+        className="comic-card"
+      >
+        <div className="comic-card-cover" style={{ backgroundColor: accentColor }}>
+          <div className="comic-card-ribbon">
+            <span>{book.readingMinutes || 5} MIN READ</span>
+            <span className="comic-issue-no">
+              {extraBadge || `VOL. ${book.id.replace('book-', '')}`}
+            </span>
+          </div>
+          <div className="comic-cover-art">
+            <div className="comic-cover-icon">📖</div>
+            <h3 className="comic-cover-heading">{book.title}</h3>
+          </div>
+          <div className="comic-sound-effect">{soundText}</div>
+        </div>
+
+        <div className="comic-card-body">
+          <p className="comic-card-desc">{book.summary}</p>
+          <div className="comic-card-meta">
+            <div className="comic-tag-pills">
+              {book.tags?.slice(0, 2).map(tag => (
+                <span key={tag} className="comic-pill">#{tag}</span>
+              ))}
+            </div>
+            <span className="comic-read-link">
+              {prog?.completed ? 'RE-READ ➔' : prog ? 'RESUME ➔' : 'OPEN ➔'}
+            </span>
+          </div>
+        </div>
+      </Link>
+    );
+  };
 
   return (
-    <div>
-      <p className="page-eyebrow">My Space · Personal Reading Vault</p>
-      <h1 className="page-title">Reading Hub & Personal Space.</h1>
-      <p className="page-lede">
-        Inspect your reading history, track your ongoing learning progress, access bookmarks, and manage offline books.
-      </p>
-
-      {/* Tabs */}
-      <div style={{ display: 'flex', gap: 8, marginBottom: 24, borderBottom: '2px solid var(--color-ink)', paddingBottom: 12, flexWrap: 'wrap' }}>
-        {[
-          { id: 'all', label: `All Books (${allBooks.length})` },
-          { id: 'history', label: `📜 History (${historyList.length})` },
-          { id: 'progress', label: `📊 User Progress (${inProgressList.length} reading, ${completedList.length} done)` },
-          { id: 'bookmarks', label: `★ Bookmarks (${bookmarks.length})` },
-          { id: 'imported', label: `📁 Local Imports (${importedBooks.length})` },
-        ].map(tab => (
+    <div style={{ maxWidth: 1400, margin: '0 auto', paddingBottom: 60 }}>
+      {/* Comic Filter Bar for Library Tabs */}
+      <div className="comic-shelf-filter" style={{ marginBottom: 24, paddingBottom: 16 }}>
+        <div className="comic-filter-tags">
           <button
-            key={tab.id}
             onClick={() => {
-              setActiveTab(tab.id as any);
-              setSearchParams({ tab: tab.id });
+              setActiveTab('all');
+              setSearchParams({ tab: 'all' });
             }}
-            className={`btn ${activeTab === tab.id ? 'btn-primary' : ''}`}
-            style={{ fontSize: '0.88rem' }}
+            className={`comic-tag-btn ${activeTab === 'all' ? 'active' : ''}`}
           >
-            {tab.label}
+            All Books ({allBooks.length})
           </button>
-        ))}
+          <button
+            onClick={() => {
+              setActiveTab('progress');
+              setSearchParams({ tab: 'progress' });
+            }}
+            className={`comic-tag-btn ${activeTab === 'progress' ? 'active' : ''}`}
+          >
+            📊 In Progress ({inProgressList.length})
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('history');
+              setSearchParams({ tab: 'history' });
+            }}
+            className={`comic-tag-btn ${activeTab === 'history' ? 'active' : ''}`}
+          >
+            📜 History ({historyList.length})
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('bookmarks');
+              setSearchParams({ tab: 'bookmarks' });
+            }}
+            className={`comic-tag-btn ${activeTab === 'bookmarks' ? 'active' : ''}`}
+          >
+            ★ Bookmarks ({bookmarks.length})
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('imported');
+              setSearchParams({ tab: 'imported' });
+            }}
+            className={`comic-tag-btn ${activeTab === 'imported' ? 'active' : ''}`}
+          >
+            📁 Local Imports ({importedBooks.length})
+          </button>
+        </div>
       </div>
 
-      {/* Tab Content: History */}
-      {activeTab === 'history' && (
+      {/* Tab Content: All Books */}
+      {activeTab === 'all' && (
+        <div className="comic-book-grid">
+          {allBooks.map((book, idx) => renderComicCard(book, idx))}
+        </div>
+      )}
+
+      {/* Tab Content: In Progress */}
+      {activeTab === 'progress' && (
         <div>
-          {historyList.length > 0 ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {historyList.map(({ book, progress }) => {
-                const dateStr = new Date(progress.lastOpenedAt || progress.updatedAt).toLocaleString();
-                return (
-                  <div
-                    key={book.id}
-                    className="comic-panel-card"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: 16,
-                      background: '#fff',
-                      border: '2px solid #20241f',
-                      borderRadius: 8,
-                      boxShadow: '3px 3px 0 #20241f',
-                    }}
-                  >
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                        <span className={`badge ${progress.completed ? 'badge-green' : 'badge-accent'}`}>
-                          {progress.completed ? '✓ Finished' : '📖 Last Read'}
-                        </span>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>{dateStr}</span>
-                      </div>
-                      <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>{book.title}</h3>
-                      <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)' }}>
-                        Section: {progress.currentPageId || 'Introduction'}
-                      </p>
-                    </div>
-                    <Link to={`/read/${book.id}/${progress.currentPageId || ''}`} className="btn btn-primary">
-                      Resume →
-                    </Link>
-                  </div>
-                );
-              })}
+          {inProgressBooks.length > 0 ? (
+            <div className="comic-book-grid">
+              {inProgressBooks.map((book, idx) => renderComicCard(book, idx, 'RESUME!'))}
             </div>
           ) : (
-            <div style={{ padding: 32, textAlign: 'center', background: '#fff', border: '2px dashed var(--color-line)', borderRadius: 8 }}>
-              <p style={{ color: 'var(--color-muted)' }}>No reading history recorded yet. Open any book to begin your journey!</p>
+            <div
+              style={{
+                background: '#fff',
+                border: '3px solid var(--color-ink)',
+                borderRadius: 12,
+                padding: 40,
+                textAlign: 'center',
+                boxShadow: '4px 4px 0 var(--color-ink)',
+              }}
+            >
+              <p style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-ink)', margin: 0 }}>
+                No books currently in progress. Start reading from our catalog!
+              </p>
+              <button
+                onClick={() => {
+                  setActiveTab('all');
+                  setSearchParams({ tab: 'all' });
+                }}
+                className="btn comic-btn comic-btn-yellow"
+                style={{ marginTop: 14 }}
+              >
+                Browse All Books
+              </button>
+            </div>
+          )}
+
+          {completedBooks.length > 0 && (
+            <div style={{ marginTop: 40 }}>
+              <div className="comic-shelf-title" style={{ marginBottom: 16 }}>
+                <span className="comic-star">★</span> COMPLETED ISSUES ({completedBooks.length})
+              </div>
+              <div className="comic-book-grid">
+                {completedBooks.map((book, idx) => renderComicCard(book, idx, 'DONE!'))}
+              </div>
             </div>
           )}
         </div>
       )}
 
-      {/* Tab Content: User Progress */}
-      {activeTab === 'progress' && (
+      {/* Tab Content: History */}
+      {activeTab === 'history' && (
         <div>
-          {/* Progress Overview Stats */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 28 }}>
-            <div style={{ background: '#d5ff58', border: '2px solid #20241f', borderRadius: 8, padding: 18, boxShadow: '4px 4px 0 #20241f' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase' }}>In Progress</span>
-              <h2 style={{ fontSize: '2.4rem', fontWeight: 900, lineHeight: 1.1 }}>{inProgressList.length}</h2>
-              <small>Currently reading</small>
-            </div>
-            <div style={{ background: '#b9d7f6', border: '2px solid #20241f', borderRadius: 8, padding: 18, boxShadow: '4px 4px 0 #20241f' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase' }}>Completed</span>
-              <h2 style={{ fontSize: '2.4rem', fontWeight: 900, lineHeight: 1.1 }}>{completedList.length}</h2>
-              <small>Books finished</small>
-            </div>
-            <div style={{ background: '#ffb99d', border: '2px solid #20241f', borderRadius: 8, padding: 18, boxShadow: '4px 4px 0 #20241f' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase' }}>Saved Bookmarks</span>
-              <h2 style={{ fontSize: '2.4rem', fontWeight: 900, lineHeight: 1.1 }}>{bookmarks.length}</h2>
-              <small>Key moments pinned</small>
-            </div>
-          </div>
-
-          <h2 style={{ fontFamily: 'var(--font-editorial)', fontSize: '1.4rem', marginBottom: 12 }}>Active Books</h2>
-          {inProgressList.length > 0 ? (
-            <div className="book-grid" style={{ marginBottom: 32 }}>
-              {inProgressList.map(prog => {
-                const book = allBooks.find(b => b.id === prog.bookId);
-                if (!book) return null;
-                return (
-                  <Link key={book.id} to={`/read/${book.id}`} className="book-card">
-                    <div>
-                      <div className="book-card-header">
-                        <span className="badge badge-accent">In Progress</span>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>{book.readingMinutes} min</span>
-                      </div>
-                      <h3 className="book-card-title">{book.title}</h3>
-                      <p className="book-card-summary">{book.summary}</p>
-                    </div>
-                    <div className="book-card-footer">
-                      <span>Section: {prog.currentPageId || 'Intro'}</span>
-                      <span style={{ fontWeight: 600 }}>Resume Reading →</span>
-                    </div>
-                  </Link>
-                );
-              })}
+          {historyList.length > 0 ? (
+            <div className="comic-book-grid">
+              {historyList.map(({ book, progress }, idx) =>
+                renderComicCard(book, idx, progress.completed ? 'DONE!' : 'LAST READ!')
+              )}
             </div>
           ) : (
-            <p style={{ color: 'var(--color-muted)', marginBottom: 28 }}>No books currently in progress.</p>
-          )}
-
-          {completedList.length > 0 && (
-            <>
-              <h2 style={{ fontFamily: 'var(--font-editorial)', fontSize: '1.4rem', marginBottom: 12 }}>Completed Visual Books</h2>
-              <div className="book-grid">
-                {completedList.map(prog => {
-                  const book = allBooks.find(b => b.id === prog.bookId);
-                  if (!book) return null;
-                  return (
-                    <Link key={book.id} to={`/read/${book.id}`} className="book-card" style={{ borderColor: '#22c55e' }}>
-                      <div>
-                        <div className="book-card-header">
-                          <span className="badge badge-green">✓ Finished</span>
-                        </div>
-                        <h3 className="book-card-title">{book.title}</h3>
-                        <p className="book-card-summary">{book.summary}</p>
-                      </div>
-                      <div className="book-card-footer">
-                        <span>Re-read anytime</span>
-                        <span style={{ fontWeight: 600 }}>Open →</span>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            </>
+            <div
+              style={{
+                background: '#fff',
+                border: '3px solid var(--color-ink)',
+                borderRadius: 12,
+                padding: 40,
+                textAlign: 'center',
+                boxShadow: '4px 4px 0 var(--color-ink)',
+              }}
+            >
+              <p style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-ink)', margin: 0 }}>
+                No reading history recorded yet. Open any book to begin!
+              </p>
+              <button
+                onClick={() => {
+                  setActiveTab('all');
+                  setSearchParams({ tab: 'all' });
+                }}
+                className="btn comic-btn comic-btn-yellow"
+                style={{ marginTop: 14 }}
+              >
+                Start Reading
+              </button>
+            </div>
           )}
         </div>
       )}
 
       {/* Tab Content: Bookmarks */}
       {activeTab === 'bookmarks' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div>
           {bookmarks.length > 0 ? (
-            bookmarks.map(bm => {
-              const book = allBooks.find(b => b.id === bm.bookId);
-              return (
-                <Link
-                  key={bm.bookmarkId}
-                  to={`/read/${bm.bookId}/${bm.pageId}`}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: 14,
-                    background: 'var(--color-surface)',
-                    border: '1px solid var(--color-line)',
-                    borderRadius: 'var(--radius-sm)',
-                    textDecoration: 'none',
-                    color: 'inherit',
-                  }}
-                >
-                  <div>
-                    <strong style={{ fontSize: '0.95rem', display: 'block' }}>
-                      {bm.label || bm.pageId}
-                    </strong>
-                    <small style={{ color: 'var(--color-muted)' }}>
-                      {book?.title || bm.bookId} · Page: {bm.pageId}
-                    </small>
-                  </div>
-                  <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>Open →</span>
-                </Link>
-              );
-            })
+            <div className="comic-book-grid">
+              {bookmarks.map((bm, idx) => {
+                const book = allBooks.find(b => b.id === bm.bookId);
+                const accentColor = colors[idx % colors.length];
+
+                return (
+                  <Link
+                    key={bm.bookmarkId}
+                    to={`/read/${bm.bookId}/${bm.pageId}`}
+                    className="comic-card"
+                  >
+                    <div className="comic-card-cover" style={{ backgroundColor: accentColor }}>
+                      <div className="comic-card-ribbon">
+                        <span>BOOKMARK PIN</span>
+                        <span className="comic-issue-no">PAGE {bm.pageId}</span>
+                      </div>
+                      <div className="comic-cover-art">
+                        <div className="comic-cover-icon">★</div>
+                        <h3 className="comic-cover-heading">{bm.label || book?.title || bm.bookId}</h3>
+                      </div>
+                      <div className="comic-sound-effect">PINNED!</div>
+                    </div>
+
+                    <div className="comic-card-body">
+                      <p className="comic-card-desc">
+                        Saved bookmark in <strong>{book?.title || bm.bookId}</strong> at section "{bm.pageId}".
+                      </p>
+                      <div className="comic-card-meta">
+                        <div className="comic-tag-pills">
+                          <span className="comic-pill">#bookmark</span>
+                        </div>
+                        <span className="comic-read-link">JUMP TO PAGE ➔</span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           ) : (
-            <p style={{ color: 'var(--color-muted)', padding: 20 }}>No bookmarks saved yet.</p>
+            <div
+              style={{
+                background: '#fff',
+                border: '3px solid var(--color-ink)',
+                borderRadius: 12,
+                padding: 40,
+                textAlign: 'center',
+                boxShadow: '4px 4px 0 var(--color-ink)',
+              }}
+            >
+              <p style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-ink)', margin: 0 }}>
+                No bookmarks pinned yet. Tap ★ Bookmark while reading any issue to save it here!
+              </p>
+            </div>
           )}
         </div>
       )}
 
-      {/* Tab Content: All Books or Local Imports */}
-      {(activeTab === 'all' || activeTab === 'imported') && (
-        <div className="book-grid">
-          {(activeTab === 'imported' ? importedBooks : allBooks).map(book => {
-            const prog = progressList.find(p => p.bookId === book.id);
-            return (
-              <Link key={book.id} to={`/read/${book.id}`} className="book-card">
-                <div>
-                  <div className="book-card-header">
-                    <span className="badge badge-accent">
-                      {prog?.completed ? '✓ Completed' : prog ? 'In Progress' : `${book.readingMinutes} min`}
-                    </span>
-                    {book.isImported && <span className="badge badge-warning">Local Import</span>}
-                  </div>
-                  <h3 className="book-card-title">{book.title}</h3>
-                  <p className="book-card-summary">{book.summary}</p>
-                </div>
-                <div className="book-card-footer">
-                  <span>{book.tags.join(' · ')}</span>
-                  <span style={{ fontWeight: 600 }}>{prog ? 'Resume →' : 'Read →'}</span>
-                </div>
+      {/* Tab Content: Imported */}
+      {activeTab === 'imported' && (
+        <div>
+          {importedBooks.length > 0 ? (
+            <div className="comic-book-grid">
+              {importedBooks.map((book, idx) => renderComicCard(book, idx, 'LOCAL!', 'IMPORTED'))}
+            </div>
+          ) : (
+            <div
+              style={{
+                background: '#fff',
+                border: '3px solid var(--color-ink)',
+                borderRadius: 12,
+                padding: 40,
+                textAlign: 'center',
+                boxShadow: '4px 4px 0 var(--color-ink)',
+              }}
+            >
+              <p style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-ink)', margin: 0 }}>
+                No private HTML visual books imported yet.
+              </p>
+              <Link
+                to="/publish"
+                className="btn comic-btn comic-btn-yellow"
+                style={{ marginTop: 14, display: 'inline-block' }}
+              >
+                Import / Publish Book
               </Link>
-            );
-          })}
+            </div>
+          )}
         </div>
       )}
     </div>
