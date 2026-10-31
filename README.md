@@ -24,8 +24,11 @@
 ## Project Structure
 ```text
 IndexLib/
-├── UI-UX-DESIGN.md            # Detailed UI & Interaction Specification
-├── interactive-prototype.html # Standalone interactive HTML/SVG prototype
+├── .agent/                        # Spec-Driven Development (Antigravity)
+│   ├── spec/                      # PRD, Architecture, UI-UX-DESIGN, Prototype
+│   ├── steering/                  # Project steering and core invariants
+│   ├── skills/                    # Specialized agent runbooks & workflows
+│   └── rules/                     # Coding and accessibility guidelines
 ├── public/
 │   ├── book/                      # Bundled sample visual books (HTML)
 │   └── data/                      # Bundled static catalog.json
