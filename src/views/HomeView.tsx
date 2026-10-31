@@ -3,55 +3,70 @@ import { Link } from 'react-router-dom';
 
 export const HomeView: React.FC = () => {
   return (
-    <div className="home-view-wrapper">
+    <div className="home-3d-wrapper">
       {/* =========================================================
-          HERO SECTION: AI-POWERED DIGITAL WEB LIBRARY
+          3D CARTOON-STYLE GRAND LIBRARY HERO SECTION
           ========================================================= */}
-      <section className="home-hero-section">
-        {/* Top Badges */}
-        <div className="home-badge-row">
-          <span className="home-badge-ai">⚡ AI-POWERED VISUAL LIBRARY</span>
-          <span className="home-badge-version">v2.0 · 100 CONCEPTS</span>
+      <section className="home-3d-hero" aria-label="IndexLib 3D library home">
+        {/* Main 3D Artwork Layer */}
+        <div className="home-3d-art-wrapper">
+          <img
+            className="home-3d-art"
+            src="./images/hero-3d-library.png"
+            alt="A child reading a book in an immersive 3D magical library with open hero book and wooden signboards"
+          />
+
+          {/* Interactive Overlay Links mapped over the 3D Artwork */}
+          {/* 1) Hero Book CTA: Learn Concepts */}
+          <Link
+            to="/concepts"
+            className="art-link learn"
+            aria-label="Learn concepts"
+            title="Learn Concepts"
+          />
+
+          {/* 2) Hero Book CTA: Scroll Reels */}
+          <Link
+            to="/reels"
+            className="art-link reels"
+            aria-label="Scroll reels"
+            title="Scroll Reels"
+          />
+
+          {/* 3) Library Signboard: Concepts */}
+          <Link
+            to="/concepts"
+            className="art-link concepts"
+            aria-label="Explore Concepts"
+            title="Concepts"
+          />
+
+          {/* 4) Library Signboard: My Learning */}
+          <Link
+            to="/paths"
+            className="art-link learning"
+            aria-label="My Learning Paths"
+            title="My Learning"
+          />
+
+          {/* 5) Library Signboard: My Space / Vault */}
+          <Link
+            to="/library?tab=history"
+            className="art-link space"
+            aria-label="My Space Vault and History"
+            title="My Space"
+          />
         </div>
+      </section>
 
-        {/* Main Title */}
-        <h1 className="home-hero-title">
-          The Open Digital Library for Visual Mini-Books.
-        </h1>
-
-        {/* Lead Text (Strictly as specified by user) */}
-        <p className="home-hero-lead">
+      {/* =========================================================
+          CONCEPT SUMMARY BANNER
+          ========================================================= */}
+      <section className="home-3d-summary-card">
+        <h2>The Open Digital Library for Visual Mini-Books.</h2>
+        <p>
           IndexLib is an open-source visual web library and authoring platform for short, structured, multi-page HTML books.
         </p>
-
-        {/* Action Buttons */}
-        <div className="home-hero-actions">
-          <Link to="/concepts" className="btn home-btn-primary">
-            1) LEARN CONCEPTS →
-          </Link>
-          <Link to="/reels" className="btn home-btn-secondary">
-            2) SCROLL REELS ➔
-          </Link>
-        </div>
-
-        {/* Interactive Feature Pills Highlight */}
-        <div className="home-features-grid">
-          <div className="home-feature-card">
-            <span className="home-feature-badge">AI ARCHITECTURE</span>
-            <h3>100 Index Dictionaries</h3>
-            <p>Every concept is synthesized into an illustrated, structured multi-page mini-book.</p>
-          </div>
-          <div className="home-feature-card">
-            <span className="home-feature-badge">SANDBOXED ENGINE</span>
-            <h3>Interactive HTML Canvas</h3>
-            <p>Read rich web books with live interactive scripts, diagrams, and responsive touch layout.</p>
-          </div>
-          <div className="home-feature-card">
-            <span className="home-feature-badge">OFFLINE-FIRST</span>
-            <h3>Private Local Vault</h3>
-            <p>Reading progress, bookmarks, and private HTML book imports persist directly in your browser.</p>
-          </div>
-        </div>
       </section>
 
       {/* =========================================================
@@ -107,3 +122,4 @@ export const HomeView: React.FC = () => {
     </div>
   );
 };
+
