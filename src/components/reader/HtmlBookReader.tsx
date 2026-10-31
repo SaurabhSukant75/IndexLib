@@ -40,11 +40,39 @@ export const HtmlBookReader: React.FC<HtmlBookReaderProps> = ({
   onBack,
   className = '',
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [currentPageId, setCurrentPageId] = useState<string>(initialPageId || '');
   const [pageIds, setPageIds] = useState<string[]>([]);
   const [zoomLevel, setZoomLevel] = useState<number>(1.0);
   const [isTocOpen, setIsTocOpen] = useState<boolean>(false);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+
+  // Monitor native fullscreen changes
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = async () => {
+    try {
+      if (!document.fullscreenElement) {
+        if (containerRef.current?.requestFullscreen) {
+          await containerRef.current.requestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        }
+      }
+    } catch (err) {
+      // Fallback: toggle pseudo fullscreen CSS class
+      setIsFullscreen(prev => !prev);
+    }
+  };
 
   // Message Handler for postMessage protocol
   useEffect(() => {
@@ -111,7 +139,8 @@ export const HtmlBookReader: React.FC<HtmlBookReaderProps> = ({
 
   return (
     <div
-      className={`reader-container ${className}`}
+      ref={containerRef}
+      className={`reader-container ${className} ${isFullscreen ? 'reader-fullscreen' : ''}`}
       style={{
         background: 'var(--color-surface)',
         border: '1px solid var(--color-line)',
@@ -119,9 +148,21 @@ export const HtmlBookReader: React.FC<HtmlBookReaderProps> = ({
         boxShadow: 'var(--shadow-md)',
         display: 'flex',
         flexDirection: 'column',
-        height: 'calc(100vh - var(--header-height) - 64px)',
+        height: isFullscreen ? '100vh' : 'calc(100vh - var(--header-height) - 64px)',
         minHeight: 560,
         overflow: 'hidden',
+        ...(isFullscreen
+          ? {
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 9999,
+              borderRadius: 0,
+              border: 'none',
+            }
+          : {}),
       }}
     >
       <ReaderToolbar
@@ -131,8 +172,10 @@ export const HtmlBookReader: React.FC<HtmlBookReaderProps> = ({
         isCompleted={isCompleted}
         isBookmarked={isCurrentPageBookmarked}
         isImported={isImported}
+        isFullscreen={isFullscreen}
         zoomLevel={zoomLevel}
         onZoomChange={setZoomLevel}
+        onToggleFullscreen={toggleFullscreen}
         onToggleSave={onToggleSave}
         onToggleComplete={onToggleComplete}
         onToggleBookmark={() => onToggleBookmark && onToggleBookmark(currentPageId)}

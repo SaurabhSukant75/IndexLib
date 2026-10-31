@@ -16,6 +16,7 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedIdFromUrl = searchParams.get('id') || 'attention';
+  const [filterTab, setFilterTab] = useState<'all' | 'evergreen' | 'trending'>('all');
 
   const [selectedConceptId, setSelectedConceptId] = useState<string>(
     concepts.some(c => c.id === selectedIdFromUrl) ? selectedIdFromUrl : concepts[0]?.id || 'attention'
@@ -27,6 +28,18 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
     setSelectedConceptId(conceptId);
     setSearchParams({ id: conceptId });
   };
+
+  // Divide into Evergreen and Trending concepts
+  const evergreenConcepts = concepts.filter(c => c.category === 'evergreen' || (!c.category && (c.id === 'attention' || c.id === 'incentives')));
+  const trendingConcepts = concepts.filter(c => c.category === 'trending' || (!c.category && (c.id === 'engagement' || c.id === 'interface-design')));
+
+  // Filtered concepts based on tab
+  const displayedConcepts =
+    filterTab === 'evergreen'
+      ? evergreenConcepts
+      : filterTab === 'trending'
+      ? trendingConcepts
+      : concepts;
 
   // Find linked books
   const linkedBooks = books.filter(b =>
@@ -43,18 +56,98 @@ export const ConceptsView: React.FC<ConceptsViewProps> = ({
       <p className="page-eyebrow">Explore Connections</p>
       <h1 className="page-title">Follow an idea.</h1>
       <p className="page-lede">
-        The knowledge graph shows how concepts relate. It suggests connections—not what order you must learn them in. Click on any node to explore its meaning and discover linked visual books.
+        The knowledge graph shows how concepts relate. Explore timeless evergreen concepts and fast-evolving trending patterns, click on any node to discover linked visual books.
       </p>
+
+      {/* Evergreen vs Trending Tabs */}
+      <div className="comic-concept-tabs" style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
+        <button
+          onClick={() => setFilterTab('all')}
+          className={`btn ${filterTab === 'all' ? 'btn-primary' : ''}`}
+          style={{ fontSize: '0.9rem' }}
+        >
+          All Concepts ({concepts.length})
+        </button>
+        <button
+          onClick={() => setFilterTab('evergreen')}
+          className={`btn ${filterTab === 'evergreen' ? 'btn-primary' : ''}`}
+          style={{ fontSize: '0.9rem', borderColor: filterTab === 'evergreen' ? '#20241f' : '#22c55e' }}
+        >
+          🌲 Evergreen Concepts ({evergreenConcepts.length})
+        </button>
+        <button
+          onClick={() => setFilterTab('trending')}
+          className={`btn ${filterTab === 'trending' ? 'btn-primary' : ''}`}
+          style={{ fontSize: '0.9rem', borderColor: filterTab === 'trending' ? '#20241f' : '#f97316' }}
+        >
+          🔥 Trending Concepts ({trendingConcepts.length})
+        </button>
+      </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1.8fr 1.2fr', gap: 28, alignItems: 'start' }}>
         {/* Graph Canvas */}
         <div>
           <ConceptGraph
-            concepts={concepts}
+            concepts={displayedConcepts}
             relations={relations}
             selectedConceptId={selectedConcept?.id || ''}
             onSelectConcept={handleSelectConcept}
           />
+
+          {/* Categorized Concept Quick Chips */}
+          <div style={{ marginTop: 20, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            <div style={{ background: '#fff', border: '2px solid #20241f', borderRadius: 8, padding: 14, boxShadow: '3px 3px 0 #20241f' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
+                <span style={{ fontSize: '1.1rem' }}>🌲</span>
+                <strong style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Evergreen</strong>
+              </div>
+              <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', marginBottom: 10 }}>Foundational mental models that stand the test of time.</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {evergreenConcepts.map(c => (
+                  <button
+                    key={c.id}
+                    onClick={() => handleSelectConcept(c.id)}
+                    className="btn"
+                    style={{
+                      fontSize: '0.8rem',
+                      padding: '4px 10px',
+                      background: selectedConceptId === c.id ? '#20241f' : '#f0fdf4',
+                      color: selectedConceptId === c.id ? '#fff' : '#166534',
+                      borderColor: '#166534',
+                    }}
+                  >
+                    ● {c.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ background: '#fff', border: '2px solid #20241f', borderRadius: 8, padding: 14, boxShadow: '3px 3px 0 #20241f' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
+                <span style={{ fontSize: '1.1rem' }}>🔥</span>
+                <strong style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Trending</strong>
+              </div>
+              <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', marginBottom: 10 }}>Modern design, emergent digital behaviors, and active shifts.</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {trendingConcepts.map(c => (
+                  <button
+                    key={c.id}
+                    onClick={() => handleSelectConcept(c.id)}
+                    className="btn"
+                    style={{
+                      fontSize: '0.8rem',
+                      padding: '4px 10px',
+                      background: selectedConceptId === c.id ? '#20241f' : '#fff7ed',
+                      color: selectedConceptId === c.id ? '#fff' : '#c2410c',
+                      borderColor: '#ea580c',
+                    }}
+                  >
+                    ● {c.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
 
           {/* Accessible Relationship List */}
           <details

@@ -34,6 +34,7 @@ export interface ConceptNode {
   id: string;
   name: string;
   description: string;
+  category?: 'evergreen' | 'trending';
   x?: number;
   y?: number;
   fill?: string;

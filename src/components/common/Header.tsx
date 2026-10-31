@@ -5,9 +5,11 @@ import { UserProfile } from '../../types';
 interface HeaderProps {
   user: UserProfile | null;
   onSignOut?: () => void;
+  onToggleSidebar?: () => void;
+  isSidebarCollapsed?: boolean;
 }
 
-export const Header: React.FC<HeaderProps> = ({ user }) => {
+export const Header: React.FC<HeaderProps> = ({ user, onToggleSidebar, isSidebarCollapsed }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -20,10 +22,22 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
 
   return (
     <header className="app-header">
-      <Link to="/" className="brand">
-        <div className="brand-mark">IL</div>
-        <div className="brand-title">IndexLib</div>
-      </Link>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        {onToggleSidebar && (
+          <button
+            className="sidebar-burger-btn"
+            onClick={onToggleSidebar}
+            title={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            aria-label="Toggle sidebar menu"
+          >
+            ☰
+          </button>
+        )}
+        <Link to="/" className="brand">
+          <div className="brand-mark">IL</div>
+          <div className="brand-title">IndexLib</div>
+        </Link>
+      </div>
 
       <form className="search-bar" onSubmit={handleSearchSubmit}>
         <span className="search-icon">🔍</span>
@@ -37,13 +51,15 @@ export const Header: React.FC<HeaderProps> = ({ user }) => {
       </form>
 
       <div className="header-actions">
-        <Link to="/publish" className="btn btn-primary">
-          ＋ Publish Book
-        </Link>
         {user?.role === 'admin' && (
-          <Link to="/admin" className="badge badge-warning" style={{ textDecoration: 'none' }}>
-            Admin Moderation
-          </Link>
+          <>
+            <Link to="/publish" className="btn btn-primary">
+              ＋ Publish Book
+            </Link>
+            <Link to="/admin" className="badge badge-warning" style={{ textDecoration: 'none' }}>
+              Admin Moderation
+            </Link>
+          </>
         )}
         <Link to="/account" className="btn">
           {user ? `👤 ${user.username}` : 'Sign In'}

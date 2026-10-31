@@ -7,8 +7,10 @@ interface ReaderToolbarProps {
   isCompleted?: boolean;
   isBookmarked?: boolean;
   isImported?: boolean;
+  isFullscreen?: boolean;
   zoomLevel: number;
   onZoomChange: (newZoom: number) => void;
+  onToggleFullscreen?: () => void;
   onToggleSave?: () => void;
   onToggleComplete?: () => void;
   onToggleBookmark?: () => void;
@@ -24,8 +26,10 @@ export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
   isCompleted = false,
   isBookmarked = false,
   isImported = false,
+  isFullscreen = false,
   zoomLevel,
   onZoomChange,
+  onToggleFullscreen,
   onToggleSave,
   onToggleComplete,
   onToggleBookmark,
@@ -91,6 +95,16 @@ export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
         >
           ☰ Contents
         </button>
+
+        {onToggleFullscreen && (
+          <button
+            className={`btn ${isFullscreen ? 'btn-primary' : ''}`}
+            onClick={onToggleFullscreen}
+            title={isFullscreen ? 'Exit Full Screen' : 'Maximize Full Screen'}
+          >
+            {isFullscreen ? '⤓ Exit Full' : '⛶ Full Screen'}
+          </button>
+        )}
 
         {onToggleBookmark && (
           <button
