@@ -77,14 +77,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       </div>
 
-      {/* 2. Publish a Book Section (Placed after Explore and before My Space) */}
+      {/* 2. Publish Studio Section (Placed after Explore and before My Space) */}
       <div className="sidebar-section">
         <div
           className="nav-group-header"
           onClick={() => !isCollapsed && setIsPublishOpen(prev => !prev)}
-          title={isPublishOpen ? 'Collapse Publish' : 'Expand Publish'}
+          title={isPublishOpen ? 'Collapse Publish Studio' : 'Expand Publish Studio'}
         >
-          <span className="nav-group-title">{!isCollapsed ? 'Publish a Book' : '•••'}</span>
+          <span className="nav-group-title">{!isCollapsed ? 'Publish Studio' : '•••'}</span>
           {!isCollapsed && (
             <span className="section-toggle-icon">{isPublishOpen ? '▾' : '▸'}</span>
           )}
@@ -95,20 +95,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <NavLink
                 to="/publish"
                 className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
-                title="Publish a Book"
+                title="Publish Studio"
               >
                 <span className="nav-item-icon">✍️</span>
                 {!isCollapsed && <span>Publish Studio</span>}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/publish?mode=manage"
-                className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
-                title="Manage Versions"
-              >
-                <span className="nav-item-icon">🔄</span>
-                {!isCollapsed && <span>My Book Versions</span>}
               </NavLink>
             </li>
           </ul>

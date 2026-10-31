@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CatalogBook, ConceptNode, TaxonomyNode, UserProfile } from '../../types';
 import { inspectBookHtml, injectProtocolBridge, ValidationReport as IValidationReport } from '../../services/validator';
-import { saveLocalImport } from '../../services/local-db';
 import { submitBookToSupabase, fetchUserBooks } from '../../services/supabase';
 import { ValidationReport } from './ValidationReport';
 import { HtmlBookReader } from '../reader/HtmlBookReader';
@@ -26,6 +25,7 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
   const [activeTab, setActiveTab] = useState<'create' | 'manage'>(initialMode);
   const [userBooks, setUserBooks] = useState<CatalogBook[]>([]);
   const [isLoadingUserBooks, setIsLoadingUserBooks] = useState<boolean>(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Form Fields
   const [bookId, setBookId] = useState<string>('');
@@ -92,7 +92,7 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
       setVersion('1.1.0');
     }
     setRevision((book.revision || 1) + 1);
-    setChangelog(`Updated content, refined structure, bumped to v${parts.join('.') || '1.1.0'}`);
+    setChangelog(`Updated edition v${parts.join('.') || '1.1.0'}`);
     setActiveTab('create');
   };
 
@@ -151,44 +151,14 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
     );
   };
 
-  const handleSaveLocal = async () => {
-    if (!htmlContent || !title.trim()) {
-      alert('Please provide an HTML file and title.');
-      return;
-    }
-
-    const stableId = bookId || `import-${Date.now().toString(36)}`;
-    const parsedTags = tagsInput.split(',').map(t => t.trim()).filter(Boolean);
-
-    const localBook: CatalogBook = {
-      id: stableId,
-      title: title.trim(),
-      summary: summary.trim() || 'Private local visual HTML book',
-      contentPath: blobUrl,
-      status: 'draft',
-      readingMinutes,
-      primaryTaxonomyId,
-      taxonomyIds: [primaryTaxonomyId],
-      tags: parsedTags.length ? parsedTags : ['Local Import'],
-      conceptLinks: selectedConceptIds.map(cId => ({ conceptId: cId, role: 'related' })),
-      version,
-      revision,
-      changelog,
-      isImported: true,
-    };
-
-    await saveLocalImport(localBook, htmlContent);
-    if (onPublishSuccess) onPublishSuccess(stableId, 'local');
-  };
-
   const handleSubmitCloud = async () => {
     if (!htmlContent || !title.trim()) {
-      alert('Please upload an HTML document and enter a book title.');
+      alert('Please import an HTML document and enter a book title.');
       return;
     }
 
     if (!user) {
-      alert('Please sign in to save or publish books to your cloud account.');
+      alert('Please sign in to publish books.');
       return;
     }
 
@@ -241,23 +211,23 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto', paddingBottom: 60 }}>
       {/* Editorial Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16, marginBottom: 24 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16, marginBottom: 24 }}>
         <div>
           <p className="page-eyebrow">IndexLib Creator Suite</p>
-          <h1 className="page-title">Publish & Version Visual Books</h1>
+          <h1 className="page-title">Publish Studio</h1>
           <p className="page-lede" style={{ marginBottom: 0 }}>
-            Author, inspect, preview, and distribute interactive HTML books with built-in semantic versioning.
+            Author, version, and publish interactive visual HTML books.
           </p>
         </div>
 
-        {/* Tab switch */}
-        <div style={{ display: 'flex', gap: 8, background: '#fff', padding: 4, borderRadius: 8, border: '2px solid #20241f', boxShadow: '3px 3px 0 #20241f' }}>
+        {/* Top Right Mode Toggle: "Publish a Book" vs "My Book" */}
+        <div style={{ display: 'flex', gap: 6, background: '#fff', padding: 4, borderRadius: 8, border: '2px solid #20241f', boxShadow: '3px 3px 0 #20241f' }}>
           <button
             onClick={() => setActiveTab('create')}
             className={`btn ${activeTab === 'create' ? 'btn-primary' : ''}`}
             style={{ fontSize: '0.85rem' }}
           >
-            ✍️ {bookId ? `Editing v${version}` : 'New Book Studio'}
+            ✍️ Publish a Book
           </button>
           <button
             onClick={() => {
@@ -267,12 +237,12 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
             className={`btn ${activeTab === 'manage' ? 'btn-primary' : ''}`}
             style={{ fontSize: '0.85rem' }}
           >
-            🔄 My Books ({userBooks.length})
+            📚 My Book ({userBooks.length})
           </button>
         </div>
       </div>
 
-      {/* Tab: Version Management */}
+      {/* Tab: My Book Management */}
       {activeTab === 'manage' && (
         <div style={{ background: '#fff', border: '3px solid #20241f', borderRadius: 12, padding: 24, boxShadow: '5px 5px 0 #20241f' }}>
           <h2 style={{ fontFamily: 'var(--font-editorial)', fontSize: '1.4rem', marginBottom: 12 }}>
@@ -329,199 +299,168 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
             </div>
           ) : (
             <div style={{ padding: 32, textAlign: 'center', border: '2px dashed var(--color-line)', borderRadius: 8 }}>
-              <p style={{ color: 'var(--color-muted)' }}>You haven't authored any books yet. Click "New Book Studio" to create your first visual book!</p>
+              <p style={{ color: 'var(--color-muted)' }}>You haven't authored any books yet. Click "Publish a Book" to create your first visual book!</p>
             </div>
           )}
         </div>
       )}
 
-      {/* Tab: Create / Republish Studio */}
+      {/* Tab: Publish a Book (Unified Single Clean Section) */}
       {activeTab === 'create' && (
-        <div style={{ display: 'grid', gridTemplateColumns: blobUrl ? '1.1fr 0.9fr' : '1fr', gap: 28, alignItems: 'start' }}>
-          {/* Main Author Form */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-            {/* Step 1: HTML Upload & Validation */}
-            <div style={{ background: '#fff', border: '3px solid #20241f', borderRadius: 12, padding: 22, boxShadow: '4px 4px 0 #20241f' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 800 }}>1. HTML Book Document</h3>
-                {fileName && <span className="badge badge-accent">{fileName}</span>}
+        <div style={{ display: 'grid', gridTemplateColumns: blobUrl ? '1.15fr 0.85fr' : '1fr', gap: 24, alignItems: 'start' }}>
+          {/* Single Unified Card Clubbing All Publisher Settings */}
+          <div style={{ background: '#fff', border: '3px solid #20241f', borderRadius: 12, padding: 26, boxShadow: '5px 5px 0 #20241f' }}>
+            
+            {/* Header row with Title and Top-Right HTML Import Button */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 20, paddingBottom: 16, borderBottom: '2px solid var(--color-line)' }}>
+              <div>
+                <h2 style={{ fontSize: '1.3rem', fontWeight: 800, margin: 0 }}>
+                  {bookId ? `Republish Book (v${version})` : 'Book Details & Content'}
+                </h2>
+                <small style={{ color: 'var(--color-muted)' }}>
+                  {fileName ? `Loaded: ${fileName}` : 'Import an HTML book file to publish or preview'}
+                </small>
               </div>
 
-              <label
-                style={{
-                  display: 'block',
-                  border: '2px dashed var(--color-ink)',
-                  borderRadius: 8,
-                  padding: '24px 16px',
-                  textAlign: 'center',
-                  background: '#fdfcf9',
-                  cursor: 'pointer',
-                  transition: 'background 0.15s',
-                }}
-              >
+              {/* Top-Right Small Import Button */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <input
                   type="file"
+                  ref={fileInputRef}
                   accept=".html,.htm"
                   onChange={handleFileUpload}
                   style={{ display: 'none' }}
                 />
-                <div style={{ fontSize: '2rem', marginBottom: 6 }}>📑</div>
-                <strong style={{ display: 'block', fontSize: '0.95rem' }}>
-                  {htmlContent ? 'Replace with revised HTML file' : 'Drag & drop your visual HTML book here, or click to browse'}
-                </strong>
-                <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>
-                  Accepts standalone .html files (max 5 MiB).
-                </span>
-              </label>
-
-              {report && (
-                <div style={{ marginTop: 16 }}>
-                  <ValidationReport
-                    report={report}
-                    onInjectBridge={!report.hasProtocolScript ? handleInjectBridge : undefined}
-                  />
-                </div>
-              )}
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() => fileInputRef.current?.click()}
+                  style={{
+                    border: '2px solid #20241f',
+                    background: htmlContent ? '#dcfce7' : '#fff',
+                    color: htmlContent ? '#166534' : '#20241f',
+                    fontWeight: 700,
+                    padding: '6px 14px',
+                    fontSize: '0.85rem',
+                  }}
+                >
+                  {htmlContent ? '✓ Change HTML File' : '📥 Import HTML Book'}
+                </button>
+              </div>
             </div>
 
-            {/* Step 2: Book Metadata */}
-            <div style={{ background: '#fff', border: '3px solid #20241f', borderRadius: 12, padding: 22, boxShadow: '4px 4px 0 #20241f' }}>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: 16 }}>2. Book Details & Metadata</h3>
+            {/* Validation Banner if HTML loaded */}
+            {report && (
+              <div style={{ marginBottom: 20 }}>
+                <ValidationReport
+                  report={report}
+                  onInjectBridge={!report.hasProtocolScript ? handleInjectBridge : undefined}
+                />
+              </div>
+            )}
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            {/* Book Metadata Fields */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
+                  Book Title *
+                </label>
+                <input
+                  type="text"
+                  className="search-input"
+                  style={{ borderRadius: 6 }}
+                  placeholder="e.g. The Attention Economy · 01"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
+                  Short Summary / Premise *
+                </label>
+                <textarea
+                  className="search-input"
+                  rows={2}
+                  style={{ borderRadius: 6, minHeight: 64, resize: 'vertical' }}
+                  placeholder="A concise summary explaining what readers will discover..."
+                  value={summary}
+                  onChange={(e) => setSummary(e.target.value)}
+                />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
-                    Book Title *
+                    Author Name
                   </label>
                   <input
                     type="text"
                     className="search-input"
                     style={{ borderRadius: 6 }}
-                    placeholder="e.g. The Attention Economy · 01"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    value={authorName}
+                    onChange={(e) => setAuthorName(e.target.value)}
                   />
                 </div>
 
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
-                    Short Summary / Premise *
+                    Topic Category
                   </label>
-                  <textarea
+                  <select
                     className="search-input"
-                    rows={2}
-                    style={{ borderRadius: 6, minHeight: 64, resize: 'vertical' }}
-                    placeholder="A concise summary explaining what readers will discover..."
-                    value={summary}
-                    onChange={(e) => setSummary(e.target.value)}
+                    style={{ borderRadius: 6, height: 38 }}
+                    value={primaryTaxonomyId}
+                    onChange={(e) => setPrimaryTaxonomyId(e.target.value)}
+                  >
+                    {taxonomies.map(t => (
+                      <option key={t.id} value={t.id}>{t.name}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
+                    Est. Minutes
+                  </label>
+                  <input
+                    type="number"
+                    className="search-input"
+                    style={{ borderRadius: 6 }}
+                    min={1}
+                    max={120}
+                    value={readingMinutes}
+                    onChange={(e) => setReadingMinutes(parseInt(e.target.value) || 10)}
                   />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
-                      Author Display Name
-                    </label>
-                    <input
-                      type="text"
-                      className="search-input"
-                      style={{ borderRadius: 6 }}
-                      value={authorName}
-                      onChange={(e) => setAuthorName(e.target.value)}
-                    />
-                  </div>
-
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
-                      Primary Topic Category
-                    </label>
-                    <select
-                      className="search-input"
-                      style={{ borderRadius: 6, height: 38 }}
-                      value={primaryTaxonomyId}
-                      onChange={(e) => setPrimaryTaxonomyId(e.target.value)}
-                    >
-                      {taxonomies.map(t => (
-                        <option key={t.id} value={t.id}>{t.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
-                      Estimated Minutes to Read
-                    </label>
-                    <input
-                      type="number"
-                      className="search-input"
-                      style={{ borderRadius: 6 }}
-                      min={1}
-                      max={120}
-                      value={readingMinutes}
-                      onChange={(e) => setReadingMinutes(parseInt(e.target.value) || 10)}
-                    />
-                  </div>
-
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
-                      Tags (Comma-separated)
-                    </label>
-                    <input
-                      type="text"
-                      className="search-input"
-                      style={{ borderRadius: 6 }}
-                      placeholder="Focus, Systems, Design"
-                      value={tagsInput}
-                      onChange={(e) => setTagsInput(e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                {/* Semantic Concepts Multi-Select */}
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 6 }}>
-                    Connected Concepts in Knowledge Web
-                  </label>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                    {concepts.map(concept => {
-                      const isSelected = selectedConceptIds.includes(concept.id);
-                      return (
-                        <button
-                          key={concept.id}
-                          type="button"
-                          onClick={() => toggleConcept(concept.id)}
-                          className="btn"
-                          style={{
-                            padding: '4px 10px',
-                            fontSize: '0.8rem',
-                            background: isSelected ? '#20241f' : '#fff',
-                            color: isSelected ? '#fff' : 'inherit',
-                            borderColor: '#20241f',
-                          }}
-                        >
-                          {isSelected ? '✓ ' : '+ '} {concept.name}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 3: Versioning & Release Changelog */}
-            <div style={{ background: '#fff', border: '3px solid #20241f', borderRadius: 12, padding: 22, boxShadow: '4px 4px 0 #20241f' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 800 }}>3. Versioning & Release Notes</h3>
-                <span className="badge badge-green">Revision #{revision}</span>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '140px 1fr', gap: 14, marginBottom: 12 }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
-                    SemVer *
+                    Tags (Comma-separated)
                   </label>
+                  <input
+                    type="text"
+                    className="search-input"
+                    style={{ borderRadius: 6 }}
+                    placeholder="Focus, Systems, Design"
+                    value={tagsInput}
+                    onChange={(e) => setTagsInput(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* Version & Changelog Row */}
+              <div style={{ padding: 14, background: '#fdfcf9', border: '1.5px solid var(--color-line)', borderRadius: 8 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 700 }}>
+                    Edition Versioning
+                  </label>
+                  <span className="badge badge-accent">Revision #{revision}</span>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '130px 1fr', gap: 12, marginBottom: 10 }}>
                   <input
                     type="text"
                     className="search-input"
@@ -530,149 +469,144 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
                     value={version}
                     onChange={(e) => setVersion(e.target.value)}
                   />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 4 }}>
-                    What changed in this edition? (Changelog)
-                  </label>
                   <input
                     type="text"
                     className="search-input"
                     style={{ borderRadius: 6 }}
-                    placeholder="e.g. Added section on feedback loops, fixed typo on page 3"
+                    placeholder="Changelog (e.g. Revised chapter 2, added diagrams)"
                     value={changelog}
                     onChange={(e) => setChangelog(e.target.value)}
                   />
                 </div>
+
+                <div style={{ display: 'flex', gap: 6 }}>
+                  <button
+                    type="button"
+                    className="btn"
+                    style={{ fontSize: '0.75rem', padding: '3px 8px' }}
+                    onClick={() => {
+                      const p = version.split('.').map(n => parseInt(n) || 0);
+                      if (p.length === 3) { p[2] += 1; setVersion(p.join('.')); }
+                    }}
+                  >
+                    + Patch (0.0.1)
+                  </button>
+                  <button
+                    type="button"
+                    className="btn"
+                    style={{ fontSize: '0.75rem', padding: '3px 8px' }}
+                    onClick={() => {
+                      const p = version.split('.').map(n => parseInt(n) || 0);
+                      if (p.length === 3) { p[1] += 1; p[2] = 0; setVersion(p.join('.')); }
+                    }}
+                  >
+                    + Minor (0.1.0)
+                  </button>
+                  <button
+                    type="button"
+                    className="btn"
+                    style={{ fontSize: '0.75rem', padding: '3px 8px' }}
+                    onClick={() => {
+                      const p = version.split('.').map(n => parseInt(n) || 0);
+                      if (p.length === 3) { p[0] += 1; p[1] = 0; p[2] = 0; setVersion(p.join('.')); }
+                    }}
+                  >
+                    + Major (1.0.0)
+                  </button>
+                </div>
               </div>
 
-              <div style={{ display: 'flex', gap: 8 }}>
-                <button
-                  type="button"
-                  className="btn"
-                  style={{ fontSize: '0.78rem' }}
-                  onClick={() => {
-                    const p = version.split('.').map(n => parseInt(n) || 0);
-                    if (p.length === 3) {
-                      p[2] += 1;
-                      setVersion(p.join('.'));
-                    }
-                  }}
-                >
-                  + Patch (+0.0.1)
-                </button>
-                <button
-                  type="button"
-                  className="btn"
-                  style={{ fontSize: '0.78rem' }}
-                  onClick={() => {
-                    const p = version.split('.').map(n => parseInt(n) || 0);
-                    if (p.length === 3) {
-                      p[1] += 1;
-                      p[2] = 0;
-                      setVersion(p.join('.'));
-                    }
-                  }}
-                >
-                  + Minor (+0.1.0)
-                </button>
-                <button
-                  type="button"
-                  className="btn"
-                  style={{ fontSize: '0.78rem' }}
-                  onClick={() => {
-                    const p = version.split('.').map(n => parseInt(n) || 0);
-                    if (p.length === 3) {
-                      p[0] += 1;
-                      p[1] = 0;
-                      p[2] = 0;
-                      setVersion(p.join('.'));
-                    }
-                  }}
-                >
-                  + Major (+1.0.0)
-                </button>
+              {/* Concept Tags */}
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 6 }}>
+                  Connect Concepts
+                </label>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {concepts.map(concept => {
+                    const isSelected = selectedConceptIds.includes(concept.id);
+                    return (
+                      <button
+                        key={concept.id}
+                        type="button"
+                        onClick={() => toggleConcept(concept.id)}
+                        className="btn"
+                        style={{
+                          padding: '4px 10px',
+                          fontSize: '0.8rem',
+                          background: isSelected ? '#20241f' : '#fff',
+                          color: isSelected ? '#fff' : 'inherit',
+                          borderColor: '#20241f',
+                        }}
+                      >
+                        {isSelected ? '✓ ' : '+ '} {concept.name}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
 
-            {/* Step 4: Visibility & Submission */}
-            <div style={{ background: '#fff', border: '3px solid #20241f', borderRadius: 12, padding: 22, boxShadow: '4px 4px 0 #20241f' }}>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: 14 }}>4. Distribution & Publish</h3>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 18 }}>
-                <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontSize: '0.9rem' }}>
-                  <input
-                    type="radio"
-                    name="pub_visibility"
-                    checked={visibilityChoice === 'request_approval'}
-                    onChange={() => setVisibilityChoice('request_approval')}
-                  />
-                  <div>
-                    <strong>Request Admin Approval (Global Public Catalog)</strong>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>
-                      Available to you immediately. Submitted to admin moderation queue for public listing.
-                    </div>
-                  </div>
+              {/* Visibility Choice */}
+              <div style={{ padding: 14, background: '#fdfcf9', border: '1.5px solid var(--color-line)', borderRadius: 8 }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: 8 }}>
+                  Visibility
                 </label>
-
-                <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontSize: '0.9rem' }}>
-                  <input
-                    type="radio"
-                    name="pub_visibility"
-                    checked={visibilityChoice === 'private'}
-                    onChange={() => setVisibilityChoice('private')}
-                  />
-                  <div>
-                    <strong>Private to My Account</strong>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>
-                      Accessible only to you across your logged-in devices.
-                    </div>
-                  </div>
-                </label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: '0.88rem' }}>
+                    <input
+                      type="radio"
+                      name="pub_visibility"
+                      checked={visibilityChoice === 'request_approval'}
+                      onChange={() => setVisibilityChoice('request_approval')}
+                    />
+                    <span>
+                      <strong>Public Approval</strong> — Immediate access for you; queued for admin moderation.
+                    </span>
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: '0.88rem' }}>
+                    <input
+                      type="radio"
+                      name="pub_visibility"
+                      checked={visibilityChoice === 'private'}
+                      onChange={() => setVisibilityChoice('private')}
+                    />
+                    <span>
+                      <strong>Private to My Account</strong> — Visible only when signed into your account.
+                    </span>
+                  </label>
+                </div>
               </div>
 
               {submitError && (
-                <div style={{ padding: 10, background: '#fee2e2', border: '1px solid #ef4444', borderRadius: 6, color: '#b91c1c', fontSize: '0.85rem', marginBottom: 14 }}>
+                <div style={{ padding: 10, background: '#fee2e2', border: '1px solid #ef4444', borderRadius: 6, color: '#b91c1c', fontSize: '0.85rem' }}>
                   {submitError}
                 </div>
               )}
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, paddingTop: 14, borderTop: '2px solid var(--color-line)' }}>
+              {/* Bottom Actions */}
+              <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 12, paddingTop: 16, borderTop: '2px solid var(--color-line)' }}>
+                {onCancel && (
+                  <button type="button" className="btn" onClick={onCancel}>
+                    Cancel
+                  </button>
+                )}
                 <button
                   type="button"
-                  className="btn"
-                  onClick={handleSaveLocal}
-                  title="Save strictly on this device in IndexedDB"
+                  className="btn btn-primary"
+                  disabled={isSubmitting || !htmlContent}
+                  onClick={handleSubmitCloud}
+                  style={{ fontSize: '0.95rem', padding: '10px 24px' }}
                 >
-                  Save Local (IndexedDB)
+                  {isSubmitting
+                    ? 'Publishing...'
+                    : bookId
+                    ? `Republish v${version} ➔`
+                    : 'Publish Book ➔'}
                 </button>
-
-                <div style={{ display: 'flex', gap: 10 }}>
-                  {onCancel && (
-                    <button type="button" className="btn" onClick={onCancel}>
-                      Cancel
-                    </button>
-                  )}
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    disabled={isSubmitting || !htmlContent}
-                    onClick={handleSubmitCloud}
-                    style={{ fontSize: '0.95rem', padding: '10px 22px' }}
-                  >
-                    {isSubmitting
-                      ? 'Publishing Edition...'
-                      : bookId
-                      ? `Republish v${version} ➔`
-                      : 'Publish Book Edition ➔'}
-                  </button>
-                </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Sandboxed Live Reader Preview */}
+          {/* Right Column: Live Reader Canvas Preview */}
           {blobUrl && (
             <div style={{ position: 'sticky', top: 80 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
