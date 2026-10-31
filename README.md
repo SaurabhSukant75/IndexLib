@@ -24,9 +24,8 @@
 ## Project Structure
 ```text
 IndexLib/
-├── indexLab/                      # Design & Interaction Prototypes
-│   ├── UI-UX-DESIGN.md            # Detailed UI & Interaction Specification
-│   └── interactive-prototype.html # Standalone interactive HTML/SVG prototype
+├── UI-UX-DESIGN.md            # Detailed UI & Interaction Specification
+├── interactive-prototype.html # Standalone interactive HTML/SVG prototype
 ├── public/
 │   ├── book/                      # Bundled sample visual books (HTML)
 │   └── data/                      # Bundled static catalog.json
