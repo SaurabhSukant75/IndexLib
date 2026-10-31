@@ -38,9 +38,22 @@ export const ReaderView: React.FC<ReaderViewProps> = ({ catalogBooks, user, onTo
           setContentSrc(URL.createObjectURL(blob));
         }
       } else {
-        // If contentPath is an absolute URL (e.g. Supabase Storage https://...), use it directly
+        // If contentPath is an absolute URL (e.g. Supabase Storage https://...)
         if (/^https?:\/\//i.test(foundBook.contentPath)) {
-          setContentSrc(foundBook.contentPath);
+          try {
+            // Fetch content as text and serve via Blob URL with text/html MIME type
+            // to prevent raw plaintext rendering or header mismatches from object storage
+            const resp = await fetch(foundBook.contentPath);
+            if (resp.ok) {
+              const htmlText = await resp.text();
+              const blob = new Blob([htmlText], { type: 'text/html;charset=utf-8' });
+              setContentSrc(URL.createObjectURL(blob));
+            } else {
+              setContentSrc(foundBook.contentPath);
+            }
+          } catch {
+            setContentSrc(foundBook.contentPath);
+          }
         } else {
           // Resolve path relative to Vite base
           const basePath = import.meta.env.BASE_URL || '/';
