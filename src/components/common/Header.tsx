@@ -29,15 +29,15 @@ export const Header: React.FC<HeaderProps> = ({ user, onToggleSidebar, isSidebar
           <button
             className="sidebar-burger-btn"
             onClick={onToggleSidebar}
-            title={isSidebarCollapsed ? 'Open navigation menu' : 'Close navigation menu'}
-            aria-label="Toggle navigation menu"
+            title={isSidebarCollapsed ? 'Open navigation vault' : 'Close navigation vault'}
+            aria-label="Toggle navigation vault"
           >
             {isSidebarCollapsed ? '☰' : '✕'}
           </button>
         )}
         <Link to="/" className="brand">
           <div className="brand-mark">IL</div>
-          <div className="brand-title">IndexLib</div>
+          <div className="brand-title">INDEXLIB</div>
         </Link>
       </div>
 
@@ -45,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({ user, onToggleSidebar, isSidebar
         className={`search-bar ${isSearchExpandedMobile ? 'search-bar-expanded' : ''}`}
         onSubmit={handleSearchSubmit}
       >
-        <span className="search-icon">🔍</span>
+        <span className="search-icon-text">SEARCH</span>
         <input
           type="text"
           className="search-input"
@@ -73,21 +73,32 @@ export const Header: React.FC<HeaderProps> = ({ user, onToggleSidebar, isSidebar
           aria-label="Toggle search input"
           title="Search"
         >
-          🔍
+          SEARCH
         </button>
 
         {user?.role === 'admin' && (
           <>
-            <Link to="/publish" className="btn btn-primary header-admin-btn">
-              ＋ Publish
+            <Link to="/publish" className="btn comic-header-btn comic-header-btn-yellow header-admin-btn">
+              + PUBLISH
             </Link>
-            <Link to="/admin" className="badge badge-warning header-admin-badge" style={{ textDecoration: 'none' }}>
-              Admin
+            <Link to="/admin" className="comic-header-badge header-admin-badge">
+              ADMIN
             </Link>
           </>
         )}
-        <Link to="/account" className="btn header-auth-btn">
-          {user ? `👤 ${user.username}` : 'Sign In'}
+
+        <Link
+          to="/account"
+          className={`btn comic-user-btn ${user ? 'comic-user-active' : ''}`}
+        >
+          {user ? (
+            <span className="comic-user-label">
+              <span className="comic-user-tag">READER</span>
+              <strong className="comic-user-name">{user.username}</strong>
+            </span>
+          ) : (
+            <span className="comic-signin-label">SIGN IN</span>
+          )}
         </Link>
       </div>
     </header>

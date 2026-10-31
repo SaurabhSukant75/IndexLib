@@ -31,7 +31,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="comic-sidebar-vol">SERIES 1.0</div>
       </div>
 
-      {/* Primary Navigation Sections */}
+      {/* Primary Navigation Sections (Direct flat navigation, no dropdowns) */}
       <div className="comic-sidebar-content">
         {/* Explore Section */}
         <div className="comic-sidebar-group">
@@ -100,7 +100,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </ul>
         </div>
 
-        {/* My Vault Section */}
+        {/* My Vault (Direct flat list - No dropdowns) */}
         <div className="comic-sidebar-group">
           <div className="comic-sidebar-group-title">MY VAULT</div>
           <ul className="comic-nav-list">
