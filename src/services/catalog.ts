@@ -14,7 +14,15 @@ export async function loadCatalog(): Promise<CatalogData> {
     if (!response.ok) {
       throw new Error(`Failed to load catalog JSON: ${response.status}`);
     }
-    const data: CatalogData = await response.json();
+    const rawData = await response.json();
+    const data: CatalogData = {
+      schemaVersion: rawData.schemaVersion || 1,
+      books: rawData.books || [],
+      taxonomies: rawData.taxonomies || rawData.taxonomy || [],
+      concepts: rawData.concepts || [],
+      conceptRelations: rawData.conceptRelations || [],
+      learningPaths: rawData.learningPaths || [],
+    };
 
     // Fetch dynamic published books from Supabase
     try {

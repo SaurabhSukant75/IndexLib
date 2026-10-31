@@ -17,8 +17,8 @@ export interface HtmlBookPublisherProps {
 
 export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
   user,
-  taxonomies,
-  concepts,
+  taxonomies = [],
+  concepts = [],
   initialMode = 'create',
   onPublishSuccess,
   onCancel,
@@ -36,7 +36,7 @@ export const HtmlBookPublisher: React.FC<HtmlBookPublisherProps> = ({
   const [revision, setRevision] = useState<number>(1);
   const [changelog, setChangelog] = useState<string>('');
   const [readingMinutes, setReadingMinutes] = useState<number>(10);
-  const [primaryTaxonomyId, setPrimaryTaxonomyId] = useState<string>(taxonomies[0]?.id || 'human-nature');
+  const [primaryTaxonomyId, setPrimaryTaxonomyId] = useState<string>(taxonomies?.[0]?.id || 'human-nature');
   const [selectedConceptIds, setSelectedConceptIds] = useState<string[]>([]);
   const [tagsInput, setTagsInput] = useState<string>('Visual Book, Design');
   const [visibilityChoice, setVisibilityChoice] = useState<'request_approval' | 'private'>('request_approval');
