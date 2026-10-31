@@ -17,6 +17,7 @@ import { AccountView } from './views/AccountView';
 import { SearchView } from './views/SearchView';
 import { TrainingView } from './views/TrainingView';
 import { TemplateCatalogView } from './views/TemplateCatalogView';
+import { ReelsView } from './views/ReelsView';
 
 export const App: React.FC = () => {
   const [catalog, setCatalog] = useState<CatalogData | null>(null);
@@ -66,7 +67,7 @@ export const App: React.FC = () => {
       pathCount={catalog.learningPaths.length}
     >
       <Routes>
-        <Route path="/" element={<HomeView books={catalog.books} concepts={catalog.concepts} />} />
+        <Route path="/" element={<HomeView />} />
         <Route
           path="/concepts"
           element={
@@ -94,6 +95,7 @@ export const App: React.FC = () => {
           element={<TemplateCatalogView />}
         />
         <Route path="/library" element={<LibraryView catalogBooks={catalog.books} />} />
+        <Route path="/reels" element={<ReelsView />} />
         <Route
           path="/read/:bookId/:pageId?"
           element={<ReaderView catalogBooks={catalog.books} user={user} onToast={setToastMessage} />}

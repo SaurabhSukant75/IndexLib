@@ -318,13 +318,33 @@ aside.sidebar.collapsed {
   gap: 6px;
 }
 
+.comic-sidebar-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 6px;
+  transition: background 0.12s ease;
+}
+
+.comic-sidebar-group-header:hover {
+  background: #f4f1e6;
+}
+
 .comic-sidebar-group-title {
   font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 1px;
   color: var(--color-muted);
-  padding-left: 8px;
   text-transform: uppercase;
+}
+
+.comic-group-caret {
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: var(--color-ink);
 }
 
 .comic-nav-list {
@@ -952,6 +972,15 @@ main.main-viewport {
   grid-template-columns: 1.3fr 1fr;
   gap: 32px;
   align-items: center;
+}
+
+.comic-hero-description-lead {
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: var(--color-ink);
+  font-weight: 500;
+  margin-bottom: 28px;
+  max-width: 580px;
 }
 
 .comic-hero-stamp {

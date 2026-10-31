@@ -23,21 +23,24 @@ export const Layout: React.FC<LayoutProps> = ({
 }) => {
   const location = useLocation();
   const isReaderRoute = location.pathname.startsWith('/read/');
+  const isHomeRoute = location.pathname === '/' || location.pathname === '';
 
-  // Initial state: collapse on mobile screens <= 768px or in reader view
+  // Initial state: by default, collapse on Home page, Reader page, and mobile screens <= 768px
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
     if (typeof window !== 'undefined') {
-      return window.innerWidth > 768 && !isReaderRoute;
+      return window.innerWidth > 768 && !isReaderRoute && !isHomeRoute;
     }
-    return true;
+    return false;
   });
 
-  // Automatically close sidebar when navigating to a new route on mobile or reader
+  // Automatically close sidebar when navigating to Home, Reader, or on mobile
   useEffect(() => {
-    if (typeof window !== 'undefined' && (window.innerWidth <= 768 || isReaderRoute)) {
-      setIsSidebarOpen(false);
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth <= 768 || isReaderRoute || isHomeRoute) {
+        setIsSidebarOpen(false);
+      }
     }
-  }, [location.pathname, isReaderRoute]);
+  }, [location.pathname, isReaderRoute, isHomeRoute]);
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen(prev => !prev);
