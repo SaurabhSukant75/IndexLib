@@ -106,7 +106,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Fundamental Attribution Error",
     "description": "Why do we blame personality for others’ actions while excusing our own circumstances?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-011"
   },
   {
     "num": "012",
@@ -114,7 +115,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Negativity Bias",
     "description": "Why do bad experiences often affect us more than equally strong good ones?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-012"
   },
   {
     "num": "013",
@@ -122,7 +124,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Planning Fallacy",
     "description": "Why do we consistently underestimate how long tasks will take?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-013"
   },
   {
     "num": "014",
@@ -130,7 +133,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Status Quo Bias",
     "description": "Why do we prefer familiar arrangements even when better options exist?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-014"
   },
   {
     "num": "015",
@@ -138,7 +142,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Choice Overload",
     "description": "Why can too many options make decisions harder rather than easier?",
     "theme": "Human Nature & Thinking",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-015"
   },
   {
     "num": "016",
@@ -147,7 +152,7 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "description": "How did money transform exchange, cooperation, and economic coordination?",
     "theme": "Money, Wealth & Economics",
     "category": "evergreen",
-    "bookId": "book-05"
+    "bookId": "book-016"
   },
   {
     "num": "017",
@@ -155,7 +160,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Money Illusion",
     "description": "Why can earning more money fail to make us richer?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-017"
   },
   {
     "num": "018",
@@ -163,7 +169,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Wealth Inequality Paradox",
     "description": "How can a society become richer while many people remain economically insecure?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-018"
   },
   {
     "num": "019",
@@ -172,7 +179,7 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "description": "How can rewards designed to improve behavior end up making it worse?",
     "theme": "Money, Wealth & Economics",
     "category": "evergreen",
-    "bookId": "book-02"
+    "bookId": "book-019"
   },
   {
     "num": "020",
@@ -180,7 +187,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Tragedy of the Commons",
     "description": "Why do individuals acting in their own interests sometimes destroy a shared resource?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-020"
   },
   {
     "num": "021",
@@ -188,7 +196,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Opportunity Cost",
     "description": "What do we give up whenever we choose one option over another?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-021"
   },
   {
     "num": "022",
@@ -196,7 +205,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Inflation Puzzle",
     "description": "Why can prices rise even when people feel no richer?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-022"
   },
   {
     "num": "023",
@@ -204,7 +214,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Compound Growth Effect",
     "description": "How can small gains or losses become enormous over time?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-023"
   },
   {
     "num": "024",
@@ -212,7 +223,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Debt Trap",
     "description": "When does borrowing help people progress, and when does it restrict their future?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-024"
   },
   {
     "num": "025",
@@ -220,7 +232,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Productivity–Wage Gap",
     "description": "Why might economic output rise faster than typical workers’ pay?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-025"
   },
   {
     "num": "026",
@@ -228,7 +241,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Scarcity Mindset",
     "description": "How does having too little time or money change the way we think?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-026"
   },
   {
     "num": "027",
@@ -236,7 +250,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Externality Problem",
     "description": "Why can private decisions impose hidden costs on everyone else?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-027"
   },
   {
     "num": "028",
@@ -244,7 +259,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Principal–Agent Problem",
     "description": "Why might someone hired to serve our interests act in their own interests instead?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-028"
   },
   {
     "num": "029",
@@ -252,7 +268,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Market Failure",
     "description": "When do markets fail to allocate resources in ways that serve society well?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-029"
   },
   {
     "num": "030",
@@ -260,7 +277,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Paradox of Thrift",
     "description": "Why can everyone saving more at once sometimes weaken the wider economy?",
     "theme": "Money, Wealth & Economics",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-030"
   },
   {
     "num": "031",
@@ -268,7 +286,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The One Person, One Vote Paradox",
     "description": "Why doesn't equal voting power guarantee equal political influence?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-031"
   },
   {
     "num": "032",
@@ -276,7 +295,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Meritocracy Myth",
     "description": "How much of success comes from talent, effort, privilege, networks, and luck?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-032"
   },
   {
     "num": "033",
@@ -284,7 +304,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Social Hierarchy",
     "description": "Why do societies create status differences, and how do they persist?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-033"
   },
   {
     "num": "034",
@@ -292,7 +313,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Banana Democracy",
     "description": "How can a country retain elections while democratic accountability weakens?",
     "theme": "Society, Power & Democracy",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-034"
   },
   {
     "num": "035",
@@ -300,7 +322,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Collective Action Problem",
     "description": "Why do people struggle to act together even when cooperation benefits everyone?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-035"
   },
   {
     "num": "036",
@@ -308,7 +331,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Social Contract",
     "description": "What makes people accept rules, authority, and shared obligations?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-036"
   },
   {
     "num": "037",
@@ -316,7 +340,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Representation Gap",
     "description": "Why may elected representatives fail to reflect the needs of the people they represent?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-037"
   },
   {
     "num": "038",
@@ -324,7 +349,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Majority–Minority Problem",
     "description": "How can majority rule coexist with protection for minority rights?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-038"
   },
   {
     "num": "039",
@@ -332,7 +358,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Power of Institutions",
     "description": "How do rules and organizations shape behavior beyond individual intentions?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-039"
   },
   {
     "num": "040",
@@ -340,7 +367,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Corruption Loop",
     "description": "How can corruption weaken institutions and make further corruption easier?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-040"
   },
   {
     "num": "041",
@@ -348,7 +376,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Network Effect of Power",
     "description": "How do connections and relationships amplify access to influence?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-041"
   },
   {
     "num": "042",
@@ -356,7 +385,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Public Goods Problem",
     "description": "Why are essential shared services often difficult to fund through individual choices alone?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-042"
   },
   {
     "num": "043",
@@ -364,7 +394,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Polarization Spiral",
     "description": "How can disagreement turn into hostility between social or political groups?",
     "theme": "Society, Power & Democracy",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-043"
   },
   {
     "num": "044",
@@ -372,7 +403,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Legitimacy Problem",
     "description": "What makes people see authority as rightful rather than merely powerful?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-044"
   },
   {
     "num": "045",
@@ -380,7 +412,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Social Mobility Question",
     "description": "What helps people move beyond the social and economic conditions into which they are born?",
     "theme": "Society, Power & Democracy",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-045"
   },
   {
     "num": "046",
@@ -389,7 +422,7 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "description": "Do algorithms reflect human preferences, or reshape them?",
     "theme": "Technology, AI & Knowledge",
     "category": "trending",
-    "bookId": "book-04"
+    "bookId": "book-046"
   },
   {
     "num": "047",
@@ -397,7 +430,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Automation Paradox",
     "description": "Why can technology make work more productive while creating new dependencies and risks?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-047"
   },
   {
     "num": "048",
@@ -405,7 +439,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The AI Alignment Problem",
     "description": "How do we ensure AI systems pursue what humans actually value?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-048"
   },
   {
     "num": "049",
@@ -413,7 +448,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Knowledge Graph",
     "description": "How are ideas connected, and how can those connections improve learning?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-049"
   },
   {
     "num": "050",
@@ -421,7 +457,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Information Overload Paradox",
     "description": "Why does having access to more information not necessarily make us wiser?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-050"
   },
   {
     "num": "051",
@@ -429,7 +466,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Black Box Problem",
     "description": "How can we trust a system when its decisions are difficult to explain?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-051"
   },
   {
     "num": "052",
@@ -437,7 +475,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Digital Divide",
     "description": "How does unequal access to technology create unequal opportunities?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-052"
   },
   {
     "num": "053",
@@ -445,7 +484,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Privacy–Convenience Trade-off",
     "description": "What do we give up when we exchange personal data for convenience?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-053"
   },
   {
     "num": "054",
@@ -453,7 +493,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Feedback Loop",
     "description": "How can a system’s outputs change the inputs that shape its future behavior?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-054"
   },
   {
     "num": "055",
@@ -461,7 +502,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Goodhart’s Law",
     "description": "Why does a measure often become less useful when it becomes a target?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-055"
   },
   {
     "num": "056",
@@ -469,7 +511,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Recommender Trap",
     "description": "How can personalized recommendations narrow what we discover?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-056"
   },
   {
     "num": "057",
@@ -477,7 +520,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Open Source Paradox",
     "description": "How can shared technology create enormous value while its maintenance remains difficult to fund?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-057"
   },
   {
     "num": "058",
@@ -485,7 +529,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Data Bias Problem",
     "description": "How can biased data produce unfair or unreliable automated decisions?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-058"
   },
   {
     "num": "059",
@@ -493,7 +538,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Network Effect",
     "description": "Why do some platforms become more valuable as more people use them?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-059"
   },
   {
     "num": "060",
@@ -501,7 +547,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Digital Memory Problem",
     "description": "What changes when information can be stored, searched, copied, and retrieved indefinitely?",
     "theme": "Technology, AI & Knowledge",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-060"
   },
   {
     "num": "061",
@@ -509,7 +556,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Freedom Paradox",
     "description": "Can having more choices sometimes make us less free?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-061"
   },
   {
     "num": "062",
@@ -517,7 +565,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Trolley Problem",
     "description": "When every available choice causes harm, how should we decide?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-062"
   },
   {
     "num": "063",
@@ -525,7 +574,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Progress Paradox",
     "description": "Why can technological and economic progress coexist with new forms of suffering?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-063"
   },
   {
     "num": "064",
@@ -533,7 +583,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Prisoner’s Dilemma",
     "description": "Why can rational individuals produce irrational collective outcomes?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-064"
   },
   {
     "num": "065",
@@ -541,7 +592,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Meaning of Life",
     "description": "How do we decide what makes a life valuable, meaningful, and worth living?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-065"
   },
   {
     "num": "066",
@@ -549,7 +601,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Ship of Theseus",
     "description": "When every part of something changes, in what sense does it remain the same thing?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-066"
   },
   {
     "num": "067",
@@ -557,7 +610,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Problem of Other Minds",
     "description": "How can we know what another person is experiencing internally?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-067"
   },
   {
     "num": "068",
@@ -565,7 +619,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Ethics of Intention",
     "description": "Should actions be judged by their motives, their consequences, or both?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-068"
   },
   {
     "num": "069",
@@ -573,7 +628,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Future Generations Problem",
     "description": "What duties do people today have toward people who do not yet exist?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-069"
   },
   {
     "num": "070",
@@ -581,7 +637,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Paradox of Tolerance",
     "description": "How should an open society respond to movements that seek to destroy openness?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-070"
   },
   {
     "num": "071",
@@ -589,7 +646,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Free Will Debate",
     "description": "How much control do we have over choices shaped by biology and environment?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-071"
   },
   {
     "num": "072",
@@ -597,7 +655,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Knowledge Problem",
     "description": "How can decisions be made when relevant knowledge is dispersed across many people?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-072"
   },
   {
     "num": "073",
@@ -605,7 +664,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Unintended Consequences",
     "description": "Why do actions intended to solve a problem sometimes create new problems?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-073"
   },
   {
     "num": "074",
@@ -613,7 +673,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Precautionary Principle",
     "description": "When should society act to prevent a serious risk despite uncertainty?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-074"
   },
   {
     "num": "075",
@@ -621,7 +682,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Good Life",
     "description": "What does it mean to live well beyond wealth, status, or pleasure?",
     "theme": "Philosophy, Ethics & The Future",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-075"
   },
   {
     "num": "076",
@@ -629,7 +691,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Trust Paradox",
     "description": "Why is trust essential for cooperation yet vulnerable to betrayal?",
     "theme": "Relationships, Culture & Identity",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-076"
   },
   {
     "num": "077",
@@ -637,7 +700,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Empathy Gap",
     "description": "Why is it difficult to understand feelings and needs we have not experienced ourselves?",
     "theme": "Relationships, Culture & Identity",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-077"
   },
   {
     "num": "078",
@@ -645,7 +709,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Identity Loop",
     "description": "How do our identities shape our choices, and how do our choices reinforce identity?",
     "theme": "Relationships, Culture & Identity",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-078"
   },
   {
     "num": "079",
@@ -653,7 +718,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Belonging Need",
     "description": "Why do people seek group acceptance even when it conflicts with personal judgment?",
     "theme": "Relationships, Culture & Identity",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-079"
   },
   {
     "num": "080",
@@ -661,7 +727,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Cultural Lens",
     "description": "How does culture influence what people consider normal, valuable, or true?",
     "theme": "Relationships, Culture & Identity",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-080"
   },
   {
     "num": "081",
@@ -669,7 +736,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Language Boundary",
     "description": "How does language shape what we notice, communicate, and understand?",
     "theme": "Relationships, Culture & Identity",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-081"
   },
   {
     "num": "082",
@@ -677,7 +745,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Generational Divide",
     "description": "Why do people from different generations interpret the same world differently?",
     "theme": "Relationships, Culture & Identity",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-082"
   },
   {
     "num": "083",
@@ -685,7 +754,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Reputation Economy",
     "description": "How does social reputation influence behavior when formal rules are weak?",
     "theme": "Relationships, Culture & Identity",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-083"
   },
   {
     "num": "084",
@@ -693,7 +763,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Bystander Effect",
     "description": "Why may people be less likely to help when others are present?",
     "theme": "Relationships, Culture & Identity",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-084"
   },
   {
     "num": "085",
@@ -701,7 +772,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Conflict Spiral",
     "description": "How can small misunderstandings escalate into lasting conflict?",
     "theme": "Relationships, Culture & Identity",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-085"
   },
   {
     "num": "086",
@@ -709,7 +781,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Prevention Paradox",
     "description": "Why can actions that help a whole population seem to offer little benefit to each individual?",
     "theme": "Health, Environment & Human Systems",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-086"
   },
   {
     "num": "087",
@@ -717,7 +790,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Public Health Trade-off",
     "description": "How should societies balance individual choice and collective protection?",
     "theme": "Health, Environment & Human Systems",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-087"
   },
   {
     "num": "088",
@@ -725,7 +799,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Climate Coordination Problem",
     "description": "Why is it difficult for countries to cooperate on a shared environmental threat?",
     "theme": "Health, Environment & Human Systems",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-088"
   },
   {
     "num": "089",
@@ -733,7 +808,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Rebound Effect",
     "description": "Why can efficiency improvements sometimes lead to more total consumption?",
     "theme": "Health, Environment & Human Systems",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-089"
   },
   {
     "num": "090",
@@ -741,7 +817,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Carrying Capacity",
     "description": "How many people or activities can an environment sustain over time?",
     "theme": "Health, Environment & Human Systems",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-090"
   },
   {
     "num": "091",
@@ -749,7 +826,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Resilience Principle",
     "description": "What helps a person or system recover from shocks without collapsing?",
     "theme": "Health, Environment & Human Systems",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-091"
   },
   {
     "num": "092",
@@ -757,7 +835,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Risk Compensation Effect",
     "description": "Why can people take greater risks when they feel safer?",
     "theme": "Health, Environment & Human Systems",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-092"
   },
   {
     "num": "093",
@@ -765,7 +844,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Sleep–Performance Loop",
     "description": "How does sleep influence attention, decisions, health, and productivity?",
     "theme": "Health, Environment & Human Systems",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-093"
   },
   {
     "num": "094",
@@ -773,7 +853,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Urban Density Trade-off",
     "description": "How can cities create opportunity while increasing pressure on space and services?",
     "theme": "Health, Environment & Human Systems",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-094"
   },
   {
     "num": "095",
@@ -781,7 +862,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Waste Problem",
     "description": "Why is it often easier to produce waste than to prevent or recover it?",
     "theme": "Health, Environment & Human Systems",
-    "category": "trending"
+    "category": "trending",
+    "bookId": "book-095"
   },
   {
     "num": "096",
@@ -789,7 +871,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Learning Transfer Problem",
     "description": "Why can knowing something in a lesson fail to help us use it in real life?",
     "theme": "Learning, Work & Personal Growth",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-096"
   },
   {
     "num": "097",
@@ -797,7 +880,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Expertise Trap",
     "description": "When can experience improve judgment, and when can it create blind spots?",
     "theme": "Learning, Work & Personal Growth",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-097"
   },
   {
     "num": "098",
@@ -805,7 +889,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Deliberate Practice Principle",
     "description": "What distinguishes purposeful practice from simply repeating an activity?",
     "theme": "Learning, Work & Personal Growth",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-098"
   },
   {
     "num": "099",
@@ -813,7 +898,8 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Motivation Gap",
     "description": "Why do intentions often fail to become consistent action?",
     "theme": "Learning, Work & Personal Growth",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-099"
   },
   {
     "num": "100",
@@ -821,6 +907,7 @@ export const CONCEPTS_100: DetailedConcept[] = [
     "name": "The Feedback Paradox",
     "description": "Why can feedback improve performance in some situations and damage it in others?",
     "theme": "Learning, Work & Personal Growth",
-    "category": "evergreen"
+    "category": "evergreen",
+    "bookId": "book-100"
   }
 ];

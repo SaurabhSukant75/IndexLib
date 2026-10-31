@@ -250,6 +250,2296 @@
           "role": "explains"
         }
       ]
+    },
+    {
+      "id": "book-011",
+      "title": "The Fundamental Attribution Error · 011",
+      "summary": "Why do we blame personality for others’ actions while excusing our own circumstances?",
+      "contentPath": "book/book-011.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Cognition"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "fundamental-attribution-error",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-012",
+      "title": "The Negativity Bias · 012",
+      "summary": "Why do bad experiences often affect us more than equally strong good ones?",
+      "contentPath": "book/book-012.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Cognition"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "negativity-bias",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-013",
+      "title": "The Planning Fallacy · 013",
+      "summary": "Why do we consistently underestimate how long tasks will take?",
+      "contentPath": "book/book-013.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Cognition"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "planning-fallacy",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-014",
+      "title": "The Status Quo Bias · 014",
+      "summary": "Why do we prefer familiar arrangements even when better options exist?",
+      "contentPath": "book/book-014.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Cognition"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "status-quo-bias",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-015",
+      "title": "The Choice Overload · 015",
+      "summary": "Why can too many options make decisions harder rather than easier?",
+      "contentPath": "book/book-015.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "human-nature",
+      "taxonomyIds": [
+        "human-nature",
+        "cognition"
+      ],
+      "tags": [
+        "Evergreen",
+        "Cognition"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "choice-overload",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-016",
+      "title": "The Fundamental Problem Solved by Money · 016",
+      "summary": "How did money transform exchange, cooperation, and economic coordination?",
+      "contentPath": "book/book-016.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "fundamental-problem-solved-by-money",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-017",
+      "title": "The Money Illusion · 017",
+      "summary": "Why can earning more money fail to make us richer?",
+      "contentPath": "book/book-017.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "money-illusion",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-018",
+      "title": "The Wealth Inequality Paradox · 018",
+      "summary": "How can a society become richer while many people remain economically insecure?",
+      "contentPath": "book/book-018.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "wealth-inequality-paradox",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-019",
+      "title": "The Incentive Trap · 019",
+      "summary": "How can rewards designed to improve behavior end up making it worse?",
+      "contentPath": "book/book-019.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "incentives",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-020",
+      "title": "The Tragedy of the Commons · 020",
+      "summary": "Why do individuals acting in their own interests sometimes destroy a shared resource?",
+      "contentPath": "book/book-020.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "tragedy-of-the-commons",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-021",
+      "title": "The Opportunity Cost · 021",
+      "summary": "What do we give up whenever we choose one option over another?",
+      "contentPath": "book/book-021.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "opportunity-cost",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-022",
+      "title": "The Inflation Puzzle · 022",
+      "summary": "Why can prices rise even when people feel no richer?",
+      "contentPath": "book/book-022.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "inflation-puzzle",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-023",
+      "title": "The Compound Growth Effect · 023",
+      "summary": "How can small gains or losses become enormous over time?",
+      "contentPath": "book/book-023.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "compound-growth-effect",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-024",
+      "title": "The Debt Trap · 024",
+      "summary": "When does borrowing help people progress, and when does it restrict their future?",
+      "contentPath": "book/book-024.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "debt-trap",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-025",
+      "title": "The Productivity–Wage Gap · 025",
+      "summary": "Why might economic output rise faster than typical workers’ pay?",
+      "contentPath": "book/book-025.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "productivity-wage-gap",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-026",
+      "title": "The Scarcity Mindset · 026",
+      "summary": "How does having too little time or money change the way we think?",
+      "contentPath": "book/book-026.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "scarcity-mindset",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-027",
+      "title": "The Externality Problem · 027",
+      "summary": "Why can private decisions impose hidden costs on everyone else?",
+      "contentPath": "book/book-027.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "externality-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-028",
+      "title": "The Principal–Agent Problem · 028",
+      "summary": "Why might someone hired to serve our interests act in their own interests instead?",
+      "contentPath": "book/book-028.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "principal-agent-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-029",
+      "title": "The Market Failure · 029",
+      "summary": "When do markets fail to allocate resources in ways that serve society well?",
+      "contentPath": "book/book-029.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "market-failure",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-030",
+      "title": "The Paradox of Thrift · 030",
+      "summary": "Why can everyone saving more at once sometimes weaken the wider economy?",
+      "contentPath": "book/book-030.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "economics",
+      "taxonomyIds": [
+        "economics",
+        "wealth"
+      ],
+      "tags": [
+        "Evergreen",
+        "Economics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "paradox-of-thrift",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-031",
+      "title": "The One Person, One Vote Paradox · 031",
+      "summary": "Why doesn't equal voting power guarantee equal political influence?",
+      "contentPath": "book/book-031.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "governance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society & Power"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "one-person-one-vote-paradox",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-032",
+      "title": "The Meritocracy Myth · 032",
+      "summary": "How much of success comes from talent, effort, privilege, networks, and luck?",
+      "contentPath": "book/book-032.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "governance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society & Power"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "meritocracy-myth",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-033",
+      "title": "The Social Hierarchy · 033",
+      "summary": "Why do societies create status differences, and how do they persist?",
+      "contentPath": "book/book-033.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "governance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society & Power"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "social-hierarchy",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-034",
+      "title": "The Banana Democracy · 034",
+      "summary": "How can a country retain elections while democratic accountability weakens?",
+      "contentPath": "book/book-034.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "governance"
+      ],
+      "tags": [
+        "Trending",
+        "Society & Power"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "banana-democracy",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-035",
+      "title": "The Collective Action Problem · 035",
+      "summary": "Why do people struggle to act together even when cooperation benefits everyone?",
+      "contentPath": "book/book-035.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "governance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society & Power"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "collective-action-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-036",
+      "title": "The Social Contract · 036",
+      "summary": "What makes people accept rules, authority, and shared obligations?",
+      "contentPath": "book/book-036.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "governance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society & Power"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "social-contract",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-037",
+      "title": "The Representation Gap · 037",
+      "summary": "Why may elected representatives fail to reflect the needs of the people they represent?",
+      "contentPath": "book/book-037.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "governance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society & Power"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "representation-gap",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-038",
+      "title": "The Majority–Minority Problem · 038",
+      "summary": "How can majority rule coexist with protection for minority rights?",
+      "contentPath": "book/book-038.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "governance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society & Power"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "majority-minority-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-039",
+      "title": "The Power of Institutions · 039",
+      "summary": "How do rules and organizations shape behavior beyond individual intentions?",
+      "contentPath": "book/book-039.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "governance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society & Power"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "power-of-institutions",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-040",
+      "title": "The Corruption Loop · 040",
+      "summary": "How can corruption weaken institutions and make further corruption easier?",
+      "contentPath": "book/book-040.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "governance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society & Power"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "corruption-loop",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-041",
+      "title": "The Network Effect of Power · 041",
+      "summary": "How do connections and relationships amplify access to influence?",
+      "contentPath": "book/book-041.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "power"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "network-effect-of-power",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-042",
+      "title": "The Public Goods Problem · 042",
+      "summary": "Why are essential shared services often difficult to fund through individual choices alone?",
+      "contentPath": "book/book-042.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "power"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "public-goods-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-043",
+      "title": "The Polarization Spiral · 043",
+      "summary": "How can disagreement turn into hostility between social or political groups?",
+      "contentPath": "book/book-043.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "power"
+      ],
+      "tags": [
+        "Trending",
+        "Society"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "polarization-spiral",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-044",
+      "title": "The Legitimacy Problem · 044",
+      "summary": "What makes people see authority as rightful rather than merely powerful?",
+      "contentPath": "book/book-044.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "power"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "legitimacy-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-045",
+      "title": "The Social Mobility Question · 045",
+      "summary": "What helps people move beyond the social and economic conditions into which they are born?",
+      "contentPath": "book/book-045.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "society",
+      "taxonomyIds": [
+        "society",
+        "power"
+      ],
+      "tags": [
+        "Evergreen",
+        "Society"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "social-mobility-question",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-046",
+      "title": "The Algorithmic Mirror · 046",
+      "summary": "Do algorithms reflect human preferences, or reshape them?",
+      "contentPath": "book/book-046.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge"
+      ],
+      "tags": [
+        "Trending",
+        "Technology"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "algorithmic-mirror",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-047",
+      "title": "The Automation Paradox · 047",
+      "summary": "Why can technology make work more productive while creating new dependencies and risks?",
+      "contentPath": "book/book-047.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge"
+      ],
+      "tags": [
+        "Trending",
+        "Technology"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "automation-paradox",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-048",
+      "title": "The AI Alignment Problem · 048",
+      "summary": "How do we ensure AI systems pursue what humans actually value?",
+      "contentPath": "book/book-048.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge"
+      ],
+      "tags": [
+        "Trending",
+        "Technology"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "ai-alignment-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-049",
+      "title": "The Knowledge Graph · 049",
+      "summary": "How are ideas connected, and how can those connections improve learning?",
+      "contentPath": "book/book-049.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge"
+      ],
+      "tags": [
+        "Trending",
+        "Technology"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "knowledge-graph",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-050",
+      "title": "The Information Overload Paradox · 050",
+      "summary": "Why does having access to more information not necessarily make us wiser?",
+      "contentPath": "book/book-050.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge"
+      ],
+      "tags": [
+        "Trending",
+        "Technology"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "information-overload-paradox",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-051",
+      "title": "The Black Box Problem · 051",
+      "summary": "How can we trust a system when its decisions are difficult to explain?",
+      "contentPath": "book/book-051.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge",
+        "digital-systems"
+      ],
+      "tags": [
+        "Trending",
+        "AI & Technology",
+        "Digital Knowledge"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "black-box-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-052",
+      "title": "The Digital Divide · 052",
+      "summary": "How does unequal access to technology create unequal opportunities?",
+      "contentPath": "book/book-052.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge",
+        "digital-systems"
+      ],
+      "tags": [
+        "Trending",
+        "AI & Technology",
+        "Digital Knowledge"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "digital-divide",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-053",
+      "title": "The Privacy–Convenience Trade-off · 053",
+      "summary": "What do we give up when we exchange personal data for convenience?",
+      "contentPath": "book/book-053.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge",
+        "digital-systems"
+      ],
+      "tags": [
+        "Trending",
+        "AI & Technology",
+        "Digital Knowledge"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "privacy-convenience-trade-off",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-054",
+      "title": "The Feedback Loop · 054",
+      "summary": "How can a system’s outputs change the inputs that shape its future behavior?",
+      "contentPath": "book/book-054.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge",
+        "digital-systems"
+      ],
+      "tags": [
+        "Trending",
+        "AI & Technology",
+        "Digital Knowledge"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "feedback-loop",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-055",
+      "title": "The Goodhart’s Law · 055",
+      "summary": "Why does a measure often become less useful when it becomes a target?",
+      "contentPath": "book/book-055.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge",
+        "digital-systems"
+      ],
+      "tags": [
+        "Trending",
+        "AI & Technology",
+        "Digital Knowledge"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "goodhart-s-law",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-056",
+      "title": "The Recommender Trap · 056",
+      "summary": "How can personalized recommendations narrow what we discover?",
+      "contentPath": "book/book-056.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge",
+        "digital-systems"
+      ],
+      "tags": [
+        "Trending",
+        "AI & Technology",
+        "Digital Knowledge"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "recommender-trap",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-057",
+      "title": "The Open Source Paradox · 057",
+      "summary": "How can shared technology create enormous value while its maintenance remains difficult to fund?",
+      "contentPath": "book/book-057.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge",
+        "digital-systems"
+      ],
+      "tags": [
+        "Trending",
+        "AI & Technology",
+        "Digital Knowledge"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "open-source-paradox",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-058",
+      "title": "The Data Bias Problem · 058",
+      "summary": "How can biased data produce unfair or unreliable automated decisions?",
+      "contentPath": "book/book-058.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge",
+        "digital-systems"
+      ],
+      "tags": [
+        "Trending",
+        "AI & Technology",
+        "Digital Knowledge"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "data-bias-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-059",
+      "title": "The Network Effect · 059",
+      "summary": "Why do some platforms become more valuable as more people use them?",
+      "contentPath": "book/book-059.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge",
+        "digital-systems"
+      ],
+      "tags": [
+        "Trending",
+        "AI & Technology",
+        "Digital Knowledge"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "network-effect",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-060",
+      "title": "The Digital Memory Problem · 060",
+      "summary": "What changes when information can be stored, searched, copied, and retrieved indefinitely?",
+      "contentPath": "book/book-060.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "technology",
+      "taxonomyIds": [
+        "technology",
+        "ai-knowledge",
+        "digital-systems"
+      ],
+      "tags": [
+        "Trending",
+        "AI & Technology",
+        "Digital Knowledge"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "digital-memory-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-061",
+      "title": "The Freedom Paradox · 061",
+      "summary": "Can having more choices sometimes make us less free?",
+      "contentPath": "book/book-061.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics",
+        "future-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy & Ethics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "freedom-paradox",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-062",
+      "title": "The Trolley Problem · 062",
+      "summary": "When every available choice causes harm, how should we decide?",
+      "contentPath": "book/book-062.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics",
+        "future-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy & Ethics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "trolley-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-063",
+      "title": "The Progress Paradox · 063",
+      "summary": "Why can technological and economic progress coexist with new forms of suffering?",
+      "contentPath": "book/book-063.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics",
+        "future-systems"
+      ],
+      "tags": [
+        "Trending",
+        "Philosophy & Ethics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "progress-paradox",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-064",
+      "title": "The Prisoner’s Dilemma · 064",
+      "summary": "Why can rational individuals produce irrational collective outcomes?",
+      "contentPath": "book/book-064.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics",
+        "future-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy & Ethics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "prisoner-s-dilemma",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-065",
+      "title": "The Meaning of Life · 065",
+      "summary": "How do we decide what makes a life valuable, meaningful, and worth living?",
+      "contentPath": "book/book-065.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics",
+        "future-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy & Ethics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "meaning-of-life",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-066",
+      "title": "The Ship of Theseus · 066",
+      "summary": "When every part of something changes, in what sense does it remain the same thing?",
+      "contentPath": "book/book-066.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics",
+        "future-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy & Ethics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "ship-of-theseus",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-067",
+      "title": "The Problem of Other Minds · 067",
+      "summary": "How can we know what another person is experiencing internally?",
+      "contentPath": "book/book-067.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics",
+        "future-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy & Ethics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "problem-of-other-minds",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-068",
+      "title": "The Ethics of Intention · 068",
+      "summary": "Should actions be judged by their motives, their consequences, or both?",
+      "contentPath": "book/book-068.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics",
+        "future-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy & Ethics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "ethics-of-intention",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-069",
+      "title": "The Future Generations Problem · 069",
+      "summary": "What duties do people today have toward people who do not yet exist?",
+      "contentPath": "book/book-069.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics",
+        "future-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy & Ethics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "future-generations-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-070",
+      "title": "The Paradox of Tolerance · 070",
+      "summary": "How should an open society respond to movements that seek to destroy openness?",
+      "contentPath": "book/book-070.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics",
+        "future-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy & Ethics"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "paradox-of-tolerance",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-071",
+      "title": "The Free Will Debate · 071",
+      "summary": "How much control do we have over choices shaped by biology and environment?",
+      "contentPath": "book/book-071.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "free-will-debate",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-072",
+      "title": "The Knowledge Problem · 072",
+      "summary": "How can decisions be made when relevant knowledge is dispersed across many people?",
+      "contentPath": "book/book-072.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "knowledge-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-073",
+      "title": "The Unintended Consequences · 073",
+      "summary": "Why do actions intended to solve a problem sometimes create new problems?",
+      "contentPath": "book/book-073.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "unintended-consequences",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-074",
+      "title": "The Precautionary Principle · 074",
+      "summary": "When should society act to prevent a serious risk despite uncertainty?",
+      "contentPath": "book/book-074.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "precautionary-principle",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-075",
+      "title": "The Good Life · 075",
+      "summary": "What does it mean to live well beyond wealth, status, or pleasure?",
+      "contentPath": "book/book-075.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "philosophy",
+      "taxonomyIds": [
+        "philosophy",
+        "ethics"
+      ],
+      "tags": [
+        "Evergreen",
+        "Philosophy"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "good-life",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-076",
+      "title": "The Trust Paradox · 076",
+      "summary": "Why is trust essential for cooperation yet vulnerable to betrayal?",
+      "contentPath": "book/book-076.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "culture",
+      "taxonomyIds": [
+        "culture",
+        "identity",
+        "relationships"
+      ],
+      "tags": [
+        "Evergreen",
+        "Culture & Identity"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "trust-paradox",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-077",
+      "title": "The Empathy Gap · 077",
+      "summary": "Why is it difficult to understand feelings and needs we have not experienced ourselves?",
+      "contentPath": "book/book-077.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "culture",
+      "taxonomyIds": [
+        "culture",
+        "identity",
+        "relationships"
+      ],
+      "tags": [
+        "Evergreen",
+        "Culture & Identity"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "empathy-gap",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-078",
+      "title": "The Identity Loop · 078",
+      "summary": "How do our identities shape our choices, and how do our choices reinforce identity?",
+      "contentPath": "book/book-078.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "culture",
+      "taxonomyIds": [
+        "culture",
+        "identity",
+        "relationships"
+      ],
+      "tags": [
+        "Evergreen",
+        "Culture & Identity"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "identity-loop",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-079",
+      "title": "The Belonging Need · 079",
+      "summary": "Why do people seek group acceptance even when it conflicts with personal judgment?",
+      "contentPath": "book/book-079.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "culture",
+      "taxonomyIds": [
+        "culture",
+        "identity",
+        "relationships"
+      ],
+      "tags": [
+        "Evergreen",
+        "Culture & Identity"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "belonging-need",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-080",
+      "title": "The Cultural Lens · 080",
+      "summary": "How does culture influence what people consider normal, valuable, or true?",
+      "contentPath": "book/book-080.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "culture",
+      "taxonomyIds": [
+        "culture",
+        "identity",
+        "relationships"
+      ],
+      "tags": [
+        "Evergreen",
+        "Culture & Identity"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "cultural-lens",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-081",
+      "title": "The Language Boundary · 081",
+      "summary": "How does language shape what we notice, communicate, and understand?",
+      "contentPath": "book/book-081.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "culture",
+      "taxonomyIds": [
+        "culture",
+        "communication"
+      ],
+      "tags": [
+        "Evergreen",
+        "Culture"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "language-boundary",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-082",
+      "title": "The Generational Divide · 082",
+      "summary": "Why do people from different generations interpret the same world differently?",
+      "contentPath": "book/book-082.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "culture",
+      "taxonomyIds": [
+        "culture",
+        "communication"
+      ],
+      "tags": [
+        "Evergreen",
+        "Culture"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "generational-divide",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-083",
+      "title": "The Reputation Economy · 083",
+      "summary": "How does social reputation influence behavior when formal rules are weak?",
+      "contentPath": "book/book-083.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "culture",
+      "taxonomyIds": [
+        "culture",
+        "communication"
+      ],
+      "tags": [
+        "Trending",
+        "Culture"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "reputation-economy",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-084",
+      "title": "The Bystander Effect · 084",
+      "summary": "Why may people be less likely to help when others are present?",
+      "contentPath": "book/book-084.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "culture",
+      "taxonomyIds": [
+        "culture",
+        "communication"
+      ],
+      "tags": [
+        "Evergreen",
+        "Culture"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "bystander-effect",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-085",
+      "title": "The Conflict Spiral · 085",
+      "summary": "How can small misunderstandings escalate into lasting conflict?",
+      "contentPath": "book/book-085.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "culture",
+      "taxonomyIds": [
+        "culture",
+        "communication"
+      ],
+      "tags": [
+        "Evergreen",
+        "Culture"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "conflict-spiral",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-086",
+      "title": "The Prevention Paradox · 086",
+      "summary": "Why can actions that help a whole population seem to offer little benefit to each individual?",
+      "contentPath": "book/book-086.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "environment",
+      "taxonomyIds": [
+        "environment",
+        "health-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Environment & Health"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "prevention-paradox",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-087",
+      "title": "The Public Health Trade-off · 087",
+      "summary": "How should societies balance individual choice and collective protection?",
+      "contentPath": "book/book-087.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "environment",
+      "taxonomyIds": [
+        "environment",
+        "health-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Environment & Health"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "public-health-trade-off",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-088",
+      "title": "The Climate Coordination Problem · 088",
+      "summary": "Why is it difficult for countries to cooperate on a shared environmental threat?",
+      "contentPath": "book/book-088.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "environment",
+      "taxonomyIds": [
+        "environment",
+        "health-systems"
+      ],
+      "tags": [
+        "Trending",
+        "Environment & Health"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "climate-coordination-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-089",
+      "title": "The Rebound Effect · 089",
+      "summary": "Why can efficiency improvements sometimes lead to more total consumption?",
+      "contentPath": "book/book-089.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "environment",
+      "taxonomyIds": [
+        "environment",
+        "health-systems"
+      ],
+      "tags": [
+        "Trending",
+        "Environment & Health"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "rebound-effect",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-090",
+      "title": "The Carrying Capacity · 090",
+      "summary": "How many people or activities can an environment sustain over time?",
+      "contentPath": "book/book-090.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "environment",
+      "taxonomyIds": [
+        "environment",
+        "health-systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Environment & Health"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "carrying-capacity",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-091",
+      "title": "The Resilience Principle · 091",
+      "summary": "What helps a person or system recover from shocks without collapsing?",
+      "contentPath": "book/book-091.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "environment",
+      "taxonomyIds": [
+        "environment",
+        "systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Human Systems"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "resilience-principle",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-092",
+      "title": "The Risk Compensation Effect · 092",
+      "summary": "Why can people take greater risks when they feel safer?",
+      "contentPath": "book/book-092.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "environment",
+      "taxonomyIds": [
+        "environment",
+        "systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Human Systems"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "risk-compensation-effect",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-093",
+      "title": "The Sleep–Performance Loop · 093",
+      "summary": "How does sleep influence attention, decisions, health, and productivity?",
+      "contentPath": "book/book-093.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "environment",
+      "taxonomyIds": [
+        "environment",
+        "systems"
+      ],
+      "tags": [
+        "Evergreen",
+        "Human Systems"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "sleep-performance-loop",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-094",
+      "title": "The Urban Density Trade-off · 094",
+      "summary": "How can cities create opportunity while increasing pressure on space and services?",
+      "contentPath": "book/book-094.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "environment",
+      "taxonomyIds": [
+        "environment",
+        "systems"
+      ],
+      "tags": [
+        "Trending",
+        "Human Systems"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "urban-density-trade-off",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-095",
+      "title": "The Waste Problem · 095",
+      "summary": "Why is it often easier to produce waste than to prevent or recover it?",
+      "contentPath": "book/book-095.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "environment",
+      "taxonomyIds": [
+        "environment",
+        "systems"
+      ],
+      "tags": [
+        "Trending",
+        "Human Systems"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "waste-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-096",
+      "title": "The Learning Transfer Problem · 096",
+      "summary": "Why can knowing something in a lesson fail to help us use it in real life?",
+      "contentPath": "book/book-096.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "growth",
+      "taxonomyIds": [
+        "growth",
+        "learning",
+        "performance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Learning & Growth"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "learning-transfer-problem",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-097",
+      "title": "The Expertise Trap · 097",
+      "summary": "When can experience improve judgment, and when can it create blind spots?",
+      "contentPath": "book/book-097.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "growth",
+      "taxonomyIds": [
+        "growth",
+        "learning",
+        "performance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Learning & Growth"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "expertise-trap",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-098",
+      "title": "The Deliberate Practice Principle · 098",
+      "summary": "What distinguishes purposeful practice from simply repeating an activity?",
+      "contentPath": "book/book-098.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "growth",
+      "taxonomyIds": [
+        "growth",
+        "learning",
+        "performance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Learning & Growth"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "deliberate-practice-principle",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-099",
+      "title": "The Motivation Gap · 099",
+      "summary": "Why do intentions often fail to become consistent action?",
+      "contentPath": "book/book-099.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "growth",
+      "taxonomyIds": [
+        "growth",
+        "learning",
+        "performance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Learning & Growth"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "motivation-gap",
+          "role": "explains"
+        }
+      ]
+    },
+    {
+      "id": "book-100",
+      "title": "The Feedback Paradox · 100",
+      "summary": "Why can feedback improve performance in some situations and damage it in others?",
+      "contentPath": "book/book-100.html",
+      "revision": 1,
+      "version": "1.0.0",
+      "status": "published",
+      "readingMinutes": 5,
+      "primaryTaxonomyId": "growth",
+      "taxonomyIds": [
+        "growth",
+        "learning",
+        "performance"
+      ],
+      "tags": [
+        "Evergreen",
+        "Learning & Growth"
+      ],
+      "conceptLinks": [
+        {
+          "conceptId": "feedback-paradox",
+          "role": "explains"
+        }
+      ]
     }
   ],
   "taxonomy": [
