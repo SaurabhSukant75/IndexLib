@@ -38,106 +38,98 @@ export const ReaderToolbar: React.FC<ReaderToolbarProps> = ({
   onBack,
 }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '12px 20px',
-        background: '#fff',
-        borderBottom: '1px solid var(--color-line)',
-        flexWrap: 'wrap',
-        gap: 12,
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+    <div className="reader-toolbar-container">
+      <div className="reader-toolbar-left">
         {onBack && (
-          <button className="btn" onClick={onBack} title="Return to library">
-            ← Library
+          <button className="btn reader-back-btn" onClick={onBack} title="Return to library">
+            ← <span className="reader-btn-text">Library</span>
           </button>
         )}
-        <div>
-          <strong style={{ fontSize: '1.05rem', display: 'block' }}>{title}</strong>
-          <small style={{ color: 'var(--color-muted)', fontSize: '0.78rem' }}>
-            {isImported ? 'Private HTML import · Local Device' : `Section: ${currentPageId || 'Introduction'}`}
+        <div className="reader-title-box">
+          <strong className="reader-book-title">{title}</strong>
+          <small className="reader-page-sub">
+            {isImported ? 'Private Import · Local' : `Sec: ${currentPageId || 'Introduction'}`}
           </small>
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div className="reader-toolbar-actions">
         {/* Zoom Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginRight: 8 }}>
+        <div className="reader-zoom-group">
           <button
-            className="btn"
-            style={{ padding: '4px 8px', fontSize: '0.8rem' }}
+            className="btn reader-icon-btn"
             onClick={() => onZoomChange(Math.max(0.85, zoomLevel - 0.1))}
             title="Decrease font size"
+            aria-label="Decrease font size"
           >
             A-
           </button>
-          <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)', minWidth: 40, textAlign: 'center' }}>
+          <span className="reader-zoom-text">
             {Math.round(zoomLevel * 100)}%
           </span>
           <button
-            className="btn"
-            style={{ padding: '4px 8px', fontSize: '0.8rem' }}
+            className="btn reader-icon-btn"
             onClick={() => onZoomChange(Math.min(1.3, zoomLevel + 0.1))}
             title="Increase font size"
+            aria-label="Increase font size"
           >
             A+
           </button>
         </div>
 
         <button
-          className="btn"
+          className="btn reader-action-btn"
           onClick={onOpenToc}
           title="Open Table of Contents"
         >
-          ☰ Contents
+          ☰ <span className="reader-btn-text">Contents</span>
         </button>
 
         {onToggleFullscreen && (
           <button
-            className={`btn ${isFullscreen ? 'btn-primary' : ''}`}
+            className={`btn reader-action-btn ${isFullscreen ? 'btn-primary' : ''}`}
             onClick={onToggleFullscreen}
             title={isFullscreen ? 'Exit Full Screen' : 'Maximize Full Screen'}
           >
-            {isFullscreen ? '⤓ Exit Full' : '⛶ Full Screen'}
+            {isFullscreen ? '⤓' : '⛶'} <span className="reader-btn-text">{isFullscreen ? 'Exit' : 'Full'}</span>
           </button>
         )}
 
         {onToggleBookmark && (
           <button
-            className="btn"
+            className="btn reader-action-btn"
             onClick={onToggleBookmark}
             style={{ color: isBookmarked ? 'var(--color-green)' : 'inherit' }}
+            title={isBookmarked ? 'Bookmarked' : 'Add Bookmark'}
           >
-            {isBookmarked ? '★ Bookmarked' : '☆ Bookmark'}
+            {isBookmarked ? '★' : '☆'} <span className="reader-btn-text">{isBookmarked ? 'Marked' : 'Bookmark'}</span>
           </button>
         )}
 
         {onToggleSave && (
           <button
-            className="btn"
+            className="btn reader-action-btn reader-hide-small"
             onClick={onToggleSave}
             style={{ color: isSaved ? 'var(--color-green)' : 'inherit' }}
+            title={isSaved ? 'Saved in library' : 'Save to library'}
           >
-            {isSaved ? '★ Saved' : '☆ Save'}
+            {isSaved ? '★' : '☆'} <span className="reader-btn-text">{isSaved ? 'Saved' : 'Save'}</span>
           </button>
         )}
 
         {onToggleComplete && (
           <button
-            className={`btn ${isCompleted ? 'btn-primary' : ''}`}
+            className={`btn reader-action-btn ${isCompleted ? 'btn-primary' : ''}`}
             onClick={onToggleComplete}
+            title={isCompleted ? 'Finished reading' : 'Mark as completed'}
           >
-            {isCompleted ? '✓ Completed' : 'Mark Complete'}
+            {isCompleted ? '✓' : '○'} <span className="reader-btn-text">{isCompleted ? 'Done' : 'Complete'}</span>
           </button>
         )}
 
         {onShare && (
-          <button className="btn" onClick={onShare} title="Copy direct link">
-            Share ⎘
+          <button className="btn reader-action-btn" onClick={onShare} title="Copy link" aria-label="Share">
+            ⎘ <span className="reader-btn-text">Share</span>
           </button>
         )}
       </div>

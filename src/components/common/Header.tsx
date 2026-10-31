@@ -11,26 +11,28 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ user, onToggleSidebar, isSidebarCollapsed }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchExpandedMobile, setIsSearchExpandedMobile] = useState(false);
   const navigate = useNavigate();
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchExpandedMobile(false);
     }
   };
 
   return (
     <header className="app-header">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div className="header-brand-group">
         {onToggleSidebar && (
           <button
             className="sidebar-burger-btn"
             onClick={onToggleSidebar}
-            title={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            aria-label="Toggle sidebar menu"
+            title={isSidebarCollapsed ? 'Open navigation menu' : 'Close navigation menu'}
+            aria-label="Toggle navigation menu"
           >
-            ☰
+            {isSidebarCollapsed ? '☰' : '✕'}
           </button>
         )}
         <Link to="/" className="brand">
@@ -39,29 +41,52 @@ export const Header: React.FC<HeaderProps> = ({ user, onToggleSidebar, isSidebar
         </Link>
       </div>
 
-      <form className="search-bar" onSubmit={handleSearchSubmit}>
+      <form
+        className={`search-bar ${isSearchExpandedMobile ? 'search-bar-expanded' : ''}`}
+        onSubmit={handleSearchSubmit}
+      >
         <span className="search-icon">🔍</span>
         <input
           type="text"
           className="search-input"
-          placeholder="Search visual books, concepts, topics..."
+          placeholder="Search books, concepts..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+        {isSearchExpandedMobile && (
+          <button
+            type="button"
+            className="search-close-mobile-btn"
+            onClick={() => setIsSearchExpandedMobile(false)}
+            aria-label="Close search"
+          >
+            ✕
+          </button>
+        )}
       </form>
 
       <div className="header-actions">
+        <button
+          type="button"
+          className="search-toggle-mobile-btn"
+          onClick={() => setIsSearchExpandedMobile(prev => !prev)}
+          aria-label="Toggle search input"
+          title="Search"
+        >
+          🔍
+        </button>
+
         {user?.role === 'admin' && (
           <>
-            <Link to="/publish" className="btn btn-primary">
-              ＋ Publish Book
+            <Link to="/publish" className="btn btn-primary header-admin-btn">
+              ＋ Publish
             </Link>
-            <Link to="/admin" className="badge badge-warning" style={{ textDecoration: 'none' }}>
-              Admin Moderation
+            <Link to="/admin" className="badge badge-warning header-admin-badge" style={{ textDecoration: 'none' }}>
+              Admin
             </Link>
           </>
         )}
-        <Link to="/account" className="btn">
+        <Link to="/account" className="btn header-auth-btn">
           {user ? `👤 ${user.username}` : 'Sign In'}
         </Link>
       </div>

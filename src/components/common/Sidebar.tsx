@@ -8,6 +8,7 @@ interface SidebarProps {
   isAdmin?: boolean;
   isCollapsed?: boolean;
   onToggleCollapse?: () => void;
+  onCloseMobile?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -16,14 +17,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isAdmin = false,
   isCollapsed = false,
   onToggleCollapse,
+  onCloseMobile,
 }) => {
   // Vertical collapse/expand state for sidebar sections
   const [isExploreOpen, setIsExploreOpen] = useState(true);
   const [isDesignStudioOpen, setIsDesignStudioOpen] = useState(true);
   const [isAdminOpen, setIsAdminOpen] = useState(true);
 
+  const handleNavClick = () => {
+    if (onCloseMobile) {
+      onCloseMobile();
+    }
+  };
+
   return (
-    <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+    <aside className={`sidebar ${isCollapsed ? 'collapsed' : 'mobile-open'}`}>
       <div className="sidebar-header-row">
         {!isCollapsed && <span className="sidebar-brand-sub">Navigation</span>}
         <button
@@ -32,7 +40,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
-          {isCollapsed ? '❯' : '❮'}
+          {isCollapsed ? '❯' : '✕'}
         </button>
       </div>
 
@@ -53,6 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <li>
               <NavLink
                 to="/concepts"
+                onClick={handleNavClick}
                 className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
                 title="Concepts (Evergreen & Trending)"
               >
@@ -64,6 +73,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <li>
               <NavLink
                 to="/paths"
+                onClick={handleNavClick}
                 className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
                 title="Learning Paths"
               >
@@ -75,6 +85,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <li>
               <NavLink
                 to="/training"
+                onClick={handleNavClick}
                 className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
                 title="Creator Training"
               >
@@ -103,6 +114,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <li>
               <NavLink
                 to="/publish"
+                onClick={handleNavClick}
                 className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
                 title="Publish a Book"
               >
@@ -113,6 +125,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <li>
               <NavLink
                 to="/templates"
+                onClick={handleNavClick}
                 className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
                 title="Template Catalog"
               >
@@ -130,6 +143,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <li>
             <NavLink
               to="/library?tab=history"
+              onClick={handleNavClick}
               className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
               title="My Space"
             >
@@ -161,6 +175,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <li>
                 <NavLink
                   to="/admin"
+                  onClick={handleNavClick}
                   className={({ isActive }) => `nav-item-link ${isActive ? 'active' : ''}`}
                   title="Admin Moderation"
                 >

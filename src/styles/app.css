@@ -773,3 +773,330 @@ main.main-viewport {
   border-radius: 0 !important;
   background: #111 !important;
 }
+
+/* =========================================================
+   RESPONSIVE & MOBILE (iPhone 13 & Touch Devices)
+   ========================================================= */
+
+/* Mobile Backdrop for Drawer Sidebar */
+.sidebar-backdrop {
+  display: none;
+}
+
+.search-toggle-mobile-btn,
+.search-close-mobile-btn {
+  display: none;
+}
+
+.header-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Reader Toolbar Styles */
+.reader-toolbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: #fff;
+  border-bottom: 1px solid var(--color-line);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.reader-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.reader-title-box {
+  min-width: 0;
+}
+
+.reader-book-title {
+  font-size: 1rem;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+.reader-page-sub {
+  color: var(--color-muted);
+  font-size: 0.76rem;
+  display: block;
+}
+
+.reader-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.reader-zoom-group {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-right: 4px;
+}
+
+.reader-icon-btn {
+  padding: 4px 7px;
+  font-size: 0.78rem;
+}
+
+.reader-zoom-text {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  min-width: 34px;
+  text-align: center;
+}
+
+.reader-action-btn {
+  padding: 6px 10px;
+  font-size: 0.82rem;
+}
+
+/* Reader main viewport takes zero side-padding for full immersion */
+.reader-main-viewport {
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tablets and Mobile breakpoint (<= 768px) */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 56px;
+  }
+
+  header.app-header {
+    padding: 0 12px;
+  }
+
+  .brand-title {
+    font-size: 1.15rem;
+  }
+
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+    font-size: 0.95rem;
+  }
+
+  /* Search bar collapsible logic */
+  .search-toggle-mobile-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .search-bar {
+    display: none;
+    margin: 0;
+  }
+
+  .search-bar.search-bar-expanded {
+    display: flex;
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 6px;
+    bottom: 6px;
+    z-index: 120;
+    max-width: none;
+    align-items: center;
+    background: var(--color-surface);
+    border-radius: var(--radius-sm);
+  }
+
+  .search-bar.search-bar-expanded .search-input {
+    padding-right: 36px;
+    height: 100%;
+  }
+
+  .search-close-mobile-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--color-muted);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .header-admin-btn,
+  .header-admin-badge {
+    display: none !important;
+  }
+
+  .header-auth-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  /* Sidebar transformed into off-canvas drawer */
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 998;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  aside.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 270px;
+    z-index: 999;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+    transform: translateX(0);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 100vh;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 16px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
+  }
+
+  aside.sidebar.collapsed {
+    transform: translateX(-100%);
+    width: 270px;
+  }
+
+  /* Main viewport takes full width without sidebar squeeze */
+  .app-container {
+    display: block;
+    width: 100%;
+  }
+
+  main.main-viewport {
+    padding: 16px 14px;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Comic Hero on mobile */
+  .comic-hero {
+    padding: 20px 16px;
+    border-width: 2px;
+    box-shadow: 4px 4px 0 var(--color-ink);
+  }
+
+  .comic-hero-title {
+    font-size: 1.55rem;
+    line-height: 1.15;
+  }
+
+  .comic-hero-speech {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+
+  .comic-hero-actions {
+    gap: 8px;
+  }
+
+  .comic-btn {
+    padding: 8px 14px;
+    font-size: 0.78rem;
+    width: 100%;
+    text-align: center;
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+
+  .comic-book-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .page-title {
+    font-size: 1.7rem;
+  }
+
+  .page-lede {
+    font-size: 0.95rem;
+  }
+
+  /* Reader Toolbar on mobile (iPhone 13 portrait & landscape) */
+  .reader-toolbar-container {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .reader-book-title {
+    max-width: 160px;
+    font-size: 0.9rem;
+  }
+
+  .reader-hide-small {
+    display: none !important;
+  }
+
+  .reader-btn-text {
+    display: none;
+  }
+
+  .reader-action-btn,
+  .reader-back-btn {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+
+  .reader-zoom-group {
+    margin-right: 0;
+  }
+}
+
+/* Small mobile devices <= 480px (iPhone portrait) */
+@media (max-width: 480px) {
+  .comic-chips-cloud {
+    gap: 6px;
+  }
+
+  .comic-chip {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+
+  .comic-shelf-filter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .comic-filter-tags {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
