@@ -3,91 +3,105 @@ import { Link } from 'react-router-dom';
 
 export const HomeView: React.FC = () => {
   return (
-    <div className="comic-homepage-wrapper">
+    <div className="home-view-wrapper">
       {/* =========================================================
-          HERO SECTION: COOL CHEWING LLAMA WITH KALA CHASMA
+          HERO SECTION: AI-POWERED DIGITAL WEB LIBRARY
           ========================================================= */}
-      <section className="comic-hero-llama-card">
-        <div className="comic-hero-grid">
-          {/* Left Text & Actions */}
-          <div className="comic-hero-intro">
-            <p className="comic-hero-description-lead">
-              IndexLib is an open-source visual web library and authoring platform for short, structured, multi-page HTML books. It combines hierarchical taxonomy exploration, a semantic concept knowledge graph, curated learning paths, an offline-first private library, and sandboxed interactive reading.
-            </p>
+      <section className="home-hero-section">
+        {/* Top Badges */}
+        <div className="home-badge-row">
+          <span className="home-badge-ai">⚡ AI-POWERED VISUAL LIBRARY</span>
+          <span className="home-badge-version">v2.0 · 100 CONCEPTS</span>
+        </div>
 
-            <div className="comic-hero-buttons">
-              <Link to="/concepts" className="btn comic-action-btn comic-btn-lime">
-                1) LEARN →
-              </Link>
-              <Link to="/reels" className="btn comic-action-btn comic-btn-blue">
-                2) SCROLL ➔
-              </Link>
-            </div>
+        {/* Main Title */}
+        <h1 className="home-hero-title">
+          The Open Digital Library for Visual Mini-Books.
+        </h1>
+
+        {/* Lead Text (Strictly as specified by user) */}
+        <p className="home-hero-lead">
+          IndexLib is an open-source visual web library and authoring platform for short, structured, multi-page HTML books.
+        </p>
+
+        {/* Action Buttons */}
+        <div className="home-hero-actions">
+          <Link to="/concepts" className="btn home-btn-primary">
+            1) LEARN CONCEPTS →
+          </Link>
+          <Link to="/reels" className="btn home-btn-secondary">
+            2) SCROLL REELS ➔
+          </Link>
+        </div>
+
+        {/* Interactive Feature Pills Highlight */}
+        <div className="home-features-grid">
+          <div className="home-feature-card">
+            <span className="home-feature-badge">AI ARCHITECTURE</span>
+            <h3>100 Index Dictionaries</h3>
+            <p>Every concept is synthesized into an illustrated, structured multi-page mini-book.</p>
           </div>
-
-          {/* Right Mascot: Cool Chewing Llama with Sunglasses */}
-          <div className="comic-mascot-showcase">
-            <div className="comic-speech-bubble">
-              "Chew on ideas, not just gum! Tap Learn or Scroll to begin."
-            </div>
-
-            <div className="comic-llama-stage">
-              <svg
-                viewBox="0 0 240 240"
-                className="comic-llama-svg"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Llama Back Hair Tufts */}
-                <ellipse cx="120" cy="130" rx="48" ry="65" fill="#fdfcf0" stroke="#20241f" strokeWidth="4" />
-                <path d="M 85 90 Q 70 70 80 50 Q 95 65 92 88" fill="#fdfcf0" stroke="#20241f" strokeWidth="4" />
-                <path d="M 155 90 Q 170 70 160 50 Q 145 65 148 88" fill="#fdfcf0" stroke="#20241f" strokeWidth="4" />
-
-                {/* Ear Insides */}
-                <path d="M 83 75 Q 77 60 84 55 Q 89 65 87 75" fill="#ffb99d" />
-                <path d="M 157 75 Q 163 60 156 55 Q 151 65 153 75" fill="#ffb99d" />
-
-                {/* Fluffy Head */}
-                <circle cx="120" cy="110" r="42" fill="#fffef7" stroke="#20241f" strokeWidth="4" />
-                <circle cx="100" cy="85" r="14" fill="#fffef7" stroke="#20241f" strokeWidth="3" />
-                <circle cx="120" cy="78" r="16" fill="#fffef7" stroke="#20241f" strokeWidth="3" />
-                <circle cx="140" cy="85" r="14" fill="#fffef7" stroke="#20241f" strokeWidth="3" />
-
-                {/* Kala Chasma (Iconic Cool Black Sunglasses) */}
-                <rect x="85" y="102" width="32" height="20" rx="5" fill="#111" stroke="#20241f" strokeWidth="3" />
-                <rect x="123" y="102" width="32" height="20" rx="5" fill="#111" stroke="#20241f" strokeWidth="3" />
-                <line x1="117" y1="110" x2="123" y2="110" stroke="#20241f" strokeWidth="4" />
-                <line x1="85" y1="108" x2="75" y2="104" stroke="#20241f" strokeWidth="4" />
-                <line x1="155" y1="108" x2="165" y2="104" stroke="#20241f" strokeWidth="4" />
-                {/* Lens Reflections */}
-                <line x1="89" y1="106" x2="102" y2="118" stroke="#00e5ff" strokeWidth="2.5" strokeLinecap="round" />
-                <line x1="127" y1="106" x2="140" y2="118" stroke="#00e5ff" strokeWidth="2.5" strokeLinecap="round" />
-
-                {/* Llama Muzzle */}
-                <ellipse cx="120" cy="138" rx="20" ry="16" fill="#f4ebd9" stroke="#20241f" strokeWidth="3" />
-                <ellipse cx="114" cy="133" rx="2.5" ry="3.5" fill="#20241f" />
-                <ellipse cx="126" cy="133" rx="2.5" ry="3.5" fill="#20241f" />
-
-                {/* Animated Chewing Bubblegum */}
-                <circle cx="132" cy="144" r="14" className="llama-bubblegum" />
-                <circle cx="128" cy="140" r="4" fill="#fff" opacity="0.6" />
-
-                {/* Gold Chain / Cool Collar */}
-                <path d="M 98 165 Q 120 180 142 165" fill="none" stroke="#eab308" strokeWidth="5" strokeLinecap="round" />
-                <circle cx="120" cy="174" r="6" fill="#eab308" stroke="#20241f" strokeWidth="2" />
-              </svg>
-            </div>
+          <div className="home-feature-card">
+            <span className="home-feature-badge">SANDBOXED ENGINE</span>
+            <h3>Interactive HTML Canvas</h3>
+            <p>Read rich web books with live interactive scripts, diagrams, and responsive touch layout.</p>
+          </div>
+          <div className="home-feature-card">
+            <span className="home-feature-badge">OFFLINE-FIRST</span>
+            <h3>Private Local Vault</h3>
+            <p>Reading progress, bookmarks, and private HTML book imports persist directly in your browser.</p>
           </div>
         </div>
       </section>
 
       {/* =========================================================
-          FOOTER (EXACT SPECIFIED TEXT ONLY)
+          INDUSTRY STANDARD PROFESSIONAL FOOTER
           ========================================================= */}
-      <footer className="comic-exact-footer">
-        <div className="comic-footer-container">
-          <p className="comic-footer-text">
-            IndexLib is an open-source visual web library and authoring platform for short, structured, multi-page HTML books. It combines hierarchical taxonomy exploration, a semantic concept knowledge graph, curated learning paths, an offline-first private library, and sandboxed interactive reading.
-          </p>
+      <footer className="home-site-footer">
+        <div className="home-footer-inner">
+          <div className="home-footer-brand">
+            <div className="home-footer-logo">
+              <span className="home-logo-box">IL</span>
+              <strong>IndexLib</strong>
+            </div>
+            <p className="home-footer-tagline">
+              Open-source visual web library and AI-assisted authoring platform for structured HTML mini-books.
+            </p>
+          </div>
+
+          <div className="home-footer-nav">
+            <div className="home-footer-col">
+              <h4>EXPLORE</h4>
+              <Link to="/concepts">100 Concepts</Link>
+              <Link to="/paths">Learning Paths</Link>
+              <Link to="/reels">Reel Discovery</Link>
+            </div>
+
+            <div className="home-footer-col">
+              <h4>STUDIO</h4>
+              <Link to="/publish">Publish a Book</Link>
+              <Link to="/templates">Template Catalog</Link>
+              <Link to="/training">Creator Practice</Link>
+            </div>
+
+            <div className="home-footer-col">
+              <h4>MY VAULT</h4>
+              <Link to="/library?tab=all">All Issues</Link>
+              <Link to="/library?tab=progress">In Progress</Link>
+              <Link to="/library?tab=history">History & Bookmarks</Link>
+              <Link to="/account">Reader Profile</Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="home-footer-bottom">
+          <p>© {new Date().getFullYear()} IndexLib. Open-Source AI-Powered Visual Web Platform.</p>
+          <div className="home-footer-links">
+            <a href="https://github.com/SaurabhSukant75/IndexLib" target="_blank" rel="noreferrer">
+              GitHub Repository
+            </a>
+            <Link to="/account">Account Sync</Link>
+          </div>
         </div>
       </footer>
     </div>

@@ -80,7 +80,7 @@ export const Layout: React.FC<LayoutProps> = ({
             />
           </>
         )}
-        <main className={`main-viewport ${isReaderRoute ? 'reader-main-viewport' : ''}`}>
+        <main className={`main-viewport ${isReaderRoute ? 'reader-main-viewport' : ''} ${isHomeRoute ? 'home-main-viewport' : ''}`}>
           {children}
         </main>
       </div>
