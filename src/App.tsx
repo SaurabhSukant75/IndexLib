@@ -22,17 +22,31 @@ export const App: React.FC = () => {
   const [toastMessage, setToastMessage] = useState<string>('');
 
   const refreshUser = async () => {
-    const profile = await getCurrentUserProfile();
-    setUser(profile);
+    try {
+      const profile = await getCurrentUserProfile();
+      setUser(profile);
+    } catch (e) {
+      console.warn('Profile fetch warning:', e);
+    }
   };
 
   useEffect(() => {
+    let isMounted = true;
     async function init() {
-      const data = await loadCatalog();
-      setCatalog(data);
-      await refreshUser();
+      try {
+        const data = await loadCatalog();
+        if (isMounted) setCatalog(data);
+      } catch (err) {
+        console.error('Failed to init catalog:', err);
+      }
+      try {
+        await refreshUser();
+      } catch (err) {
+        console.warn('User init warning:', err);
+      }
     }
     init();
+    return () => { isMounted = false; };
   }, []);
 
   if (!catalog) {

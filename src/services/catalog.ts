@@ -18,7 +18,10 @@ export async function loadCatalog(): Promise<CatalogData> {
 
     // Fetch dynamic published books from Supabase
     try {
-      const cloudBooks = await fetchPublishedBooks();
+      const cloudBooks = await Promise.race([
+        fetchPublishedBooks(),
+        new Promise<CatalogBook[]>((_, reject) => setTimeout(() => reject(new Error('timeout')), 3000)),
+      ]);
       const existingIds = new Set(data.books.map(b => b.id));
       for (const cloudBook of cloudBooks) {
         if (!existingIds.has(cloudBook.id)) {
