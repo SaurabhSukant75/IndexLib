@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndexLib — UI & Interaction Design Prototype</title>
+  <style>
+    :root {
+      --color-background: #f5f3ed;
+      --color-sidebar: #f9f7f1;
+      --color-surface: #fffefa;
+      --color-ink: #20241f;
+      --color-muted: #686b63;
+      --color-line: #e3dfd5;
+      --color-accent: #d5ff58;
+      --color-green: #34654c;
+      --color-blue: #b9d7f6;
+      --color-peach: #ffb99d;
+      --color-lavender: #ded7f5;
+      --color-sand: #e7e3d4;
+      --color-warning-bg: #fef3c7;
+      --color-warning-text: #92400e;
+      --color-danger: #dc2626;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-editorial: Georgia, "Times New Roman", serif;
+      --header-height: 64px;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 2px 8px rgba(32, 36, 31, 0.04);
+      --shadow-md: 0 8px 24px rgba(32, 36, 31, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-background);
+      color: var(--color-ink);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    header.app-header {
+      height: var(--header-height);
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--color-ink);
+    }
+    .brand-mark {
+      background: var(--color-ink);
+      color: var(--color-accent);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      letter-spacing: -0.5px;
+    }
+    .brand-title {
+      font-family: var(--font-editorial);
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 440px;
+      margin: 0 24px;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 8px 16px 8px 36px;
+      border: 1px solid var(--color-line);
+      border-radius: 9999px;
+      background: var(--color-background);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus {
+      border-color: var(--color-ink);
+      background: #fff;
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-muted);
+      font-size: 0.85rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-accent { background: var(--color-accent); color: var(--color-ink); }
+    .badge-warning { background: var(--color-warning-bg); color: var(--color-warning-text); }
+    .badge-green { background: #dcfce7; color: #166534; }
+    .badge-muted { background: #e5e7eb; color: #374151; }
+
+    /* App Layout */
+    .app-container {
+      display: flex;
+      flex: 1;
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    /* Sidebar Navigation */
+    aside.sidebar {
+      width: 240px;
+      background: var(--color-sidebar);
+      border-right: 1px solid var(--color-line);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .nav-group-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      padding-left: 8px;
+    }
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .nav-item-btn {
+      width: 100%;
+      text-align: left;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      color: var(--color-ink);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s;
+    }
+    .nav-item-btn:hover {
+      background: var(--color-line);
+    }
+    .nav-item-btn.active {
+      background: var(--color-ink);
+      color: var(--color-surface);
+      font-weight: 600;
+    }
+    .nav-item-btn.active .nav-counter {
+      background: var(--color-accent);
+      color: var(--color-ink);
+    }
+    .nav-counter {
+      font-size: 0.75rem;
+      background: #e2ded4;
+      padding: 2px 6px;
+      border-radius: 9999px;
+      color: var(--color-muted);
+    }
+
+    /* Main View Area */
+    main.main-viewport {
+      flex: 1;
+      padding: 32px 40px;
+      overflow-y: auto;
+    }
+
+    .view-panel {
+      display: none;
+    }
+    .view-panel.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--color-muted);
+      margin-bottom: 6px;
+    }
+    .page-title {
+      font-family: var(--font-editorial);
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: var(--color-ink);
+      margin-bottom: 8px;
+    }
+    .page-lede {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      margin-bottom: 28px;
+      max-width: 680px;
+    }
+
+    /* Concept Graph Grid Layout */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .graph-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .graph-svg {
+      width: 100%;
+      height: 380px;
+      overflow: visible;
+    }
+    .node-circle {
+      cursor: pointer;
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .node-circle:hover {
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+    }
+    .node-text {
+      font-size: 13px;
+      font-weight: 600;
+      fill: var(--color-ink);
+      pointer-events: none;
+      text-anchor: middle;
+      user-select: none;
+    }
+    .edge-line {
+      stroke: #a29f95;
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .edge-text {
+      font-size: 11px;
+      fill: var(--color-muted);
+      font-weight: 500;
+      text-anchor: middle;
+    }
+    .selected-node circle {
+      stroke: var(--color-ink);
+      stroke-width: 3;
+    }
+
+    .detail-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .detail-title {
+      font-family: var(--font-editorial);
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .detail-desc {
+      color: var(--color-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .linked-books-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-muted);
+      margin-bottom: 12px;
+    }
+    .book-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .book-item-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px;
+      background: var(--color-background);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .book-item-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-ink);
+    }
+    .book-mini-cover {
+      width: 40px;
+      height: 48px;
+      background: var(--color-ink);
+      color: var(--color-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border-radius: 4px;
+    }
+    .book-info strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+    .book-info small {
+      color: var(--color-muted);
+      font-size: 0.8rem;
+    }
+
+    /* Reader View */
+    .reader-container {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      height: 720px;
+      overflow: hidden;
+    }
+    .reader-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: #fff;
+      border-bottom: 1px solid var(--color-line);
+    }
+    .reader-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--color-line);
+      background: #fff;
+      transition: all 0.15s;
+    }
+    .btn:hover { background: var(--color-background); border-color: var(--color-ink); }
+    .btn-primary { background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+    .btn-primary:hover { background: #353b34; }
+    .reader-progress-track {
+      height: 4px;
+      background: var(--color-line);
+      width: 100%;
+    }
+    .reader-progress-fill {
+      height: 100%;
+      background: var(--color-green);
+      width: 45%;
+      transition: width 0.3s;
+    }
+    .reader-frame-body {
+      flex: 1;
+      border: none;
+      width: 100%;
+      background: #fdfcf9;
+    }
+
+    /* Publisher View */
+    .publisher-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1.8fr;
+      gap: 28px;
+    }
+    .upload-zone {
+      border: 2px dashed var(--color-line);
+      border-radius: var(--radius-md);
+      padding: 36px 20px;
+      text-align: center;
+      background: var(--color-surface);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .upload-zone:hover {
+      border-color: var(--color-ink);
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--color-line);
+    }
+    .check-ok { color: var(--color-green); font-weight: bold; }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      background: #fff;
+    }
+    .form-textarea { resize: vertical; min-height: 80px; }
+
+    /* Admin Moderation Table */
+    .table-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    table.data-table th {
+      background: var(--color-sidebar);
+      padding: 12px 16px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--color-line);
+      color: var(--color-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    table.data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--color-line);
+      vertical-align: middle;
+    }
+    table.data-table tr:hover td {
+      background: #faf8f2;
+    }
+
+    /* Modal / Drawer */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--color-ink);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-md);
+      font-size: 0.9rem;
+      display: none;
+      z-index: 1000;
+    }
+    .toast.show { display: block; animation: toastUp 0.3s ease; }
+    @keyframes toastUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <a href="#concepts" class="brand" onclick="switchView('concepts')">
+      <div class="brand-mark">IL</div>
+      <div class="brand-title">IndexLib</div>
+    </a>
+
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" placeholder="Search visual books, concepts, topics...">
+    </div>
+
+    <div class="header-actions">
+      <span class="badge badge-accent">v2.0 React Prototype</span>
+      <button class="btn btn-primary" onclick="switchView('publish')">＋ Publish Book</button>
+      <button class="btn" onclick="switchView('admin')">Admin Queue</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div>
+        <p class="nav-group-title">Explore</p>
+        <ul class="nav-list">
+          <li><button class="nav-item-btn" onclick="switchView('topics')"><span>Topics</span></button></li>
+          <li><button class="nav-item-btn active" id="nav-concepts" onclick="switchView('concepts')"><span>Concepts</span> <span class="nav-counter">5</span></button></li>
+          <li><button class="nav-item-btn" onclick="switchView('paths')"><span>Learning Paths</span> <span class="nav-counter">2</span></button></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="nav-group-title">My Space</p>
+        <ul class="nav-list">
+          <li><button class="nav-item-btn" onclick="switchView('library')"><span>My Library</span> <span class="nav-counter">3</span></button></li>
+          <li><button class="nav-item-btn" onclick="switchView('learning')"><span>Reading Progress</span></button></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="nav-group-title">Creator & Admin</p>
+        <ul class="nav-list">
+          <li><button class="nav-item-btn" id="nav-publish" onclick="switchView('publish')"><span>Publish Book</span></button></li>
+          <li><button class="nav-item-btn" id="nav-admin" onclick="switchView('admin')"><span>Admin Moderation</span> <span class="nav-counter" id="pending-counter">1</span></button></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Viewport -->
+    <main class="main-viewport">
+
+      <!-- View: Concepts Graph (#concepts) -->
+      <section class="view-panel active" id="view-concepts">
+        <p class="page-eyebrow">Explore Connections</p>
+        <h1 class="page-title">Follow an idea.</h1>
+        <p class="page-lede">The knowledge graph visualizes semantic relationships between ideas. Click on any concept node to inspect its definition and discover books that explain it.</p>
+
+        <div class="concept-grid">
+          <div class="graph-card">
+            <svg class="graph-svg" viewBox="0 0 650 340">
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0 0 L6 3 L0 6 Z" fill="#99998d"></path>
+                </marker>
+              </defs>
+
+              <!-- Relationship Edges -->
+              <g class="edge-group">
+                <path class="edge-line" marker-end="url(#arrow)" d="M154 165 L270 95"></path>
+                <text class="edge-text" x="200" y="120">explains</text>
+
+                <path class="edge-line" marker-end="url(#arrow)" d="M154 165 L270 240"></path>
+                <text class="edge-text" x="200" y="215">introduces</text>
+
+                <path class="edge-line" marker-end="url(#arrow)" d="M360 85 L490 150"></path>
+                <text class="edge-text" x="430" y="110">applies</text>
+
+                <path class="edge-line" marker-end="url(#arrow)" d="M360 250 L490 270"></path>
+                <text class="edge-text" x="425" y="275">reinforces</text>
+              </g>
+
+              <!-- Nodes -->
+              <!-- 1. Attention -->
+              <g class="node-group selected-node" id="node-attention" onclick="selectConcept('attention', 'Attention', 'Who controls your attention, and who profits from it? Focus is the scarce resource of the digital age.', '#d5ff58', ['The Attention Economy · 01', 'Attention & Technology · 04'])">
+                <circle class="node-circle" cx="110" cy="165" r="44" fill="#d5ff58"></circle>
+                <text class="node-text" x="110" y="170">Attention</text>
+              </g>
+
+              <!-- 2. Incentives -->
+              <g class="node-group" id="node-incentives" onclick="selectConcept('incentives', 'Incentives', 'Rules and reward mechanisms that shape decisions, deliberate architecture, and platform behavior.', '#b9d7f6', ['The Attention Economy · 02', 'System Design · 03'])">
+                <circle class="node-circle" cx="315" cy="80" r="41" fill="#b9d7f6"></circle>
+                <text class="node-text" x="315" y="85">Incentives</text>
+              </g>
+
+              <!-- 3. Engagement -->
+              <g class="node-group" id="node-engagement" onclick="selectConcept('engagement', 'Engagement', 'Metrics, behavioral loops, and interface patterns engineered to capture and hold reader interaction.', '#ffb99d', ['The Attention Economy · 02'])">
+                <circle class="node-circle" cx="315" cy="250" r="41" fill="#ffb99d"></circle>
+                <text class="node-text" x="315" y="255">Engagement</text>
+              </g>
+
+              <!-- 4. Interface Design -->
+              <g class="node-group" id="node-interface" onclick="selectConcept('interface', 'Interface Design', 'The affordances, visual hierarchies, and sensory cues presented on screens.', '#ded7f5', ['Design & Society · 03'])">
+                <circle class="node-circle" cx="535" cy="165" r="41" fill="#ded7f5"></circle>
+                <text class="node-text" x="535" y="170">Interface</text>
+              </g>
+
+              <!-- 5. Autonomy -->
+              <g class="node-group" id="node-autonomy" onclick="selectConcept('autonomy', 'Autonomy', 'The human capacity for self-determination and independent agency in digital environments.', '#e7e3d4', ['Digital Autonomy · 05'])">
+                <circle class="node-circle" cx="535" cy="275" r="39" fill="#e7e3d4"></circle>
+                <text class="node-text" x="535" y="280">Autonomy</text>
+              </g>
+            </svg>
+            <p style="font-size: 0.8rem; color: var(--color-muted); text-align: center; margin-top: 10px;">Select a concept to view linked books and explore relationships.</p>
+          </div>
+
+          <!-- Detail Panel -->
+          <aside class="detail-card">
+            <p class="page-eyebrow">Selected Concept</p>
+            <h2 class="detail-title" id="concept-title">Attention</h2>
+            <p class="detail-desc" id="concept-desc">Who controls your attention, and who profits from it? Focus is the scarce resource of the digital age.</p>
+
+            <p class="linked-books-title">Books that explain it</p>
+            <div class="book-list" id="concept-books">
+              <div class="book-item-card" onclick="openReader('book-01', 'The Attention Economy · 01')">
+                <div class="book-mini-cover">01</div>
+                <div class="book-info">
+                  <strong>The Attention Economy · 01</strong>
+                  <small>10 min · Explains · Human Nature</small>
+                </div>
+              </div>
+              <div class="book-item-card" onclick="openReader('book-04', 'Attention & Technology · 04')">
+                <div class="book-mini-cover">04</div>
+                <div class="book-info">
+                  <strong>Attention & Technology · 04</strong>
+                  <small>8 min · Applies · Systems</small>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- View: Book Reader (#read) -->
+      <section class="view-panel" id="view-reader">
+        <div class="reader-container">
+          <div class="reader-bar">
+            <div class="reader-left">
+              <button class="btn" onclick="switchView('concepts')">← Back to Library</button>
+              <div>
+                <strong id="reader-book-title" style="font-size: 1.05rem;">The Attention Economy · 01</strong>
+                <small style="display: block; color: var(--color-muted); font-size: 0.78rem;">Independent Visual HTML Book · Sandboxed Execution</small>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button class="btn" onclick="showToast('Bookmark added for Chapter 1!')">☆ Bookmark</button>
+              <button class="btn" onclick="showToast('Saved to My Library!')">★ Save</button>
+              <button class="btn" onclick="showToast('Marked as Completed! Synced to Supabase.')">✓ Complete</button>
+              <button class="btn" onclick="showToast('Deep-link copied to clipboard!')">Share ⎘</button>
+            </div>
+          </div>
+          <div class="reader-progress-track">
+            <div class="reader-progress-fill" id="reader-progress-bar"></div>
+          </div>
+          <iframe class="reader-frame-body" id="reader-iframe" sandbox="allow-scripts" srcdoc="
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <meta charset='utf-8'>
+              <style>
+                body { font-family: Georgia, serif; line-height: 1.7; padding: 48px; max-width: 680px; margin: 0 auto; color: #20241f; background: #fffefa; }
+                h1 { font-size: 2.4rem; margin-bottom: 8px; }
+                .subtitle { color: #686b63; font-size: 1.1rem; margin-bottom: 32px; font-style: italic; }
+                p { margin-bottom: 24px; font-size: 1.05rem; }
+                .callout { background: #f5f3ed; padding: 20px; border-left: 4px solid #d5ff58; margin: 28px 0; border-radius: 4px; }
+                .nav-buttons { display: flex; justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid #e3dfd5; }
+                button { background: #20241f; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+              </style>
+            </head>
+            <body>
+              <h1>01 · The Scarcity of Attention</h1>
+              <p class='subtitle'>When information is abundant, attention becomes the rarest asset.</p>
+              <p>In a world saturated with continuous streams of messages, alerts, and multimedia feeds, our capacity for sustained thought is under constant assault.</p>
+              <div class='callout'>
+                <strong>Core Premise:</strong> Wealth of information creates a poverty of attention, and a need to allocate that attention efficiently among the overabundance of information sources that might consume it.
+              </div>
+              <p>Every digital product you touch is competing for your consciousness. Understanding this dynamic is the first step toward reclaiming intellectual sovereignty.</p>
+              <div class='nav-buttons'>
+                <button onclick='alert(&quot;Previous Page&quot;)'>◄ Cover</button>
+                <button onclick='alert(&quot;Next Page: Chapter 2&quot;)'>Chapter 2: Algorithms ►</button>
+              </div>
+            </body>
+            </html>
+          "></iframe>
+        </div>
+      </section>
+
+      <!-- View: Book Publisher (#publish) -->
+      <section class="view-panel" id="view-publisher">
+        <p class="page-eyebrow">Author Studio</p>
+        <h1 class="page-title">Publish an HTML book.</h1>
+        <p class="page-lede">Upload and validate your standalone visual HTML book. Anyone can submit; your book will enter <strong>Pending Review</strong> and become public once approved by an administrator.</p>
+
+        <div class="publisher-grid">
+          <div>
+            <div class="upload-zone" onclick="simulateUpload()">
+              <div style="font-size: 2.2rem; margin-bottom: 8px;">📄</div>
+              <strong>Drop HTML book file here</strong>
+              <p style="color: var(--color-muted); font-size: 0.85rem; margin-top: 4px;">Click to simulate upload (.html or .htm up to 5 MiB)</p>
+            </div>
+
+            <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 20px; margin-top: 20px;">
+              <strong style="display: block; margin-bottom: 12px; font-size: 0.9rem;">Automated Verification Report</strong>
+              <div class="check-item"><span class="check-ok">✓</span> <span>HTML5 DOCTYPE & UTF-8 encoding valid</span></div>
+              <div class="check-item"><span class="check-ok">✓</span> <span>Viewport meta tag configured</span></div>
+              <div class="check-item"><span class="check-ok">✓</span> <span>4 Navigable Page IDs: [cover, ch-1, ch-2, recap]</span></div>
+              <div class="check-item"><span class="check-ok">✓</span> <span>No prohibited external CDN scripts</span></div>
+              <div class="check-item"><span class="check-ok">✓</span> <span>Bridge script index-dictionary.book detected</span></div>
+            </div>
+          </div>
+
+          <div style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 24px;">
+            <div class="form-group">
+              <label class="form-label">Book Title</label>
+              <input type="text" class="form-input" id="pub-title" value="The Psychology of Friction">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Summary / Premise</label>
+              <textarea class="form-textarea" id="pub-summary">How intentional interface friction can restore intentionality and mindfulness in user choices.</textarea>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div class="form-group">
+                <label class="form-label">Primary Topic</label>
+                <select class="form-select" id="pub-topic">
+                  <option>Human Nature & Psychology</option>
+                  <option>Design & Society</option>
+                  <option>Systems & Technology</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Est. Reading Time (minutes)</label>
+                <input type="number" class="form-input" id="pub-time" value="12">
+              </div>
+            </div>
+
+            <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--color-line); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="badge badge-warning">Workflow: Pending Review</span>
+                <small style="display: block; color: var(--color-muted); margin-top: 4px;">Visible to you immediately; global after admin approval.</small>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="showToast('Saved to browser IndexedDB only!')">Save Local Private</button>
+                <button class="btn btn-primary" onclick="submitForReview()">Submit to Supabase →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- View: Admin Moderation (#admin) -->
+      <section class="view-panel" id="view-admin">
+        <p class="page-eyebrow">Administration</p>
+        <h1 class="page-title">Catalog Moderation Queue</h1>
+        <p class="page-lede">Review submitted books. Once approved, books are updated to <code>published</code> in Supabase and distributed to the global catalog.</p>
+
+        <div class="table-card">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Topic</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body">
+              <tr id="row-friction">
+                <td><strong>The Psychology of Friction</strong><br><small style="color: var(--color-muted);">4 pages · 12 min read</small></td>
+                <td>reader_alexander</td>
+                <td>Design & Society</td>
+                <td><span class="badge badge-warning" id="status-friction">Pending Review</span></td>
+                <td>
+                  <button class="btn btn-primary" style="padding: 4px 10px; font-size: 0.8rem;" onclick="approveBook('row-friction', 'status-friction')">Approve & Publish</button>
+                  <button class="btn" style="padding: 4px 10px; font-size: 0.8rem; color: var(--color-danger);" onclick="archiveBook('row-friction', 'status-friction')">Archive</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>The Attention Economy · 01</strong><br><small style="color: var(--color-muted);">6 pages · 10 min read</small></td>
+                <td>IndexLib Curators</td>
+                <td>Human Nature</td>
+                <td><span class="badge badge-green">Published</span></td>
+                <td>
+                  <button class="btn" style="padding: 4px 10px; font-size: 0.8rem;" onclick="openReader('book-01', 'The Attention Economy · 01')">View in Reader</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="toast" id="toast-el">Notification message</div>
+
+  <script>
+    function switchView(viewName) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
+
+      const target = document.getElementById('view-' + viewName);
+      if (target) target.classList.add('active');
+
+      const navBtn = document.getElementById('nav-' + viewName);
+      if (navBtn) navBtn.classList.add('active');
+    }
+
+    function selectConcept(id, title, desc, color, books) {
+      document.querySelectorAll('.node-group').forEach(n => n.classList.remove('selected-node'));
+      const activeNode = document.getElementById('node-' + id);
+      if (activeNode) activeNode.classList.add('selected-node');
+
+      document.getElementById('concept-title').textContent = title;
+      document.getElementById('concept-desc').textContent = desc;
+
+      const bookList = document.getElementById('concept-books');
+      bookList.innerHTML = books.map((b, idx) => `
+        <div class="book-item-card" onclick="openReader('book-0${idx+1}', '${b}')">
+          <div class="book-mini-cover">0${idx+1}</div>
+          <div class="book-info">
+            <strong>${b}</strong>
+            <small>Explains · Connected Concept</small>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openReader(bookId, title) {
+      document.getElementById('reader-book-title').textContent = title;
+      switchView('reader');
+    }
+
+    function simulateUpload() {
+      showToast("Uploaded 'psychology-of-friction.html' (42 KB). Validation passed!");
+    }
+
+    function submitForReview() {
+      showToast("Book submitted! Status: Pending Review. Added to Admin Queue.");
+      switchView('admin');
+    }
+
+    function approveBook(rowId, statusId) {
+      const statusEl = document.getElementById(statusId);
+      statusEl.className = 'badge badge-green';
+      statusEl.textContent = 'Published';
+      document.getElementById('pending-counter').textContent = '0';
+      showToast("Book approved! It is now live in the global catalog.");
+    }
+
+    function archiveBook(rowId, statusId) {
+      const statusEl = document.getElementById(statusId);
+      statusEl.className = 'badge badge-muted';
+      statusEl.textContent = 'Archived';
+      showToast("Book moved to Archived state.");
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast-el');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+  </script>
+</body>
+</html>
